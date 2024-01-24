@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{packages}
+
+\begin{document}
+\import{./}{title}
+
+\frontmatter
+\tableofcontents
+\listoffigures
+\listoftables
+\include{Sections/00-abstract}
+
+\mainmatter 
+\include{Sections/10-introduction}
+\include{Sections/20-methodology}
+\include{Sections/30-literature}
+\include{Sections/40-discussion}
+\include{Sections/45-reflections}
+\include{Sections/50-future_work}
+\include{Sections/60-conclusion}
+\include{Annet/tanker}
+
+% Printing bibliography
+\printbibliography[heading = bibintoc, title = Bibliography]    % 'bibintoc' inserts our bibliography into the table of contents
+
+% \addappendix % Inserting appendix with separate settings
+% \import{./Appendices/}{example_appendix}
+
+% End of document
+\end{document}

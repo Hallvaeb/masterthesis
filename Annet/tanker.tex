@@ -1,0 +1,39 @@
+\section{Tanker}
+Skaffe en divers gruppe samtykkende mennesker med flere former for bekledning; luer, caps, jakke, tskjorte. Eller bare meg, med masse ulike klær.
+
+Image segmentation, hente ut utsnittet av menneskene;
+
+Plassere disse menneskene på tilfeldige steder rundt i et område;
+
+Trene datasettet på disse utsnittene;
+
+Gjør vi det da bedre for det gitte området?
+
+
+Kan dette streamlines, prosedurebeskrivelse:
+
+1. Sett opp enheten fysisk der den skal sitte, så i app/nettside der et tomt (ingen mennesker) bilde tas, bruker verifiserer bildeområdet.
+
+2. Bruker trykker på knapp: "start datainnsamling"
+
+3. 10min: bruker/brukere beveger seg rundt, ulike posisjoner, ulike jakker, luer, capser
+
+4. datasamling fullført, enheten forsøker å hente ut menneskene i disse bildene, bruker korrigerer. Her vil det være nødvendig med et verktøy for bildesegmentering der brukeren kan korrigere for hvert bilde som er blitt tatt.
+
+5. Når utsnittene er korrekt satt, lagres de lokalt, og brukeren ferdig.
+
+6. Enheten behandler det tomme bildet (steg 1) og regner ut hvor gulvearealet er, kjører full bildesegmentering for å se hvor hindringer i bildet er (dybdesensor?). 
+
+7. Enheten dupliserer det tomme bildet 100 000 ganger, og setter inn tilfeldige utsnitt på tilfeldige plasser i bildene. 
+
+8. ML modell (vision transformer) trenes på generelt dataset (COCO?), så fyller på med disse bildene.
+
+Highlights:
+
+1. The produced dataset will be highly specialized to a specific area, thus possibly greatly increasing the accuracy for difficult scenarios.
+
+2. The dataset will not be optimized to different situations, but the segmented people may possibly be applicable to insertion in similar environments (with respect to light conditions). 
+
+3. Must be same light conditions in the whole operational period of the ML model.
+
+4. Experiment to see if the produced data alone can suffice for similar accuracies on smaller models without the need of massive training, thus shifting the workload of machine learning to specialized data acquizition rather than computational heavy model training.
