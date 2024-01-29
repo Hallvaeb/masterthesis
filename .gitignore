@@ -12,7 +12,7 @@ main.run.xml
 *.bbl
 *.bcf
 *.aux
-
+*.blg
 
 
 
