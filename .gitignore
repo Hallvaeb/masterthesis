@@ -11,7 +11,7 @@ main.run.xml
 *.fdb_latexmk
 *.bbl
 *.bcf
-
+*.aux
 
 
 

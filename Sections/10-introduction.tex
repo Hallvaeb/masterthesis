@@ -2,10 +2,41 @@
 
 
 \subsection{Background and Motivation}
+Attention data has been much exploited online for personalized advertising and displaying of information and content thought to be relevant for a specific persons online profile. In real world, however, museums and cultural spaces remain in the dark regarding what really draws the attention of visitors and enhance the visitation experience. The museum staff may obtain this information through questionnaires, but analyzing behavior rather than self-reported attention is inherently more accurate. 
+
+Intelligence regarding visitor attention in cultural facilities, such as museums or aquariums, could prove beneficial for multiple reasons. One may switch out artwork or exhibitions that are not interesting to visitors, or tweak/enhance their appearance to be more attractive. 
+
+Technology for visitor intelligence obtainance could also contribute more advanced analysis information. This information may contain some answers to the following questions:
+\subsubsection*{Questions}
+\begin{enumerate}
+    \item How do the exhibitions rate in terms of popularity?
+    \item At what exhibition do the visitors spend the longest?
+    \item What is the average/maximum number of people in front of a given exhibition? Is this maximum number of people often reached?
+    \item Is there a change in what exhibitions are popular depending on the time of the day?
+    \item How big of a factor is the localization of exhibitions to how much time is spent there? 
+    \item What areas are most prone to lines forming?
+    \item Are all parts of the museum being visited?
+\end{enumerate}
+
+These answers may be converted into concrete actions to augment the visitation quality. Some of these actions may include the following:
+\subsubsection*{Actions}
+\begin{enumerate}
+    \item Put more lights in an exhibition that is relatively more popular during daylight than after dark.
+    \item Replace unpopular artwork or place the most popular/expensive artwork in areas where more people may notice it.
+    \item Automatically open a window if more than 10 people are present in a room on average for 30 minutes.
+    \item Automatically close off sections of a facility when it's close to closing time and no people are in that area.    
+    \item Integrate with other systems. Notify someone if someone falls in the water, or if, during closing, someone is about to be locked inside, a door is open, or a light is still turned on. 
+    \item Notify if the total count of people in the museum is higher than tickets sold + registered employees/workers for that time period (people has snuck in).
+\end{enumerate} 
 
 \subsection{Problem Description}
+Recent advancements in object detection allows applications to achieve incredible things. Detecting in dark environments or where the objects are partly occluded remains challenging, however, and is one of the reasons to why well-lit facilities may have advanced crowd intelligence and safety features, while darker areas remain harder to understand. 
+
+Image sensors can see infrared light impossible for the human eye to process. Infrared sensors may be used to infer how many people are in an area and where there's movement, but individually segmenting individuals is challenging as the borders of an individual is fuzzy in the infrared spectrum, and thus the task of measuring the amount of time a person is within a given area, i.e. more detailed intelligence regarding the attention of e.g. museum visitors is hard to achieve without utilizing image sensors for more refined light data.
 
 \subsection{Project Scope}
+
+
 
 \subsubsection{Objectives}
 \label{sec:primary_objectives}
@@ -19,7 +50,7 @@ The objectives are to:
 Consequently, the questions which all are addressed in the following literature study and discussion are the following:
 
 \begin{researchQ}{Challenges}
-    What are the current challenges and some ways of resolving these challenges in object detection?
+    What are the current challenges and some ways of resolving these challenges in object detection? 
 \end{researchQ}
 
 

@@ -12,21 +12,22 @@ Gjør vi det da bedre for det gitte området?
 
 Kan dette streamlines, prosedurebeskrivelse:
 
-1. Sett opp enheten fysisk der den skal sitte, så i app/nettside der et tomt (ingen mennesker) bilde tas, bruker verifiserer bildeområdet.
+1. Sett opp enheten fysisk der den skal sitte. 
 
-2. Bruker trykker på knapp: "start datainnsamling"
+2. Et bilde der det er ingen mennesker tas, og bruker verifiserer bildeområdet. Dette bildet beholdes og brukes senere i prosessen.
 
-3. 10min: bruker/brukere beveger seg rundt, ulike posisjoner, ulike jakker, luer, capser
+2. Bruker trykker på knapp: "start datainnsamling".
 
-4. datasamling fullført, enheten forsøker å hente ut menneskene i disse bildene, bruker korrigerer. Her vil det være nødvendig med et verktøy for bildesegmentering der brukeren kan korrigere for hvert bilde som er blitt tatt.
+3. 10min: bruker/brukere beveger seg rundt, ulike posisjoner, ulike bekledning.
+
+4. Datainnsamling fullført, enheten forsøker å hente ut menneskene i disse bildene, bruker korrigerer. Her vil det være nødvendig med et verktøy for bounding box der brukeren kan korrigere for hvert bilde som er blitt tatt.
 
 5. Når utsnittene er korrekt satt, lagres de lokalt, og brukeren ferdig.
 
-6. Enheten behandler det tomme bildet (steg 1) og regner ut hvor gulvearealet er, kjører full bildesegmentering for å se hvor hindringer i bildet er (dybdesensor?). 
+6. Enheten dupliserer det tomme bildet 100 000 ganger, og setter inn tilfeldige utsnitt på tilfeldige plasser i bildene. 
 
-7. Enheten dupliserer det tomme bildet 100 000 ganger, og setter inn tilfeldige utsnitt på tilfeldige plasser i bildene. 
+7. ML modell (vision transformer?) trenes på generelt dataset, så fyller på med disse bildene.
 
-8. ML modell (vision transformer) trenes på generelt dataset (COCO?), så fyller på med disse bildene.
 
 Highlights:
 
@@ -37,3 +38,11 @@ Highlights:
 3. Must be same light conditions in the whole operational period of the ML model.
 
 4. Experiment to see if the produced data alone can suffice for similar accuracies on smaller models without the need of massive training, thus shifting the workload of machine learning to specialized data acquizition rather than computational heavy model training.
+
+
+Questions:
+Do the cameras need to be RGB? Why need colors? More information for the space if we see greygscale? Better accuracy with colors?
+
+Hypothesises regarding museums:
+Hvad er det der museumet er interessert i at finde ud?
+    - Hvor lenge en 
