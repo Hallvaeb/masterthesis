@@ -14,5 +14,6 @@
         "main.run.xml": true,
         "main.syn*": true,
         "main.toc": true
-    }
+    },
+    "editor.wordWrap": "on"
 }
