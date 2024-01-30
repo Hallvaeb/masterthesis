@@ -43,6 +43,25 @@ Highlights:
 Questions:
 Do the cameras need to be RGB? Why need colors? More information for the space if we see greygscale? Better accuracy with colors?
 
+Use Raspberry Pi Black camera?
+
+
 Hypothesises regarding museums:
 Hvad er det der museumet er interessert i at finde ud?
-    - Hvor lenge en 
+    - Hvor lenge en person ser på hver fisk
+
+
+
+
+Baseline creation:
+1. Have the device function as normal, try to detect people. 
+2. Improve it so it has detection algorithm more optimized for short distance detection
+3. If not well: specialized dataset. If well: heatmap and efficiency.
+
+Specialized dataset:
+1. Setup camera and make it send images to a google bucket. 
+2. Object detect persons on device, then send count and image to bucket.
+3. Create code to obscure image before sending
+
+
+Notes are taken on Work-Confluence as well for easier access and transparency with coworkers. 
