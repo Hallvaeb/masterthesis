@@ -28,16 +28,11 @@ import uuid
 from io import BytesIO
 from health_check import get_full_health_check
 
-from coordinate_helper import convert_coordinates, compute_coordinates_of_shrunk_image
+from coordinate_helper import compute_coordinates_of_shrunk_image
 # from upload.dropbox_helper import upload_image
 from upload.upload_schedule_reader import should_upload_image_timebased, should_upload_image
 from upload.google_storage import upload_blob
-from image_manipulator import gamma_correction, split_image, draw_text_on_image
-from rectangle_math import (
-	remove_boxes_inside_main,
-	merge_boxes_belonging_to_the_same_person,
-	check_for_splitsize_boxes_in_flat_list
-)
+from image_manipulator import gamma_correction, draw_text_on_image
 from utils.camera import add_camera_args, Camera
 from utils.visualization import BBoxVisualization
 from utils.yolo_classes import get_cls_dict
@@ -122,13 +117,12 @@ def parse_args():
 	return parser.parse_args()
 
 
-def push_image(img, amountOfPeople: int, timestamp):
+def push_image(img, amountOfPeople: int, timestamp, image_filename: str):
 	"""
 	Uploads image to bucket. Sends count to endpoint
 	@param img:image as numpy array
 	@param amountOfPeople: amount of detected persons in the image
 	"""
-	fileName = "NULL"
 	should_upload = False
 
 	try:
@@ -140,7 +134,6 @@ def push_image(img, amountOfPeople: int, timestamp):
 
 	if should_upload:
 		write_to_log("Uploading image to cloud")
-		fileName = str(uuid.uuid4()) + ".jpg"
 		# convert BGR to RGB
 		img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
@@ -149,7 +142,7 @@ def push_image(img, amountOfPeople: int, timestamp):
 		img_pil.save(buffered2, format="JPEG")
 
 		try:
-			upload_blob("hallmonitor_3_input", fileName, buffered2)
+			upload_blob("hallmonitor_3_input", image_filename, buffered2)
 		except Exception as e:
 			write_to_log("Failed to upload image to cloud: " + e, 1)
 
@@ -157,7 +150,7 @@ def push_image(img, amountOfPeople: int, timestamp):
 	print("Device ID: ", DEVICE_ID)
 	data = {
 		"key": API_KEY,
-		"file_name": fileName,
+		"file_name": image_filename,
 		"count": amountOfPeople,
 		"device_id": DEVICE_ID,
 		"timestamp": timestamp
@@ -258,7 +251,7 @@ def detect_persons(numpyImage, trt_yolo, conf_th):
 
 	return person_boxes, clss_filtered, conf_filtered
 
-def take_picture(cam, trt_yolo, conf_th, vis, horizontal_tile_amount, vertical_tile_amount):
+def take_picture(img, trt_yolo, conf_th, vis):
 	"""
 	@param cam: Camera instance
 	@param trt_yolo: TrtYolo instance
@@ -269,15 +262,13 @@ def take_picture(cam, trt_yolo, conf_th, vis, horizontal_tile_amount, vertical_t
 	write_to_log("Capturing image")
 	timestamp = datetime.now(tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 	timestamp_draw = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+	timestamp_hallvard = datetime.now().strftime("%d%m%y-%H%M%S")
 
-	img = cam
 	img = gamma_correction(img)
 	img = cv2.GaussianBlur(img, (5, 5), 0)
 	write_to_log("Image preprocessing")
 
 	if img is not None:
-		detections_3d = []
-		detections_flat = []
 
 		# detection on full image
 		write_to_log("Running detection on full image", True)
@@ -290,77 +281,9 @@ def take_picture(cam, trt_yolo, conf_th, vis, horizontal_tile_amount, vertical_t
 			person_boxes_full, conf_filtered_full, clss_filtered_full
 		)
 
-		overlay_percentage = 0
-		write_to_log("Splitting image")
-		images = split_image(
-			img, horizontal_tile_amount, vertical_tile_amount, overlay_percentage
-		)
-
-		write_to_log("Running detection on splitted images")
-		for vertical_pos in range(horizontal_tile_amount):
-			detections_in_column = []
-			for horizontal_pos in range(vertical_tile_amount):
-				person_boxes, clss_filtered, conf_filtered = detect_persons(
-					images[horizontal_pos][vertical_pos], trt_yolo, conf_th
-				)
-
-				detections_in_tile = []
-
-				for k in range(len(person_boxes)):
-					print("Converting")
-					x, y = convert_coordinates(
-						person_boxes[k][2],
-						person_boxes[k][3],
-						overlay_percentage,
-						vertical_pos,
-						horizontal_pos,
-						img.shape[0],
-						img.shape[1],
-						horizontal_tile_amount,
-						vertical_tile_amount,
-					)
-					x2, y2 = convert_coordinates(
-						person_boxes[k][0],
-						person_boxes[k][1],
-						overlay_percentage,
-						vertical_pos,
-						horizontal_pos,
-						img.shape[0],
-						img.shape[1],
-						horizontal_tile_amount,
-						vertical_tile_amount,
-					)
-					rect = [x2, y2, x, y]
-					detection = Detection(rect, conf_filtered[k], clss_filtered[k])
-					# detections_flat.append(detection)
-					detections_in_tile.append(detection)
-
-				detections_in_column.append(detections_in_tile)
-
-			detections_3d.append(detections_in_column)
-
-		detections_merged = merge_boxes_belonging_to_the_same_person(
-			detections_3d,
-			img.shape[1],
-			img.shape[0],
-			horizontal_tile_amount,
-			vertical_tile_amount,
-			5,
-		)
-		remove_threshhold = 6  # percent. smaller value means more strict
-		removed_detections = check_for_splitsize_boxes_in_flat_list(detections_merged, images, remove_threshhold)
-		for i in removed_detections:
-			print('Rem: ' + str(i.box))
-
-		remove_boxes_inside_main(detections_full_img, detections_merged)
-
 		# BLURRED
 		write_to_log("Blurring image")
 		img = cv2.GaussianBlur(img, (211, 211), 0)
-
-		# remove boxes inside main boxes
-		# remove_boxes_inside_main(detections_full_img, detections_flat)
-		# remove_boxes_inside_other_boxes(detections_flat)
 
 		divide_amount = 4
 		img = upload_preprocess(img, divide_amount)
@@ -368,46 +291,30 @@ def take_picture(cam, trt_yolo, conf_th, vis, horizontal_tile_amount, vertical_t
 		write_to_log("Combining detections")
 
 		compute_coordinates_of_shrunk_image(detections_full_img, divide_amount)
-		compute_coordinates_of_shrunk_image(detections_merged, divide_amount)
-		compute_coordinates_of_shrunk_image(removed_detections, divide_amount)
 
 		# img = vis.draw_bboxes(img, detections_flat, 0)
 		write_to_log("Visualizing detections", True)
 		img = vis.draw_bboxes(img, detections_full_img, 1)
-		img = vis.draw_bboxes(img, detections_merged, 1)
   
 		"""Debugging purposes for pushing detection coordinates"""
 		print("Detections on full image: ", detections_full_img)
 		aNumber = 0
-		cNumber = 0
 
-		all_detections = detections_full_img + detections_merged
+		all_detections = detections_full_img
 		for detection in detections_full_img:
 				# print(aNumber, "Detection (Full-image): ", detection)
 				print("Confidence: ", detection.conf)
 				print("Box coords: ", detection.box)
 				print("Class: ", detection.cl)
 				aNumber = aNumber + 1
-		for detection in detections_merged:
-				# print(cNumber, "Detection (Merged): ", detection)
-				print("Confidence: ", detection.conf)
-				print("Box coords: ", detection.box)
-				print("Class: ", detection.cl)
-				cNumber = cNumber + 1
-		print("Detections on merged image: ", detections_merged)
 
-		# img = vis.draw_bboxes(img, removed_detections, 6) # draws removed (tile-size) detections
-		# for testing purposes
-		count = len(detections_merged) + len(detections_full_img)
-		# draw_people_count(img, count)
-		# timestamp = datetime.now(tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
-		# timestamp_draw = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-		fileName = f"{str(uuid.uuid4())}.jpg"
+		count = len(detections_full_img)
+		image_filename = f"{str(timestamp_draw)}-{str(count)}.jpg"
   
-		draw_text_on_image(img, timestamp_draw)
-		push_image(img, count, timestamp)  # push to api using post request
+		# Hallvard
+		push_image(img, count, timestamp, image_filename)  # push to api using post request
 		if ZONE_ANALYSIS == "TRUE":
-  			upload_detection_data(fileName, all_detections, timestamp)
+  			upload_detection_data(image_filename, all_detections, timestamp)
 		# upload_image_dropbox(img, SERIAL_NR) #upload to dropbox for testing
 
 
@@ -434,13 +341,13 @@ def upload_image_dropbox(img_array, path):
 
 
 # (--type 0) default. analyzes one picture and exits script
-def start(cam, vis, trt_yolo, conf_th, horizontal_tile_amount, vertical_tile_amount):
-	take_picture(cam, trt_yolo, conf_th, vis, horizontal_tile_amount, vertical_tile_amount)
+def start(img, vis, trt_yolo, conf_th):
+	take_picture(img, trt_yolo, conf_th, vis)
 
 
-# (--type 1) analyaze next picture when enter is pressed.
+# (--type 1) analyze next picture when enter is pressed.
 # images can be captured by onboard cam or fed as singles or multiple via folder through the terminal. this is only used for testing
-def start_manual(cam, vis, trt_yolo, images, conf_th, horizontal_tile_amount, vertical_tile_amount):
+def start_manual(cam, vis, trt_yolo, images, conf_th):
 	run = True
 	i = 0
 	while run:
@@ -454,7 +361,7 @@ def start_manual(cam, vis, trt_yolo, images, conf_th, horizontal_tile_amount, ve
 				else:
 					print("No more pictures")
 					break
-			take_picture(cam, trt_yolo, conf_th, vis, horizontal_tile_amount, vertical_tile_amount)
+			take_picture(cam, trt_yolo, conf_th, vis)
 			print("Captured")
 		else:
 			break
@@ -462,7 +369,7 @@ def start_manual(cam, vis, trt_yolo, images, conf_th, horizontal_tile_amount, ve
 
 # (--type 2) analyze multiple images in succession automatically
 # images can be captured by onboard cam or fed as singles or multiple via folder through the terminal. this is only used for testing
-def analyze_multiple(cam, vis, trt_yolo, images, conf_th, horizontal_tile_amount, vertical_tile_amount):
+def analyze_multiple(cam, vis, trt_yolo, images, conf_th):
 	i = 0
 	progress = 0.0
 	write_to_log("Analyzing image")
@@ -474,7 +381,7 @@ def analyze_multiple(cam, vis, trt_yolo, images, conf_th, horizontal_tile_amount
 			else:
 				break
 		print("Analyzing image", str(i + 1))
-		take_picture(cam, trt_yolo, conf_th, vis, horizontal_tile_amount, vertical_tile_amount)
+		take_picture(cam, trt_yolo, conf_th, vis)
 		print("\n\n\n", str(progress), "%\n\n\n")
 		i += 1
 
@@ -493,11 +400,10 @@ def initiate_camera(args):
 	except:
 		write_to_log('ERROR: failed to open camera', True)
 		raise Exception("ERROR: failed to open camera!")
-
 	return cam
 
 
-def operation_mode(args, cam, vis, trt_yolo, conf_th, horizontal_tile_amount, vertical_tile_amount):
+def operation_mode(args, img, vis, trt_yolo, conf_th):
 	images = None
 
 	if args.use_folder:
@@ -512,7 +418,7 @@ def operation_mode(args, cam, vis, trt_yolo, conf_th, horizontal_tile_amount, ve
 
 	time.sleep(1)  # crashes occur if an image is captured immediately after opening
 	if args.type == 0:
-		start(cam, vis, trt_yolo, conf_th, horizontal_tile_amount, vertical_tile_amount)
+		start(img, vis, trt_yolo, conf_th)
 		""" print("Waiting..")
         thread = threading.Thread(
             target=start_schedule, args=[cam, vis, trt_yolo, conf_th]
@@ -523,9 +429,9 @@ def operation_mode(args, cam, vis, trt_yolo, conf_th, horizontal_tile_amount, ve
         stop_threads = True
         thread.join() """
 	elif args.type == 1:
-		start_manual(cam, vis, trt_yolo, images, conf_th, horizontal_tile_amount, vertical_tile_amount)
+		start_manual(cam, vis, trt_yolo, images, conf_th)
 	elif args.type == 2:
-		analyze_multiple(cam, vis, trt_yolo, images, conf_th, horizontal_tile_amount, vertical_tile_amount)
+		analyze_multiple(cam, vis, trt_yolo, images, conf_th)
 
 
 def stop_camera(cam):
@@ -587,70 +493,16 @@ def main():
 	global current_minutes
 	current_minutes = int(now.strftime("%M"))
 	args = parse_args()
-	camera_rot = args.cam_flip
-	print(f"Camera rot: {camera_rot}")
+	camera_rotated = args.cam_flip
+	print(f"Camera rotated: {camera_rotated}")
 	conf_th = args.confidence / 100.0
-	horizontal_tile_amount = args.xtiles
-	vertical_tile_amount = args.ytiles
 
 	trt_yolo = Load_Yolo_model()
-	# trt_yolo = TrtYOLO(args.model, dimension, args.category_num)
 	cls_dict = get_cls_dict(args.category_num)
 
-	cam = None
-
-	try:
-		online = True
-
-		if online:
-			# cam = initiate_camera(args)
-			cam = capture_image_pi(camera_rot)
-			vis = BBoxVisualization(cls_dict)
-			operation_mode(args, cam, vis, trt_yolo, conf_th, horizontal_tile_amount, vertical_tile_amount)
-			# stop_camera(cam)
-		else:
-			write_to_log("Connection failed..", True)
-			raise Exception("Connection not established")
-
-	except Exception as e:
-		print(" (Caught error) ")
-		write_to_log('Caught error. Stopping cam\n' + str(e.__class__) + 'occured\n', True)
-		write_to_log(traceback.format_exc(), True)
-		if cam:
-			stop_camera(cam)
-		write_to_log("ShouldReboot? -> Count: " + str(failure_count.get_value()), True)
-		should_reboot = failure_count.increment(max_value)
-		if should_reboot:
-			write_to_log('attempting REBOOT', True)
-			os.system('sudo reboot')  # if there is close to no available ram this will fail
-			# therefore a reboot check is also made at the start of
-			# this script.
-
-		raise Exception(e)
-
-	failure_count.reset()
-	write_to_log("====== STOPPING ======", True)
-
-
-def checkForNetwork(tries):
-	host = '8.8.8.8'
-
-	delay = 0.5
-	backoff = 1.5
-	command = ['ping', '-c', '1', host]
-
-	for n in range(tries):
-		try:
-			result = subprocess.call(command)
-			if result == 2:
-				write_to_log("Retrying.. in {0}".format(delay), True)
-				time.sleep(delay)
-				delay *= backoff
-			elif result == 0:
-				write_to_log("Connection established after {0} retries".format(n), True)
-				return result == 0
-		except:
-			write_to_log("Connection not established after {0}".format(tries), True)
+	img = capture_image_pi(camera_rotated)
+	vis = BBoxVisualization(cls_dict)
+	operation_mode(args, img, vis, trt_yolo, conf_th)
 
 
 class Detection:
