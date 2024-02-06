@@ -1,3 +1,7 @@
+main.*
+!main.pdf
+!main.tex
+*.aux
 main.toc
 main.syn*
 main.run.xml
