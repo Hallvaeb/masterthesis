@@ -33,6 +33,3 @@ def processKiller():
           process = psutil.Process(processID)
           process.kill()
           write_to_log('-> detect_yolo killed.', True)
-          print("detect_yolo killed.")
-    else:
-      print('No Running Process found with name "python".')
