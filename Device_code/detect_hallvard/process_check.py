@@ -22,7 +22,6 @@ def findProcessIdByName(processName):
 
 def processKiller():
   current_pid = os.getpid()
-    
   listOfProcessNames = ['python']
   for name in listOfProcessNames:
     listOfProcessIds = findProcessIdByName(name)
@@ -30,14 +29,10 @@ def processKiller():
     if len(listOfProcessIds) > 0:
       for elem in listOfProcessIds:
         processID = elem['pid']
-        processName = elem['name']
-        processCreationTime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(elem['create_time']))
-        processStatus = elem['status']
-        processCmdline = elem['cmdline']
         if 'detect_yolo.py' in elem['cmdline'] and processID != current_pid:
           process = psutil.Process(processID)
           process.kill()
-          write_to_log('-> detect_yolo killed', True)
-          print("detect_yolo killed")
+          write_to_log('-> detect_yolo killed.', True)
+          print("detect_yolo killed.")
     else:
-      print('No Running Process found with given search-text')
+      print('No Running Process found with name "python".')
