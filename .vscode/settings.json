@@ -6,14 +6,15 @@
         "*.fdb_latexmk": true,
         "*.fls": true,
         "*.lof": true,
-        "*.log": true,
+        "*.log": false,
         "*.lot": true,
+        "*.blg": true,
+        "*.dvi": true,
         "*.out": true,
         "**/.aux": true,
         "*/*.aux": true,
         "main.run.xml": true,
         "main.syn*": true,
         "main.toc": true
-    },
-    "editor.wordWrap": "on"
+    }
 }
