@@ -1,5 +1,7 @@
 \section{Methodology}
 
+Camera setup
+Aperture mechanical setting (camera focus adjustment), depth control. Default not found... images well sharp enough... 50cm to infinity...
 
 Dataset obtainment
 Dataset was build by capturing images while no visitors were present in the acquarium. Due to the constraint to only operate within opening hours when the facility was open to everyone, a way to cancel image capturing was needed in the case if someone entered the room. One of the goals of the dataset was to have the images taken from the same angle as the device will be used in the future. The device was therefore mounted in the corner of the room, and ssh was used to access the device remotely from a pc in the acquarium. Then, a script was ran to capture an image per second and storing it on the SD card in the device. The choice to store the image locally rather than transmitting it was to not have to worry about data transmission costs and issues. The first iteration of image capture was made with non-optimized camera configurations, turning to the brightness setting of the picamera python module to get the images to a sufficient brightness. Still, some images fell short to the auto focus of the camera focusing on the bright acquariums and thus rendering the rest of the image rather dark. However, these images serve as a way of inspecting the impact of captured image quality on inference performance. 
