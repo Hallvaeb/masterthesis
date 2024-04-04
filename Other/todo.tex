@@ -1,3 +1,21 @@
+- Capture images for a specialized dataset.
+- Label the dataset to have ground truth data.
+- Train multiple detectors with the data.
+	Several versions for both yolov3 and yolov9:
+		general
+		trained with sub optimal data
+		trained with best data:
+			100 images, 500 images, 1000 images
+		trained with all data available
+	In total: 2 models * 5 version = 10 detectors to be ran in sequence for every image captured. 
+- Test on unseen data obtained from the devices.
+	Will be okay-easy and quick to do and render results regarding validity of the dataset. 
+- Test on live data from detectors deployed on real-world live devices.
+	Here we will have no ground truth... Counting live is subject to human error. 
+	For each set of detector results over a week (or so), make a heat map to illustrate their detections. Compare heat maps to see if differences in accuracy matters for an application tasked with finding the location of persons in a dark-lit indoors acquarium situation.
+
+	Deployment of yolov3 and yolov9 with differing dependencies on the same device:
+	Solution to dependencies issues? Docker, venvs?	Ask Erik? Amund? Go with venv because simplistic?
 
 
 
