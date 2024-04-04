@@ -1,6 +1,8 @@
 \section{Methodology}
+Two cameras were deployed in a room of acquariums at "Fiskeri- og Søfartsmuseet" in Esbjerg to take images for building a specialized dataset and to evaluate the effects of developing a highly specialized detector rather than using a general.
 
-Camera setup
+Camera setup:
+Hardware camera can be tweaked by screwing the lens with a mechanical tool to modify it's aperture, which influences it's depth focus. 
 Aperture mechanical setting (camera focus adjustment), depth control. Default not found... images well sharp enough... 50cm to infinity...
 
 Dataset obtainment
@@ -8,7 +10,11 @@ Dataset was build by capturing images while no visitors were present in the acqu
 
 Due to many technical difficulties the first few times images were being captured for the dataset, only the developer and author of this thesis is present in the images\footnote{Initially, an attempt was made to pass MQTT messages as a way to initialize image capture so multiple cameras could be deployed in several locations, thus speeding up and simplifying the image capturing process. This was discarded due to technical difficulties related to efficiently stopping the image capturing. For a different solution, a recommendation would be to implement a way of communicating to multiple devices however, so one could obtain all images from deployment locations in one shooting. For this single-deployment angle and area project, however, the approach with ssh-ing into the device worked fine.}. The acquarium could not provide free tickets for additional participants in the experiments, and the cost of bringing friends to enrichen the dataset would then have to be optimized in terms of time spent at the site.
 
-The detector needs to know the ground truth when training and validating on the obtained data. This can be obtained by manually labeling the data. However, a more scientific, robust and scaleable way of labeling is to have the detector do the heavy lifting. Therefore, the dataset was first inferenced by the detector. The data was then manually validated, and finally the images for which the detector did not find any persons was manually labeled. The time to understand the tools and develop this pipeline was similar to what it would take to manually label all the images, but can now be used for future applications also. The approach to label the images is described in section: \ref{sec:labeling}.    
+The detector needs to know the ground truth when training and validating on the obtained data. This can be obtained by manually labeling the data. However, a more scientific, robust and scaleable way of labeling is to have the detector do the heavy lifting. Therefore, the dataset was first inferenced by the detector. The data was then manually validated, and finally the images for which the detector did not find any persons was manually labeled. The time to understand the tools and develop this pipeline was similar to what it would take to manually label all the images, but can now be used for future applications also. The approach to label the images is described in section: \ref{sec:labeling}.
+
+After the ground truth was identified for all the dataset images, it was then used to evaluate the general-purpose yolov3 and yolov9. Results are discussed in \ref{sec:results}. The data was then used to train the detectors. The training process is described in section \ref{sec:training}. The trained models were then deployed to the device to evaluate the inference speed and accuracy. The deployment process is described in section \ref{sec:deployment}.
+
+To visualize the improvements and highlight the areas in the image benefitting most from detector improvements, heat maps were generated. The process of generating heat maps is described in section \ref{sec:heatmaps}.
 
 \subsection{Labeling}
 \label{sec:labeling}

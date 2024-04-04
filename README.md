@@ -1,6 +1,5 @@
-The most recent iteration of the thesis is the "main.pdf" in the "report" directory (same level as this readme). 
+## AMUND: "main.pdf" in the the top level directory (same level as this readme) should be the most updated version of my thesis.
 
+I've written in VSCode using the LaTeX Workshop extension and compiled with "Latexmk, John Collins, 24 Dec. 2023. Version 4.82".
 
-Latex is written with the LaTeX Workshop extension in VSCode, and compiled with "Latexmk, John Collins, 24 Dec. 2023. Version 4.82".
-
-Run latexmk to generate latex document, or save any of the .tex files. 
+Note to self: Run latexmk to generate latex document, or save any of the .tex files. 
