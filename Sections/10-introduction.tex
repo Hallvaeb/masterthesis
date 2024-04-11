@@ -1,7 +1,20 @@
-\section{Introduction}
-Citation test: \cite{bj2023selfmade_youtube}
+\section{Introduction} 
+*v1* On-device processing is emerging as a vital component of modern human detection and tracking systems as an approach to ensure privacy. The ability to detect and track humans in real-time is crucial for a wide range of applications, from security surveillance to visitor analytics in cultural institutions. However, the deployment of such systems raises concerns about privacy and data security, particularly in sensitive environments like museums and aquariums. This project aims to develop a privacy-preserving human analytics system that can be deployed in these environments while ensuring visitor privacy and data security.
+
+The method of human detection and tracking in public spaces has evolved significantly over the past decade, driven by advancements in computer vision and machine learning. Traditional surveillance systems relied on centralized processing, where video feeds were transmitted to a remote server for manual human analysis. However, this approach raised privacy concerns as it involved transmitting raw video data over the network, potentially exposing sensitive information. Additionally, it also required a human to manually analyze the video feed, which was time-consuming, prone to errors, lacking of scalability, and not privacy-preserving. On-device processing addresses this issue by performing analytics locally on the edge device, reducing the need to transmit raw video data and enhancing privacy.  
+
+A device was deployed in the acquarium of "Fiskeri og Søfartsmuseet" in Esbjerg, Denmark, to demonstrate the feasibility and effectiveness of on-device human detection and tracking in a practical and realistic setting. On top of the inherent challenges of running the analysis on-device in real-time, the system also faced the challenge of a suboptimal lighting environment, common in acquarium settings. This thesis serves as a demonstration of how to overcome said challenges by the use of a Raspberry Pi 4 with a camera, running a pre-trained yolov9 object detection model. The thesis further explores the effects of adding labeled images from the museum environment to the training dataset to improve the model's performance in the specific setting. The implementation is described in great detail, and the dataset is available at the following link: *TODO add link*. */v1*
 
 \subsection{Background and Motivation}
+
+*v1*
+Understanding visitor behavior in cultural institutions such as museums and aquariums is useful for enhancing visitor engagement, optimizing exhibit design, and improving overall visitor experience. The study of visitor behavior is multifaceted, involving human psychology, image capturing techniques, privacy, ethics, and data analysis. Traditional methods of visitor behavior analysis, such as surveys, manual counting, and direct observation, have limitations in terms of accuracy, scalability, and real-time data collection.
+*/v1*
+
+
+
+
+
 The study of visitor engagement in physical spaces, particularly in museums and aquariums, has evolved significantly alongside advancements in technology. Traditionally, understanding how visitors interact with exhibits relied on direct observation, surveys, and manual counting. These methods, while valuable, offered limited insights and were often labor-intensive and prone to biases. The desire to quantitatively measure and analyze visitor behavior has driven the adoption of increasingly sophisticated technologies, from simple passive infrared sensor counters to complex digital surveillance systems.
 
 In the late 20th century, the introduction of video cameras provided a new avenue for tracking visitors, allowing for more detailed observations of visitor behaviour. However, these early systems were primarily used for security purposes and offered limited capabilities for analyzing visitor behavior in depth in a privacy preservant manner. As digital technologies advanced, so did the potential for understanding visitor experiences in more nuanced and meaningful ways.
@@ -16,7 +29,7 @@ This historical context underscores the transformative impact of technology on t
 
 Visitor attention intelligence in cultural facilities, such as museums or aquariums, offers a wide array of potential applications. By analyzing visitor engagement and behavior, facilities can make informed decisions to enhance the visitor experience. This thesis aims to provide insights into visitor behavior, addressing questions such as:
 
-\subsubsection*{Questions}
+\subsubsection*{Questions} 
 \begin{enumerate}
     \item What are the popularity ratings of various exhibitions within the facility?
     \item What are the average and peak visitor counts in front of each exhibition, and how frequently are these peak counts reached?
@@ -27,7 +40,7 @@ Visitor attention intelligence in cultural facilities, such as museums or aquari
 \end{enumerate}
 
 The findings from these questions can inform strategic improvements and interventions to enhance the quality of visitation. Potential strategic actions include:
-\subsubsection*{Strategic actions}
+\subsubsection*{Strategic actions} 
 \begin{enumerate}
     \item Enhance the lighting around exhibits that gain increased popularity during specific times, such as daylight hours, to maintain or boost visitor interest.
     \item Reevaluate the positioning of artworks or exhibitions based on popularity data, ensuring high-value or popular items are placed in strategic locations to maximize visibility and engagement.
@@ -39,7 +52,7 @@ The findings from these questions can inform strategic improvements and interven
 
 These strategies, informed by data-driven insights into visitor behavior, can significantly enhance operational efficiency, safety, and the overall visitor experience in cultural institutions.
 
-\subsection{Problem Description}
+\subsection{Problem Description} 
 Recent advancements in object detection technology have significantly enhanced applications across various fields, including security surveillance, retail analytics, and visitor tracking in cultural institutions. Despite these advancements, achieving high-quality and efficient object detection, particularly in the context of visitor localization within museums and aquariums, presents distinct challenges. Key among these is the ability to accurately detect and localize individuals in environments where lighting conditions are variable or suboptimal and where objects or individuals may be partially occluded.
 
 In environments with insufficient lighting, conventional image sensors struggle to capture the detailed visual information required for accurate object detection and segmentation. Although these sensors can detect infrared (IR) light, which extends beyond the visual spectrum visible to the human eye, leveraging this capability introduces its own set of challenges. IR sensors can indeed infer the presence and movement of people within a space, but they fall short when it comes to segmenting individuals from one another or from the background. The difficulty arises from the inherent fuzziness of borders in the infrared spectrum.

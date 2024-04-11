@@ -1,0 +1,59 @@
+\section{Introduction} 
+On-device processing is emerging as a vital component of modern human detection and tracking systems as an approach to ensure privacy. The ability to detect and track humans in real-time is crucial for a wide range of applications, from security surveillance to visitor analytics in cultural institutions. However, the deployment of such systems raises concerns about privacy and data security, particularly in sensitive environments like museums and aquariums. This project aims to develop a privacy-preserving human analytics system that can be deployed in these environments while ensuring visitor privacy and data security.
+
+*Faller følgende to avsnitt under bakgrunn/motivasjon, generell introduksjon, eller problembeskrivelse?*
+
+The method of human detection and tracking in public spaces has evolved significantly over the past decade, driven by advancements in computer vision and machine learning. Traditional surveillance systems relied on centralized processing, where video feeds were transmitted to a remote server for manual human analysis. However, this approach raised privacy concerns as it involved transmitting raw video data over the network, potentially exposing sensitive information. Additionally, it also required a human to manually analyze the video feed, which was time-consuming, prone to errors, lacking of scalability, and not privacy-preserving. On-device processing addresses this issue by performing analytics locally on the edge device, reducing the need to transmit raw video data and enhancing privacy.  
+
+A device was deployed in the acquarium of "Fiskeri og Søfartsmuseet" in Esbjerg, Denmark, to demonstrate the feasibility and effectiveness of on-device human detection and tracking in a practical and realistic setting. On top of the inherent challenges of running the analysis on-device in real-time, the system also faced the challenge of a suboptimal lighting environment, common in acquarium settings. This thesis serves as a demonstration of how to overcome said challenges by the use of a Raspberry Pi 4 with a camera, running a pre-trained yolov9 object detection model. The thesis further explores the effects of adding labeled images from the museum environment to the training dataset to improve the model's performance in the specific setting. The implementation is described in great detail, and the dataset is available at the following link: *TODO add link*. 
+
+*Inkluderer også noe (mer) om background and motivation, problem description, scope (research questions og research objectives) og struktur av oppgaven...*
+
+\section{Literature Review}
+The advent of "modern" object detection has enabled more sophisticated and automated methods for understanding visitor engagement and flow in cultural institutions. This literature review aims to explore the current state of research on object detection and visitor behaviour analysis in cultural institutions, focusing on privacy-preserving techniques, dataset specialization for enhanced object detection accuracy, and case studies of technology implementation. 
+
+\subsection{Visitor Behavior Analysis in Cultural Institutions}
+Studies on traditional methods for analyzing visitor behavior (surveys, manual counting, direct observation) and their use cases and limitations.
+
+*Hva har man kunnet finne ut av tidligere vs hva kan object detection gi oss?*
+
+\subsection{Privacy-Preserving Technologies in Surveillance}
+Exploration of techniques for ensuring privacy in surveillance, such as blurring, pixelating faces etc.. 
+
+*TODO insert chapter from forstudien om hva folk tolker som privacy preservant og ikke. Poengtere at det mest personvernvennlige er å ikke lagre data i det hele tatt.*
+
+\subsubsection{Privacy and Ethics}
+Research addressing the ethical implications of surveillance in public spaces, including visitor perceptions and legal considerations.
+
+\subsection{Introduction to Object Detection and Visitor Tracking}
+Review of the evolution of object detection and tracking technologies, including the transition from traditional methods to modern computer vision techniques. What are some of their challenges, and how have they been addressed? Specifically focusing on suboptimal lighting conditions.
+
+*Har fått yolov9 oppe og kjøre på pcen så tenker å kortfattet oppsummere hvordan yolo-algoritmen er ulik noen andre algoritmer, hva yolo er brukt til, og hvordan v9 skiller seg fra tidligere versjoner. Ta for seg hva vekter er i denne konteksten og at vektene bestemmes av treningsdata, som gir en glidende overgang til \ref{sec:dataset_specialization}* 
+
+\subsection{Effectiveness of Object Detection Training Dataset Specialization}
+\label{sec:dataset_specialization}
+Comparison of various algorithms performance enhancement when data has been optimized for the use case. What is the role of a training dataset in the task of determining the weights in a yolov9 artificial neural network, and how can would special training data optimize the weights for a specific use case?
+
+\subsection{Summary of Literature Review}
+A summarization of the current state of research, and where my thesis aims to contribute.
+
+\section{Methodology}
+This chapter will describe the process of developing the human detection and tracking system, including the hardware and software components used, the dataset collection and preparation (labeling ), the training of the object detection model, and the deployment of the system in the museum environment. The chapter will also discuss the ways of assessing the system's performance, before and after deployment (hhv using test dataset og vanskelighetene ved å ikke enkelt kunne vite hva som er korrekt).
+
+\section{Results}
+This chapter will present the results of the human detection and tracking system, including the system's performance in the museum environment, the effects of adding labeled images from the museum environment to the training dataset, and the system's ability to detect and track humans in real-time.
+
+\section{Discussion}
+This chapter will discuss the implications of the results, summarizing the results and their significance for the development of similar systems, and whether or not the approach in this thesis is a viable solution for the presented problem. 
+
+\section{Conclusion}
+Summarization of the thesis and its contributions to the field.
+
+\subsection{Recommendations}
+If I were to do it all over, what would I do differently and why? What are the key takeaways from this project, and what recommendations do I have for anyone looking to do similar work?
+
+\subsection{Ethical Implications}
+What are the ethical implications of the development of automated visual tracking?
+
+\subsection{Future Work}
+Recommendations for future work.

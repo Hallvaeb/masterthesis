@@ -1,38 +1,27 @@
 \section{Literature Review}
-
-\subsection{Introduction to Object Detection and Visitor Tracking}
-Understanding visitor behavior in cultural institutions such as museums and aquariums is pivotal for enhancing visitor engagement, optimizing exhibit design, and improving overall visitor experience. The study of visitor behavior encompasses a broad range of methods and approaches, from traditional observational techniques to advanced digital tracking technologies.
+The advent of "modern" object detection has enabled more sophisticated and automated methods for understanding visitor engagement and flow in cultural institutions. This literature review aims to explore the current state of research on object detection and visitor behaviour analysis in cultural institutions, focusing on privacy-preserving techniques, dataset specialization for enhanced object detection accuracy, and case studies of technology implementation. 
 
 \subsection{Visitor Behavior Analysis in Cultural Institutions}
-Studies on traditional methods for analyzing visitor behavior (surveys, manual counting, direct observation) and their limitations.
-Research on the use of digital technologies (video surveillance, mobile tracking) for understanding visitor engagement and flow in museums and aquariums.
+Studies on traditional methods for analyzing visitor behavior (surveys, manual counting, direct observation) and their use cases and limitations.
+
+*Hva har man kunnet finne ut av tidligere vs hva kan object detection gi oss?*
 
 \subsection{Privacy-Preserving Technologies in Surveillance}
-Exploration of techniques for ensuring privacy in surveillance, such as real-time image processing (pixelation, blurring), data anonymization, and encryption.
-Discussion on ethical considerations and legal frameworks governing the use of surveillance technologies in public spaces.
+Exploration of techniques for ensuring privacy in surveillance, such as blurring, pixelating faces etc.. 
 
-\subsection{Case Studies and Applications}
-Detailed examination of case studies involving the implementation of advanced tracking technologies in museums, aquariums, or similar cultural institutions. Analysis of objectives, methodologies, results, and implications of these studies.
-Detailed case studies of museums, aquariums, or similar cultural institutions that have implemented advanced tracking technologies.
-Focus on the objectives, methodologies, results, and implications of these studies.
-Analysis of how these technologies have impacted visitor experience, exhibit design, and operational decisions.
-Challenges and Future Directions
-
-\subsection{Challenges and Future Directions}
-Identification of current challenges in the field, such as accuracy in diverse environments, scalability, and balancing privacy with data utility.
-Speculative insights into future trends in technology development and application in cultural spaces.
-
-\subsubsection{Effectiveness of Object Detection Algorithms}
-Comparison of various algorithms' performance in crowded or complex environments typical of museums and aquariums.
-
-\subsubsection{Impact of Technology on Visitor Experience}
-Studies assessing how tracking technologies affect visitor satisfaction, engagement, and behavior.
+*TODO insert chapter from forstudien om hva folk tolker som privacy preservant og ikke. Poengtere at det mest personvernvennlige er å ikke lagre data i det hele tatt.*
 
 \subsubsection{Privacy and Ethics}
 Research addressing the ethical implications of surveillance in public spaces, including visitor perceptions and legal considerations.
 
-\subsubsection{Technology Integration}
-Examples of how cultural institutions have integrated object detection and tracking systems with other technologies.
+\subsection{Introduction to Object Detection and Visitor Tracking}
+Review of the evolution of object detection and tracking technologies, including the transition from traditional methods to modern computer vision techniques. What are some of their challenges, and how have they been addressed? Specifically focusing on suboptimal lighting conditions.
 
-\section{Conclusion}
-A critical evaluation of existing research, highlighting gaps that the project aims to fill and emphasizing the novelty of the approach, especially the application of privacy-preserving object detection technologies in cultural institutions.
+*Har fått yolov9 oppe og kjøre på pcen så tenker å kortfattet oppsummere hvordan yolo-algoritmen er ulik noen andre algoritmer, hva yolo er brukt til, og hvordan v9 skiller seg fra tidligere versjoner. Ta for seg hva vekter er i denne konteksten og at vektene bestemmes av treningsdata, som gir en glidende overgang til \ref{sec:dataset_specialization}* 
+
+\subsection{Effectiveness of Object Detection Training Dataset Specialization}
+\label{sec:dataset_specialization}
+Comparison of various algorithms performance enhancement when data has been optimized for the use case. What is the role of a training dataset in the task of determining the weights in a yolov9 artificial neural network, and how can would special training data optimize the weights for a specific use case?
+
+\subsection{Summary}
+A summarization of the current state of research, and where my thesis aims to contribute.
