@@ -21,7 +21,7 @@
             maxcitenames = 2,   % Number of authors in cite before replaced with 'Author#1 et al.'
             backref=true,
             ]{biblatex}
-
+            
   \bibliography{references.bib} % Adding our file containing the references
 
 \renewbibmacro{pageref}{%
@@ -32,6 +32,7 @@
          {\bibstring{backrefpages}\ppspace}
          {\bibstring{backrefpage}\ppspace}%
        \printlist[pageref][-\value{listtotal}]{pageref}}}}
+
 \addbibresource{references.bib}     % Adding our file containing the references
 % \addbibresource{reference_2.bib} is possible if we want to add several reference files
 
