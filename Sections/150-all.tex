@@ -27,9 +27,21 @@ On-device processing is emerging as a vital component of modern human detection 
 
 *Faller følgende to avsnitt under bakgrunn/motivasjon, generell introduksjon, eller problembeskrivelse?*
 
-The method of human detection and tracking in public spaces has evolved significantly over the past decade, driven by advancements in computer vision and machine learning. Traditional surveillance systems relied on centralized processing, where video feeds were transmitted to a remote server for manual human analysis. However, this approach raised privacy concerns as it involved transmitting raw video data over the network, potentially exposing sensitive information. Additionally, it also required a human to manually analyze the video feed, which was time-consuming, prone to errors, lacking of scalability, and not privacy-preserving. On-device processing addresses this issue by performing analytics locally on the edge device, reducing the need to transmit raw video data and enhancing privacy.  
+generell intro er jo bakgrunn og motivasjon
 
-A device was deployed in the acquarium of "Fiskeri og Søfartsmuseet" in Esbjerg, Denmark, to demonstrate the feasibility and effectiveness of on-device human detection and tracking in a practical and realistic setting. On top of the inherent challenges of running the analysis on-device in real-time, the system also faced the challenge of a suboptimal lighting environment, common in acquarium settings. This thesis serves as a demonstration of how to overcome said challenges by the use of a Raspberry Pi 4 with a camera, running a pre-trained yolov9 object detection model. The thesis further explores the effects of adding labeled images from the museum environment to the training dataset to improve the model's performance in the specific setting. The implementation is described in great detail, and the dataset is available at the following link: *TODO add link*. 
+The method of human detection and tracking in public spaces has evolved significantly over the past decade, driven by advancements in computer vision and machine learning. Traditional surveillance systems relied on centralized processing, where video feeds were transmitted to a remote server for manual human analysis. 
+
+dette er problembeskrivelse? Og generell problem beskrivelse"""However, this approach raised privacy concerns as it involved transmitting raw video data over the network, potentially exposing sensitive information. Additionally, it also required a human to manually analyze the video feed, which was time-consuming, prone to errors, lacking of scalability, and not privacy-preserving. """
+
+On-device processing addresses this issue by performing analytics locally on the edge device, reducing the need to transmit raw video data and enhancing privacy.  
+
+* to demonstrate feasibility and effectiveness... Er jo privacy jeg sørger for. Hvis man leser alt i ett, så er det lettere å se sammenhengen. Kanskje utheve med: such on-device processing..
+
+** on top of the ... Trønder-engelsk?
+
+A device was deployed in the acquarium of "Fiskeri og Søfartsmuseet" in Esbjerg, Denmark, to demonstrate the feasibility and effectiveness of on-device human detection and tracking in a practical and realistic setting. On top of the inherent challenges of running the analysis on-device in real-time, the system also faced the challenge of a suboptimal lighting environment. Such challenges are usual in museums where bildene vil bli skadet. It is also common in especially in acquarium settings. The project postuleted in this thesis demonstrates how to overcome said challenges by the use of a Raspberry Pi 4 with a camera, running a pre-trained yolov9 object detection model. The thesis further explores the effects of adding labeled images from the museum environment to the training dataset to improve the model's performance in the specific setting. The implementation is described in detail. The dataset is available at the following link: *TODO add link*. 
+
+Heller korte ned setninger. Prøve å bryte setningene opp i flere. Hold "great" unna vitenskapelige tekster. Forsøket ble gjort i fortid. Det som står i oppgaven er i presens.
 
 *Inkluderer også noe (mer) om background and motivation, problem description, scope (research questions og research objectives) og struktur av oppgaven...*
 
@@ -63,6 +75,13 @@ Review of the evolution of object detection and tracking technologies, including
 
 *Har fått yolov9 oppe og kjøre på pcen så tenker å kortfattet oppsummere hvordan yolo-algoritmen er ulik noen andre algoritmer, hva yolo er brukt til, og hvordan v9 skiller seg fra tidligere versjoner. Ta for seg hva vekter er i denne konteksten og at vektene bestemmes av treningsdata, som gir en glidende overgang til \ref{sec:dataset_specialization}* 
 
+evne til å forbedre mørke scener i mobiltelefonteknologi vil kanskje også over noen år bli overført til mer lavnivåsystemer.
+
+Primary objective demonstrate feasability and effectiveness of on-device human detection and tracking in a practical and realistic setting.
+Burde være en sekundary goal her kanskje å lage en heatmap.
+Avvening om lysstyrke, bevegelse, bilder, sett fra menneske og maskin.
+
+
 \subsubsection{Yolov9 Object Detection}
 The YOLO (You Only Look Once) object detection algorithm is a popular choice for real-time object detection due to its speed and accuracy. The YOLO algorithm processes images in a single pass, making it faster than traditional object detection algorithms that require multiple passes. YOLO divides the image into a grid and predicts bounding boxes and class probabilities for each grid cell. The YOLOv9 model is an improved version of the original YOLO algorithm, incorporating various enhancements to improve detection accuracy and speed. YOLOv9 uses a pre-trained model that has been trained on a large dataset to detect a wide range of objects. The model's weights are determined by the training data, allowing it to learn to detect objects with high accuracy.
 
@@ -72,7 +91,7 @@ The YOLO (You Only Look Once) object detection algorithm is a popular choice for
 
 \subsubsection{Dark-Lit Environments}
 Being able to detect and locate people in dark-lit environments have been previously attempted, usually for security concerns in public spaces. \citeauthor{pa2020PersonDetectionNightTimeFLIR} developed a system for detecting people in dark-lit environments using a convolutional neural network. They modified the three input channels which usually take RGB to take as input instead (i) the original infrared image, (ii) a difference image from the previous frame, and (iii) a background subtraction mask. Their dataset is vastly different from the setting for this thesis, as the individuals in their photos were far away from the cameras. However, they found that their system was able to detect people in dark-lit environments with an accuracy of 90\%. This is a promising result, as it shows that it is possible to detect people in dark-lit environments using infrared imaging and CNNs. They used FLIR cameras, which make images from heat. Doing inferences on pure infrared images may be harder because the infrared radiation may be less prevalent than the heat a FLIR camera may capture. The FLIR cameras are expensive, and thus not considered viable for this project. 
-\cite{pa2020PersonDetectionNightTimeFLIR}. hei
+\cite{pa2020PersonDetectionNightTimeFLIR}. 
 
 
 
@@ -87,8 +106,8 @@ Comparison of various algorithms performance enhancement when data has been opti
 A summarization of the current state of research, and where my thesis aims to contribute.
 
 \section{Methodology}
-This chapter will describe the process of developing the human detection and positioning system, including the hardware and software components used, the dataset collection and preparation (labeling ), the training of the object detection model, and the deployment of the system in the museum environment. The chapter will also discuss the ways of assessing the system's performance, before and after deployment (hhv using test dataset og vanskelighetene ved å ikke enkelt kunne vite hva som er korrekt).
- 
+This chapter describes the process of developing the human detection and positioning system, including the hardware and software components used, the dataset collection and preparation (labeling), the training of the object detection model, and the deployment of the system in the museum environment. The chapter will also discuss the ways of assessing the system's performance, before and after deployment (hhv using test dataset og vanskelighetene ved å ikke enkelt kunne vite hva som er korrekt).
+
 \begin{table}[H]
     \centering\renewcommand{\arraystretch}{1.5} % Increase vertical padding
     \setlength{\tabcolsep}{1em}
