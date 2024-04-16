@@ -1,10 +1,26 @@
 - Capture images for a specialized dataset.
+	Set up camera with the right settings.
+	Eksamen medisinstudenter 17. april.
+		Få med Marinka som høy person...
+		Jakob er lav... Og har en datter...
 - Label the dataset to have ground truth data.
+	Process prepared: 
+		tiling-experiment/yolov9/config, detect
+		tiling-experiment/find_images_without_predictions
+			This overwrites images with same name in the folder to avoid duplicates
+		lsenv, 
+		label-studio start, 
+		sync storage of the images-predictions-failed-yolov9
+		manual label
+		export yolo format og json format
+		sync storage of images-labeled-yolov9/... 
+		manual label (verify yolov9 predictions)
+		export yolo format og json format
 - Train multiple detectors with the data.
 	Several versions for both yolov3 and yolov9:
 		general
-		trained with sub optimal data
-		trained with best data:
+		trained with first dataset (sub optimal) 
+		trained with better dataset:
 			100 images, 500 images, 1000 images
 		trained with all data available
 	In total: 2 models * 5 version = 10 detectors to be ran in sequence for every image captured. 
@@ -12,12 +28,13 @@
 	Will be okay-easy and quick to do and render results regarding validity of the dataset. 
 - Test on live data from detectors deployed on real-world live devices.
 	Here we will have no ground truth... Counting live is subject to human error. 
-	For each set of detector results over a week (or so), make a heat map to illustrate their detections. Compare heat maps to see if differences in accuracy matters for an application tasked with finding the location of persons in a dark-lit indoors acquarium situation.
+	For each set of detector results over a week (or so), make a heat map to illustrate their detections. 
+	Compare heat maps to see if differences in accuracy matters for an application tasked with finding the location of persons in a dark-lit indoors acquarium situation.
 
 	Deployment of yolov3 and yolov9 with differing dependencies on the same device:
 	Solution to dependencies issues? Docker, venvs?	Ask Erik? Amund? Go with venv because simplistic?
 
-
+Hvor mange bilder trengs for at en maskin skal forstå hvor mennesker er på et bilde.
 
 
 
