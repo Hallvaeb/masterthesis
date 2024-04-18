@@ -22,21 +22,21 @@
             backref=true,
             ]{biblatex}
             
-  \bibliography{references.bib} % Adding our file containing the references
+\bibliography{references.bib} % Adding our file containing the references
 
 \renewbibmacro{pageref}{%
   \iflistundef{pageref}
     {}
     {\printtext[parens]{%
-       \ifnumgreater{\value{pageref}}{1}
-         {\bibstring{backrefpages}\ppspace}
-         {\bibstring{backrefpage}\ppspace}%
-       \printlist[pageref][-\value{listtotal}]{pageref}}}}
+      \ifnumgreater{\value{pageref}}{1}
+        {\bibstring{backrefpages}\ppspace}
+        {\bibstring{backrefpage}\ppspace}%
+      \printlist[pageref][-\value{listtotal}]{pageref}}}}
 
 \addbibresource{references.bib}     % Adding our file containing the references
 % \addbibresource{reference_2.bib} is possible if we want to add several reference files
 
-\usepackage{caption} % Enables controlling the look and feel of captions, see package documentation
+% \usepackage{caption} % Enables controlling the look and feel of captions, see package documentation
 \usepackage{subcaption}     % Recommended when making sub-figures
 \usepackage[nottoc]{tocbibind}  % Includes Bibliography, Index, list of Listing etc. to table of contents
 \newcommand{\source}[1]{\vspace{-4pt} \caption*{\hfill \footnotesize{Source: {#1}} } }   % Easily insert sources in images
@@ -127,120 +127,8 @@
 \usetikzlibrary{calc}
 \usepackage{lipsum}
 
-
-\newcounter{remarkcounter}
-\renewcommand{\theremarkcounter}{\arabic{remarkcounter}}
-
-\NewEnviron{myremarkwithimage}[2]{%
-  \refstepcounter{remarkcounter}%
-  \par\medskip\noindent
-  \begin{tikzpicture}
-    \node[inner sep=0pt] (box) {\parbox[t]{.99\textwidth}{%
-      \begin{minipage}{.3\textwidth}
-      \centering\tikz[scale=1]\node[scale=.3]{\includegraphics{#2}};
-      \end{minipage}%
-      \begin{minipage}{.65\textwidth}
-      \textbf{Remark~\theremarkcounter: #1}\par\smallskip
-      \BODY
-      \end{minipage}\hfill}%
-    };
-    \draw[red!75!black,line width=3pt] 
-      ( $ (box.north east) + (-5pt,3pt) $ ) -- ( $ (box.north east) + (0,3pt) $ ) -- ( $ (box.south east) + (0,-3pt) $ ) -- + (-5pt,0);
-    \draw[red!75!black,line width=3pt] 
-      ( $ (box.north west) + (5pt,3pt) $ ) -- ( $ (box.north west) + (0,3pt) $ ) -- ( $ (box.south west) + (0,-3pt) $ ) -- + (5pt,0);
-  \end{tikzpicture}\par\medskip%
-}
-
-\NewEnviron{myremark}[1]{%
-  \refstepcounter{remarkcounter}%
-  \par\medskip\noindent
-  \centering
-  \begin{tikzpicture}
-    \node[inner sep=10pt] (box) {\parbox[t]{0.9\textwidth}{%
-      \begin{minipage}{.9\textwidth}
-      \textbf{Remark~\theremarkcounter: #1}\par\smallskip
-      \BODY
-      \end{minipage}\hfill}%
-    };
-    \draw[red!75!black,line width=3pt] 
-      ( $ (box.north east) + (-5pt,3pt) $ ) -- ( $ (box.north east) + (0,3pt) $ ) -- ( $ (box.south east) + (0,-3pt) $ ) -- + (-5pt,0);
-    \draw[red!75!black,line width=3pt] 
-      ( $ (box.north west) + (5pt,3pt) $ ) -- ( $ (box.north west) + (0,3pt) $ ) -- ( $ (box.south west) + (0,-3pt) $ ) -- + (5pt,0);
-  \end{tikzpicture}\par\medskip%
-}
-
-\NewEnviron{myquote}[1]
-  {\par\medskip\noindent
-  \centering
-  \begin{tikzpicture}
-    \node[inner sep=10pt] (box) {\parbox[t]{.9\textwidth}{%
-      \begin{minipage}{.9\textwidth}
-      \textbf{#1}\par\smallskip
-      \BODY
-      \end{minipage}\hfill}%
-    };
-    \draw[blue!75!black,line width=3pt] 
-      ( $ (box.north east) + (-5pt,3pt) $ ) -- ( $ (box.north east) + (0,3pt) $ ) -- ( $ (box.south east) + (0,-3pt) $ ) -- + (-5pt,0);
-    \draw[blue!75!black,line width=3pt] 
-      ( $ (box.north west) + (5pt,3pt) $ ) -- ( $ (box.north west) + (0,3pt) $ ) -- ( $ (box.south west) + (0,-3pt) $ ) -- + (5pt,0);
-  \end{tikzpicture}\par\medskip%
-}
-
-\NewEnviron{myquoteblueboxwithimage}[2]
-  {\par\medskip\noindent
-  \begin{tikzpicture}
-    \node[inner sep=0pt] (box) {\parbox[t]{.99\textwidth}{%
-      \begin{minipage}{.3\textwidth}
-      \centering\tikz[scale=1]\node[scale=.3]{\includegraphics{#2}};
-      \end{minipage}%
-      \begin{minipage}{.65\textwidth}
-      \textbf{#1}\par\smallskip
-      \BODY
-      \end{minipage}\hfill}%
-    };
-    \draw[blue!75!black,line width=3pt] 
-      ( $ (box.north east) + (-5pt,3pt) $ ) -- ( $ (box.north east) + (0,3pt) $ ) -- ( $ (box.south east) + (0,-3pt) $ ) -- + (-5pt,0);
-    \draw[blue!75!black,line width=3pt] 
-      ( $ (box.north west) + (5pt,3pt) $ ) -- ( $ (box.north west) + (0,3pt) $ ) -- ( $ (box.south west) + (0,-3pt) $ ) -- + (5pt,0);
-  \end{tikzpicture}\par\medskip%
-}
-
-
-\newcounter{researchquestioncounter}
-\renewcommand{\theresearchquestioncounter}{\arabic{researchquestioncounter}}
-
-\NewEnviron{researchQ}[1]{%
-  \refstepcounter{researchquestioncounter}%
-  \par\medskip\noindent
-  \textit{Research Question \theresearchquestioncounter} \textit{[#1]} \\
-  \textbf{\BODY}
-}
-
-\newcounter{primaryobjectivecounter}
-\renewcommand{\theprimaryobjectivecounter}{\arabic{primaryobjectivecounter}}
-
-\NewEnviron{primaryobjective}{%
-  \refstepcounter{primaryobjectivecounter}%
-  \par\medskip\noindent
-  \textit{Primary Objective \theprimaryobjectivecounter} \\
-  \textbf{\centering \BODY}
-}
-
 \usepackage[most]{tcolorbox}
 \usetikzlibrary{shadows}
-\newmdenv[
-  roundcorner=10pt,
-  backgroundcolor=white,
-  shadow=true,
-  shadowsize=4pt,
-  frametitlefont=\bfseries\itshape,
-  frametitlerule=true,
-  frametitlebackgroundcolor=gray!20,
-  linewidth=0.5pt,
-  innerleftmargin=15pt,
-  innerrightmargin=15pt,
-]{myquote3}
-
 
 % Følgende måtte plasseres lenger opp i dette dokumentet for å unngå warn.
 % \usepackage[raggedrightboxes]{ragged2e} % For fine tables

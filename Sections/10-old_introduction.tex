@@ -1,0 +1,83 @@
+% \subsection{Background and Motivation}
+
+% *v1*
+% Understanding visitor behavior in cultural institutions such as museums and aquariums is useful for enhancing visitor engagement, optimizing exhibit design, and improving overall visitor experience. The study of visitor behavior is multifaceted, involving human psychology, image capturing techniques, privacy, ethics, and data analysis. Traditional methods of visitor behavior analysis, such as surveys, manual counting, and direct observation, have limitations in terms of accuracy, scalability, and real-time data collection.
+% */v1*
+
+% In the late 20th century, the introduction of video cameras provided a new avenue for tracking visitors, allowing for more detailed observations of visitor behaviour. However, these early systems were primarily used for security purposes and offered limited capabilities for analyzing visitor behavior in depth in a privacy preservant manner. As digital technologies advanced, so did the potential for understanding visitor experiences in more nuanced and meaningful ways.
+
+% The turn of the millennium marked a significant shift with the emergence of computer vision and artificial intelligence (AI) technologies. These advancements enabled the development of systems capable of not just recording visitor movements but interpreting them without the need of human interference. Object detection algorithms began to allow for the automatic localization of people across a space, allowing more complex insights to be extracted from the scene.
+
+% Today, the field stands on the cusp of a new era, fueled by deep learning and real-time data analysis capabilities. Technologies such as pose estimation, gaze tracking, and behavioral analysis algorithms provide unprecedented insights into how visitors engage with exhibits. These tools can identify not just which exhibits attract the most attention but how visitors physically interact with them, offering a window into the visitor experience that was previously unimaginable.
+
+
+% This historical context underscores the transformative impact of technology on the study of visitor engagement. From the rudimentary tools of the past to the sophisticated systems of today, the journey reflects a broader trend towards increasingly precise, nuanced, and actionable insights into how people interact with their environment. This research represents a continuation of that journey, pushing the boundaries of what can be understood about visitor experiences in cultural institutions.
+
+% Visitor attention intelligence in cultural facilities, such as museums or aquariums, offers a wide array of potential applications. By analyzing visitor engagement and behavior, facilities can make informed decisions to enhance the visitor experience. This thesis aims to provide insights into visitor behavior, addressing questions such as:
+
+% \subsubsection*{Questions} 
+% \begin{enumerate}
+%     \item What are the popularity ratings of various exhibitions within the facility?
+%     \item What are the average and peak visitor counts in front of each exhibition, and how frequently are these peak counts reached?
+%     \item Which exhibition experiences the longest visitor engagement times?
+%     \item To what extent does the physical placement of an exhibition influence visitor engagement and dwell time?
+%     \item Which areas within the facility are most susceptible to crowding or queue formation?
+%     \item Are all parts of the museum being visited?
+% \end{enumerate}
+
+% The findings from these questions can inform strategic improvements and interventions to enhance the quality of visitation. Potential strategic actions include:
+% \subsubsection*{Strategic actions} 
+% \begin{enumerate}
+%     \item Enhance the lighting around exhibits that gain increased popularity during specific times, such as daylight hours, to maintain or boost visitor interest.
+%     \item Reevaluate the positioning of artworks or exhibitions based on popularity data, ensuring high-value or popular items are placed in strategic locations to maximize visibility and engagement.
+%     \item Implement environmental controls, such as automatic window opening, to regulate airflow and temperature in response to room occupancy exceeding a certain threshold for a designated period.
+%     \item Automate the management of exhibit areas based on real-time visitor presence, such as closing off sections near closing time to streamline the exit process if no visitors are detected.
+%     \item Develop a system integration plan for safety and operational efficiency, enabling immediate response to incidents like falls into water features or ensuring all visitors have vacated the premises before locking down the facility.
+%     \item Utilize visitor count data to identify discrepancies between ticket sales and actual attendance, flagging potential security concerns such as unauthorized entry.
+% \end{enumerate} 
+
+% These strategies, informed by data-driven insights into visitor behavior, can significantly enhance operational efficiency, safety, and the overall visitor experience in cultural institutions.
+
+% \subsection{Problem Description} 
+% Recent advancements in object detection technology have significantly enhanced applications across various fields, including security surveillance, retail analytics, and visitor tracking in cultural institutions. Despite these advancements, achieving high-quality and efficient object detection, particularly in the context of visitor localization within museums and aquariums, presents distinct challenges. Key among these is the ability to accurately detect and localize individuals in environments where lighting conditions are variable or suboptimal and where objects or individuals may be partially occluded.
+
+% In environments with insufficient lighting, conventional image sensors struggle to capture the detailed visual information required for accurate object detection and segmentation. Although these sensors can detect infrared (IR) light, which extends beyond the visual spectrum visible to the human eye, leveraging this capability introduces its own set of challenges. IR sensors can indeed infer the presence and movement of people within a space, but they fall short when it comes to segmenting individuals from one another or from the background. The difficulty arises from the inherent fuzziness of borders in the infrared spectrum.
+
+% In cultural spaces like museums and aquariums, lighting conditions are often designed with the preservation of exhibits in mind rather than optimal visibility for image capture. This can lead to areas within these institutions where low light or shadows impair the effectiveness of standard image sensors. While these sensors are capable of detecting infrared (IR) light, which is invisible to the human eye, relying solely on IR sensors for visitor localization introduces its own set of challenges. Although IR sensors can broadly detect movement and presence, the fuzzy nature of individual outlines in the infrared spectrum complicates the differentiation process of individuals within a group and the task of accurately segmenting a person from the background becomes problematic.
+
+% In summary, this project aims to address the multifaceted challenges of implementing an effective and efficient visitor localization system in museums and aquariums. These challenges include adapting to variable lighting conditions, accurately identifying and tracking individuals in crowded or complex scenes, and ensuring the privacy of all visitors. Overcoming these obstacles is crucial for leveraging visitor localization technology to enhance museum management and the overall visitor experience.
+
+% \subsection{Project Scope}
+
+% The scope of this project encompasses developing a sophisticated visitor localization system tailored for use in museums and aquariums. This system aims to address the inherent challenges posed by the scene and the need for maintaining visitor privacy.
+
+% \subsubsection{Objectives}
+% \label{sec:primary_objectives}
+% The primary objectives of this project are to:
+% \begin{enumerate}
+%     \item Develop an object detection system that performs reliably under the indoor lighting conditions, characteristic of museum and aquarium environments.
+%     \item Implement privacy-preserving technologies within the localization system to ensure that visitor data is anonymized and secure.
+%     \item Evaluate the system's accuracy and efficiency in real-world settings, identifying areas for improvement and potential scalability.
+%     \item Explore the integration of the localization system with existing museum management systems to enhance the visitor experience through personalized content and navigation aids.
+% \end{enumerate}
+
+% \subsubsection{Research Questions}
+% \label{sec:research_questions}
+% The research will address the following critical questions, which are pivotal to understanding the challenges and opportunities in object detection within cultural institutions:
+% \begin{enumerate}
+%     \item What are the current challenges in object detection technologies, especially in low-light and crowded environments found in museums and aquariums?
+%     \item How can object detection systems be designed to respect and ensure the privacy of visitors while collecting useful localization data?
+%     \item In what ways can the accuracy and efficiency of these systems be improved to provide real-time insights into visitor behavior and exhibit engagement?
+%     \item What potential does such technology hold for transforming museum and aquarium management and the overall visitor experience?
+% \end{enumerate}
+
+% \subsection{Structure}
+
+% The remainder of this document is structured as follows to provide a comprehensive overview of the project and its findings:
+% \begin{enumerate}
+%     \item \textbf{Literature Review:} An examination of existing research and technologies in object detection and visitor localization, highlighting gaps this project aims to fill.
+%     \item \textbf{Methodology:} Detailed description of the system design, development process, and the methods used for testing and data analysis.
+%     \item \textbf{Results:} Presentation of the findings from the implementation of the localization system in a museum or aquarium setting.
+%     \item \textbf{Discussion:} Analysis of the results in the context of the research questions, including the implications for museum management and visitor experience.
+%     \item \textbf{Conclusion and Future Work:} Summary of the project's contributions to the field and suggestions for future research directions.
+% \end{enumerate}

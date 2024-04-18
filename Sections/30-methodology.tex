@@ -5,19 +5,19 @@ Camera setup:
 Hardware camera can be tweaked by screwing the lens with a mechanical tool to modify it's aperture, which influences it's depth focus. 
 Aperture mechanical setting (camera focus adjustment), depth control. Default not found... images well sharp enough... 50cm to infinity...
 
-I was getting the following errorS:
-mma l:
-mal_uc_port_enable: failed to enable port
-uc.null_sink: in:0(OPQV): ENOSPC
-mal: mal_port_enable: failed to enable connected
-port (uc.null_sink: in:0COPQU) )0x256daf0 CENOSPC)
+I was getting the following errorS
+mmal:
+mal uc port enable: failed to enable port
+uc.null sink: in:0(OPQV): ENOSPC
+mal: mal port enable: failed to enable connected
+port (uc.null sink: in:0COPQU) 0x256daf0 CENOSPC
 mmal connection enable:
 Error: Failed
 output port couldn't be enabled
 to enable connection: Out of resources
-Which was solved by allocating more memory to the GPU by going through raspi-config Performance Options > GPU Memory
+Which was solved by allocating more memory to the GPU by going through raspi-config Performance Options  GPU Memory
 
-The awb_gains control seems to not set before after capturing an image. Thus, setting these values and then checking, rather than setting them, capturing and then checking leads to confusing results.
+The awb gains control seems to not set before after capturing an image. Thus, setting these values and then checking, rather than setting them, capturing and then checking leads to confusing results.
 
 Dataset obtainment
 Dataset was build by capturing images while no visitors were present in the acquarium. Due to the constraint to only operate within opening hours when the facility was open to everyone, a way to cancel image capturing was needed in the case if someone entered the room. One of the goals of the dataset was to have the images taken from the same angle as the device will be used in the future. The device was therefore mounted in the corner of the room, and ssh was used to access the device remotely from a pc in the acquarium. Then, a script was ran to capture an image per second and storing it on the SD card in the device. The choice to store the image locally rather than transmitting it was to not have to worry about data transmission costs and issues. The first iteration of image capture was made with non-optimized camera configurations, turning to the brightness setting of the picamera python module to get the images to a sufficient brightness. Still, some images fell short to the auto focus of the camera focusing on the bright acquariums and thus rendering the rest of the image rather dark. However, these images serve as a way of inspecting the impact of captured image quality on inference performance. 
@@ -26,7 +26,7 @@ Due to many technical difficulties the first few times images were being capture
 
 The detector needs to know the ground truth when training and validating on the obtained data. This can be obtained by manually labeling the data. However, a more scientific, robust and scaleable way of labeling is to have the detector do the heavy lifting. Therefore, the dataset was first inferenced by the detector. The data was then manually validated, and finally the images for which the detector did not find any persons was manually labeled. The time to understand the tools and develop this pipeline was similar to what it would take to manually label all the images, but can now be used for future applications also. The approach to label the images is described in section: \ref{sec:labeling}.
 
-After the ground truth was identified for all the dataset images, it was then used to evaluate the general-purpose yolov3 and yolov9. Results are discussed in \ref{sec:results}. The data was then used to train the detectors. The training process is described in section \ref{sec:training}. The trained models were then deployed to the device to evaluate the inference speed and accuracy. The deployment process is described in section \ref{sec:deployment}.
+After the ground truth was identified for all the dataset images, it was then used to evaluate the general-purpose yolov3 and yolov9. Results are discussed in \ref{sec:results}. The data was then used to train the detectors. The training process is described in section \ref{sec:model_training}. The trained models were then deployed to the device to evaluate the inference speed and accuracy.
 
 To visualize the improvements and highlight the areas in the image benefitting most from detector improvements, heat maps were generated. The process of generating heat maps is described in section \ref{sec:heatmaps}.
 
@@ -35,6 +35,9 @@ To visualize the improvements and highlight the areas in the image benefitting m
 Ground truth values for the dataset must be obtained before improving the model and evaluating it's effect. 
 
 "Label Studio" was used to label the images. First, the dataset was predicted with a yolo v9 model trained on the COCO dataset. Predictions were mostly decent, but some needed small tweakings and in some cases the persons were not discovered. The detector had close to zero hallucinations due to a sufficiently high confidence rate of 0.5 (: for ), but in some cases the fish were identified as human.
+
+\subsection{Model Training}
+\label{sec:model_training}
 
 \subsection{Ethical Considerations}
 In the deployment of advanced machine learning technologies for visitor localization and engagement analysis, this research proactively addresses privacy concerns through the implementation of image obscuration techniques. These methods ensure that no personally identifiable information is captured or communicated, thus significantly reducing privacy risks associated with visitor tracking in cultural spaces such as museums and aquariums.
@@ -57,6 +60,8 @@ Furthermore, the project will adhere to an ongoing ethical review process, ensur
 In summary, by prioritizing privacy through the use of image obscuration techniques and adopting a comprehensive ethical framework, this research aims to advance the understanding of visitor engagement in a manner that is both innovative and respectful of individual privacy rights. This approach sets a precedent for the ethical application of machine learning technologies in cultural institutions, balancing the benefits of visitor behavior analysis with the imperative of protecting privacy.
 
 
+\subsection{Heatmaps}
+\label{sec:heatmaps}
 
 \subsection*{Notes}
 Tried to download/use model from Roboflow, but either image has to be sent to an API which would not retain privacy, or the device has to host an API itself to run the inference... Seems unlikely to be the most preferable solution, as the device would have to set up the service and run it locally. Possibly an interesting solution would be to do this with multiple devices. This supports the master-slave pattern of having multiple weaker computers and have them send to the stronger unit. Setting up private TCP connection between the weaker units and the strong unit and have the images sent to the stronger, so it can detect on them and send information etc... How many weak units do we need in order to make it profitable to have a strong GPU unit to do the processing? This whole systems sounds to be complicating processes, not making the product modular and easy-to-use. Includes a lot of connection/networking to make the weaker units find and connect to strong, physically close device.
