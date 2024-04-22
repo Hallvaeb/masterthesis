@@ -7,15 +7,24 @@
 	Process prepared: 
 		tiling-experiment/yolov9/config, detect
 		tiling-experiment/find_images_without_predictions
-			This overwrites images with same name in the folder to avoid duplicates
-		lsenv, 
-		label-studio start, 
-		sync storage of the images-predictions-failed-yolov9
-		manual label
-		export yolo format og json format
-		sync storage of images-labeled-yolov9/... 
-		manual label (verify yolov9 predictions)
-		export yolo format og json format
+			This gives a count and the images where yolov9 found no people...
+		tiling-experiment/yolo_to_json_predictions
+			This will give the predictions in json format so it can be imported to ls
+		lsenv
+		label-studio start 
+		import predictions.json
+			Now, if the paths in predictions_converter are correctly set up the predictions will all appear as separate predictions for each photo.
+		select all, create annotations from predictions
+		press the first of the images and go through the list, verifying the annotations
+			predictions can remain
+		manual label what has been missed.
+		import the images resulting from "find_images_without_predictions" to annotate those as well
+			Do this by syncing the folder, as directly importing the images will result in weird filenames of the annotations, complicating the conversion afterwards.
+		export json minimum format
+			The yolo format appears to have a bug, only exporting one annotation per image, ignoring where there are multiple annotations for a single image.
+			This formats the bboxes in a non-normalized way. We have to do the inverse of predictions_converter to get them on the yolo format for training.
+		run the 'json_to_yolo_labels.py' script to correctly convert back to yolo format 
+
 - Train multiple detectors with the data.
 	Several versions for both yolov3 and yolov9:
 		general

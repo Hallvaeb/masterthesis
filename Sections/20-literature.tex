@@ -5,12 +5,10 @@ The advent of "modern" object detection has enabled more sophisticated and autom
 Studies on traditional methods for analyzing visitor behavior (surveys, manual counting, direct observation) and their use cases and limitations.
 
 
-
 \citeauthor{la2017museumbehaviouranalysis} conducted a study on the behaviour of museum visitors, and the perceived value of their findings to museum curators. They found that the use of technology for visitor behaviour analysis was generally well-received by museum curators, and that the data collected could be used to improve the visitor experience. They also avoided the use of manual counting and surveys, by giving the visitors wearable RFID trackers, communicating their position to the system when close to one of several beacons deployed at positions deemed important by the museum curators. The study was able to provide insights into the visitors' behaviour, such as the most popular exhibits, the average time spent in the museum, and the most common paths taken by visitors. The biggest draw back of such a system is having to give the visitors wearable trackers, which can be unfavourable. TDOO: finne ut om de spurte deltakere om hva de synes om å bha med seg devices.
 
 On the usability of a visitor behavior analysis systems, \cite{la2017museumbehaviouranalysis} found split opinions. Administrators and department heads were generally more enthustistic, while the museum curators were generally more sceptical: "A temporary exhibition won’t
 change after you deploy it, and understanding how it is used by the public would not help me in my next exhibition, since they are each very different. My main reason to analyze behavior would be to satisfy my curiosity." On the contrary, one museum administrator stated: "Some exhibitions cost a fortune. We really need to know if this expenditure was worthwhile" displaying how opinions can vary greatly depending on the role of the individual in the museum.
-
 
 
 \subsection{Privacy-Preserving Technologies in Surveillance}
@@ -36,8 +34,7 @@ Avvening om lysstyrke, bevegelse, bilder, sett fra menneske og maskin.
 
 
 \subsubsection{Yolov9 Object Detection}
-The YOLO (You Only Look Once) object detection algorithm is a popular choice for real-time object detection due to its speed and accuracy. The YOLO algorithm processes images in a single pass, making it faster than traditional object detection algorithms that require multiple passes. YOLO divides the image into a grid and predicts bounding boxes and class probabilities for each grid cell. The YOLOv9 model is an improved version of the original YOLO algorithm, incorporating various enhancements to improve detection accuracy and speed. YOLOv9 uses a pre-trained model that has been trained on a large dataset to detect a wide range of objects. The model's weights are determined by the training data, allowing it to learn to detect objects with high accuracy.
-
+The YOLO (You Only Look Once) object detection algorithm is a popular choice for real-time object detection due to its speed and accuracy. YOLO processes images in a single pass, making it faster than traditional object detection algorithms that require multiple passes. YOLO divides the image into a grid and predicts bounding boxes and class probabilities for each grid cell. The YOLOv9 is an improved version of the original YOLO algorithm, incorporating various enhancements to improve detection accuracy and speed. The YOLOv9 model used for this project uses weights that has been pre-trained on the COCO dataset. This is a large dataset of ... images, with 80 different classes (i.e. objects). To improve the model, removing all other classes than persons would likely allow for a smaller model which could mean a smaller size weights file for the resulting model. Training a model from scratch, however, is a time consuming process which requires a lot of data and processing.
 
 
 

@@ -1,40 +1,94 @@
 \section{Methodology}
 Two cameras were deployed in a room of acquariums at "Fiskeri- og Søfartsmuseet" in Esbjerg to take images for building a specialized dataset and to evaluate the effects of developing a highly specialized detector rather than using a general.
 
-Camera setup:
+\subsection{Dataset Construction}
+\subsubsection{Camera}
 Hardware camera can be tweaked by screwing the lens with a mechanical tool to modify it's aperture, which influences it's depth focus. 
 Aperture mechanical setting (camera focus adjustment), depth control. Default not found... images well sharp enough... 50cm to infinity...
 
-I was getting the following errorS
-mmal:
-mal uc port enable: failed to enable port
-uc.null sink: in:0(OPQV): ENOSPC
-mal: mal port enable: failed to enable connected
-port (uc.null sink: in:0COPQU) 0x256daf0 CENOSPC
-mmal connection enable:
-Error: Failed
-output port couldn't be enabled
-to enable connection: Out of resources
-Which was solved by allocating more memory to the GPU by going through raspi-config Performance Options  GPU Memory
+\subsubsection{Technical Challenges and their Solutions}
+\textbf{Pi out of memory on image capture}
+Context: tweaking camera settings, leading to larger size images
+Error: mal port enable failed to enable connected port... Out of resources.
+Solution: allocating more memory to the GPU by going through raspi-config Performance Options -> GPU Memory
 
-The awb gains control seems to not set before after capturing an image. Thus, setting these values and then checking, rather than setting them, capturing and then checking leads to confusing results.
+\textbf{AWB Gains not setting}
+Context: setting picamera.awg gains has no effect
+Error: no change 
+Solution: set awb gains after awb mode has been set to off, and capture an image. The control seems to not set before after capturing an image. Thus, setting these values and then checking the values, it might seem the modification has not been made altough it will show on the images.
 
-Dataset obtainment
-Dataset was build by capturing images while no visitors were present in the acquarium. Due to the constraint to only operate within opening hours when the facility was open to everyone, a way to cancel image capturing was needed in the case if someone entered the room. One of the goals of the dataset was to have the images taken from the same angle as the device will be used in the future. The device was therefore mounted in the corner of the room, and ssh was used to access the device remotely from a pc in the acquarium. Then, a script was ran to capture an image per second and storing it on the SD card in the device. The choice to store the image locally rather than transmitting it was to not have to worry about data transmission costs and issues. The first iteration of image capture was made with non-optimized camera configurations, turning to the brightness setting of the picamera python module to get the images to a sufficient brightness. Still, some images fell short to the auto focus of the camera focusing on the bright acquariums and thus rendering the rest of the image rather dark. However, these images serve as a way of inspecting the impact of captured image quality on inference performance. 
+\subsubsection{Image Capture}
+The dataset was built by capturing images while no visitors were present in the acquarium. Due to the constraint to only operate within opening hours when the facility was open to everyone, a way to cancel image capturing was needed in the case if someone entered the room. One of the goals of the dataset was to have the images taken from the same angle as the device will be used in the future. The device was therefore mounted in the corner of the room, and ssh was used to access the device remotely from a pc in the acquarium. Then, a script was ran to capture images in sequence, storing them on the SD card in the device. The choice to store the image locally rather than transmitting it was to not have to worry about data transmission costs and issues. 
 
-Due to many technical difficulties the first few times images were being captured for the dataset, only the developer and author of this thesis is present in the images\footnote{Initially, an attempt was made to pass MQTT messages as a way to initialize image capture so multiple cameras could be deployed in several locations, thus speeding up and simplifying the image capturing process. This was discarded due to technical difficulties related to efficiently stopping the image capturing. For a different solution, a recommendation would be to implement a way of communicating to multiple devices however, so one could obtain all images from deployment locations in one shooting. For this single-deployment angle and area project, however, the approach with ssh-ing into the device worked fine.}. The acquarium could not provide free tickets for additional participants in the experiments, and the cost of bringing friends to enrichen the dataset would then have to be optimized in terms of time spent at the site.
+All picamera configurations used in the image capture iterations can be seen in figure TODO. Example images to display the image qualities and differences are found in appendix \ref{app:images}
 
-The detector needs to know the ground truth when training and validating on the obtained data. This can be obtained by manually labeling the data. However, a more scientific, robust and scaleable way of labeling is to have the detector do the heavy lifting. Therefore, the dataset was first inferenced by the detector. The data was then manually validated, and finally the images for which the detector did not find any persons was manually labeled. The time to understand the tools and develop this pipeline was similar to what it would take to manually label all the images, but can now be used for future applications also. The approach to label the images is described in section: \ref{sec:labeling}.
+\textbf{1st iteration}
+\textit{Total number of images: 1312 (day 1), 986 (day 2) and 641 (day 3), total 2939. 1 subject.}
 
-After the ground truth was identified for all the dataset images, it was then used to evaluate the general-purpose yolov3 and yolov9. Results are discussed in \ref{sec:results}. The data was then used to train the detectors. The training process is described in section \ref{sec:model_training}. The trained models were then deployed to the device to evaluate the inference speed and accuracy.
+The first iteration of image capture was made with non-optimized camera configurations. To sufficiently brighten the images, the picamera.brightness attribute was set to 65. This is a postprocessing operation, which gave brighter but also artificially lit images. Also, the camera would sometimes focus on the bright fish-tanks in the museus, rendering the rest of the image rather dark. This was an effect of the awb mode and exposure mode being set to auto, and led to images of varying brightness and color. These images were still included in the dataset however, as images seen as suboptimal to the human eye may still be useful to the training of detectors. These images may be used to inspect the impact of captured image quality on inference performance. 
 
-To visualize the improvements and highlight the areas in the image benefitting most from detector improvements, heat maps were generated. The process of generating heat maps is described in section \ref{sec:heatmaps}.
+The images were then used to build a proof of concept for the project pipeline, verifying and developing the steps needed for a successful project. The following steps in the project pipeline are described after the description of the 2nd and 3rd iterations of image captures. 
+
+Due to many technical difficulties the first few times images were being captured for the dataset, only the developer and author of this thesis is present in the images\footnote{Initially, an attempt was made to pass MQTT messages as a way to initialize image capture so multiple cameras could be deployed in several locations, thus speeding up and simplifying the image capturing process. This was discarded due to technical difficulties related to efficiently stopping the image capturing. For this single-deployment angle and area project, however, the approach with ssh-ing into the device worked fine.}. 
+
+\textbf{2nd iteration}
+\textit{Total number of images: 295 (normal camera) and 60 (no infrared filter camera), total 355. 4 subjects.}
+
+For the second image-shooting session, the camera configurations had been more thorougly tested to obtain more consistent images in terms of colors and brightness. This means using non-auto auto white balancing and exposure settings, and reducing the amount of post-processing brightness adjustment. Also, some friends were invited in this session. Due to a reduced post-processing brightness augmentation, the exposure speed had to be increased to get sufficient light in the images. This meant more unclear outlines of moving subjects in the frame. It also meant more time was spent capturing and storing each image. This increased from 1.3$\frac{s}{image}$ to 6.3$\frac{s}{image}$, which means the time available for image capturing was spent less productively than with the previous camera configuration. Depending on the impacts of image consistency on inference accuracy vs. amount of training data, capturing with a higher exposure speed and then post-processing the images to be brighter might be the better solution. Also, as pointed out by TODO insert mikkels master, augmenting the brightness might only slightly impact the model performance. This is because a model may see slight differences in pixel-level values invisible to humans, thus enabling it to still recognize the patterns of human outlines. A sufficiently bright image would still be required for the sake of model verification and ground truth obtainment (by human annotators). 
+
+
+
+
+TODO send til mikkel når internett:
+
+Hurtigt spørgsmål om masteren din... Jeg skriver måske nogle som det her i oppgaven min:
+"Also, as pointed out by TODO insert mikkels master, augmenting the brightness might only slightly impact the model performance. This is because a model may see slight differences in pixel-level values invisible to humans, thus enabling it to still recognize the patterns of human outlines. A sufficiently bright image would still be required for the sake of model verification and ground truth obtainment (by human annotators)."
+Hvor fikk du dine ground truth data ifra? Vil det ikke stemme at man uansett vil behøve billeder hvor man selv kan verifisere at modellens predictions stæmmer? in any case when developing the model
+
+
+
+
+
+
+While there, the raspberry pi noir camera v2.1 was also tested to see if it could capture better images in the rather dark setting of the acquarium. The configurations were tested in the office with all lights turned off and curtains shut. However, the heavily overexposed scene in the office turned really dark in the acquarium as illustrated in figure TODO.
+
+This was discovered, and 60 images were captured using the noir camera and half the exposure speed so the persons in the images were possible to see for the human eye. One of these images is displayed in figure TODO.
+
+Out of the ordinary camera images, some turned out faulty, to which the reasons are unknown. For this iteration of image capturing, this only happened once and the faulty image can be seen in figure TODO.
+
+The camera was repositioned three times during this iteration of image capturing. This is a drawback as it complicates the process of mapping the person positions in the images to real world locations in the acquarium. This is because the positions are represented as x,y values from the corner of the image, and for a person standing at exactly the same position in two images, the x,y-values will differ if the camera position has moved. The positions had to be corrected for the generation of heat maps. 
+
+
+% \begin{figure}
+%     \includegraphics[options]{Images/DeviceImages/2nd-iteration/ss20000_fimus.jpg}
+
+% \end{figure}
+
+\textbf{3rd iteration}
+\textit{Total number of images: TODO. 1 subject.}
+For the third iteration the camera setup was better prepared. Two main differences since the last iteration was made. The first was to opt for a higher post-processing brightness value and a faster exposure speed to increase the number of images taken. The other was to spend some time beforehand setting up the camera to the best position before starting image capture. The image capture sessions are heavily influenced by the constraint of not photographing unconsenting individuals, thus limiting the capturing session to the windows where no other persons are in the acquarium. Therefore, spending time setting up the camera and verifying it's positioning is time which could be spent capturing images for the dataset. However, with well-enough time to complete the project, spending some extra time setting everything up correctly can save time in later stages of the process. 
+
+The third iteration was made after setting everything up, in the time waiting for a second subject arrive.
+
+\textbf{4th iteration}
+
+The 4th iteration was with the same exact setup as the 3rd iteration, but with 2 subjects instead of 1.  
 
 \subsection{Labeling}
 \label{sec:labeling}
-Ground truth values for the dataset must be obtained before improving the model and evaluating it's effect. 
+The detector needs to know the ground truth of the correct person positions when training and validating on the images. 
 
-"Label Studio" was used to label the images. First, the dataset was predicted with a yolo v9 model trained on the COCO dataset. Predictions were mostly decent, but some needed small tweakings and in some cases the persons were not discovered. The detector had close to zero hallucinations due to a sufficiently high confidence rate of 0.5 (: for ), but in some cases the fish were identified as human.
+The images was first inferenced by a yolov9 detector pre-trained on the COCO dataset. This is a way to greatly speed up the labeling process, instead of manually labeling every image. The detector had close to zero hallucinations due to a sufficiently high confidence rate of 0.5, but in some cases the fish were identified as human. Out of the 2939 images in the first iteration images, 1076 came out with no detections. The images were then manually validated, and the images in which the detector did not find any persons were manually labeled. 
+
+TODO hører hjemme i en recommendations eller discussion? selv-kritiske kommentarer.. I forstudien hadde jeg en "reflections" etter diskusjon som sa litt om hva jeg ville gjort anerledes og forklarte noen av de valgene jeg tok. 
+The time to understand the tools and develop this pipeline was similar to what it would take to manually label all the images, but can now be used for future applications also. The approach to label the images is described in section: \ref{sec:labeling}.
+
+After the ground truth was identified for all the dataset images, it was then used to evaluate the pre-trained yolov3 and yolov9. Results are discussed in \ref{sec:results}. The data was then used to train the detectors. The training process is described in section \ref{sec:model_training}. The trained models were then deployed to the device to evaluate the inference speed and accuracy.
+
+To visualize the improvements and highlight the areas in the image benefitting most from detector improvements, heat maps were generated. The process of generating heat maps is described in section \ref{sec:heatmaps}.
+
+
+"Label Studio" was used to label the images. 
 
 \subsection{Model Training}
 \label{sec:model_training}
@@ -48,7 +102,7 @@ At the forefront of our ethical approach is the principle of "privacy by design.
 The application of these privacy-preserving techniques negates the need for explicit consent from visitors for two primary reasons. First, the anonymization process occurs instantaneously as the data is captured, meaning no identifiable information is ever stored or analyzed. Second, the focus of the research is on aggregate behavior patterns rather than individual actions, further distancing the study from privacy concerns.
 
 \subsubsection{Ethical Use and Data Protection}
-Ensuring the ethical use of technology extends beyond privacy considerations to include the responsible handling and protection of any data generated by the system. Although the data is anonymized, we are committed to maintaining high standards of data protection. This includes secure data storage, limiting access to authorized personnel, and employing robust data management policies that comply with relevant data protection laws and guidelines.
+Ensuring the ethical use of technology extends beyond privacy considerations to include the responsible handling and protection of any data generated by the system. Although the data is anonymized, we are committed to maintaining high standards of data protection. This includes secure data storage, limiting access to authorized personnel, and employing robust data management policies that comply with relevant data protection laws and guidelines. 
 
 The utilization of anonymization techniques also reflects our commitment to minimizing any potential impact on visitor behavior and the overall museum or aquarium experience. By ensuring that the tracking system is unobtrusive and does not compromise privacy, we aim to maintain the integrity of the visitor experience, allowing individuals to engage with exhibits without concern for their privacy.
 
