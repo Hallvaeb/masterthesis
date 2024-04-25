@@ -31,6 +31,7 @@ The images were then used to build a proof of concept for the project pipeline, 
 
 Due to many technical difficulties the first few times images were being captured for the dataset, only the developer and author of this thesis is present in the images\footnote{Initially, an attempt was made to pass MQTT messages as a way to initialize image capture so multiple cameras could be deployed in several locations, thus speeding up and simplifying the image capturing process. This was discarded due to technical difficulties related to efficiently stopping the image capturing. For this single-deployment angle and area project, however, the approach with ssh-ing into the device worked fine.}. 
 
+
 \textbf{2nd iteration}
 \textit{Total number of images: 295 (normal camera) and 60 (no infrared filter camera), total 355. 4 subjects.}
 
@@ -78,7 +79,12 @@ The 4th iteration was with the same exact setup as the 3rd iteration, but with 2
 \label{sec:labeling}
 The detector needs to know the ground truth of the correct person positions when training and validating on the images. 
 
-The images was first inferenced by a yolov9 detector pre-trained on the COCO dataset. This is a way to greatly speed up the labeling process, instead of manually labeling every image. The detector had close to zero hallucinations due to a sufficiently high confidence rate of 0.5, but in some cases the fish were identified as human. Out of the 2939 images in the first iteration images, 1076 came out with no detections. The images were then manually validated, and the images in which the detector did not find any persons were manually labeled. 
+The images was first inferenced by a yolov9 detector pre-trained on the COCO dataset. This is a way to greatly speed up the labeling process, instead of manually labeling every image. The detector had close to zero hallucinations due to a sufficiently high confidence rate of 0.5. Out of the 2939 images in the 1st-iteration dataset, 1076 came out with no detections and had to be manually labeled. The rest of the images were then validated. In 74 of the images, a part of one the fish tanks were identified to be human, as it was a moving seaweed that sometimes had a human-like shape. In one image the person was carrying a ladder which was identified to be a person. 
+
+The 2nd iteration images were brighter, and in these images one of the roof-lamps were sometimes identified to be human.
+
+In one image, the lamp and the seaweed were the only persons in the image. insert 120324-163917-84. 
+In another, the seaweed was more man than I. \includegraphics[width=0.4\textwidth]{Images/fun/seaweed-man-more-than-I.png}.
 
 TODO hører hjemme i en recommendations eller discussion? selv-kritiske kommentarer.. I forstudien hadde jeg en "reflections" etter diskusjon som sa litt om hva jeg ville gjort anerledes og forklarte noen av de valgene jeg tok. 
 The time to understand the tools and develop this pipeline was similar to what it would take to manually label all the images, but can now be used for future applications also. The approach to label the images is described in section: \ref{sec:labeling}.
@@ -90,8 +96,18 @@ To visualize the improvements and highlight the areas in the image benefitting m
 
 "Label Studio" was used to label the images. 
 
+Labeling speed: about 10 images per minute, when calculating in the time of deleting images without people,
+
 \subsection{Model Training}
 \label{sec:model_training}
+
+\subsubsection{Hyperparameter Optimization}
+todo finskriv... Not really optimization.. More like finding... Since we're doing a cheeky approach to this. Done with autogluon, follow this guide for installation: https://auto.gluon.ai/stable/install.html. I had to run pip install autogluon twice for the imports to see autogluon.
+
+This guide could be used to fine tune the hyperparameters of the model: https://auto.gluon.ai/scoredebugweight/tutorials/course/script.html. A simpler guide was implemented to find the hyperparameters. This was to save time, and since our models require an okay level of hyperparameters. However, this choice to not give every dataset the same "fighting chance" with their optimal hyperparameters might have led to a lower validity of this experiments results. 
+
+The hyperparameters were optimized for a yolov3 fitting to the 2nd iteration dataset, which was used for evaluation of all the models. To do this, the 1st iteration dataset was used for training data and the 2nd iteration dataset was used for validation data. No data was saved for testing, as this model was trained only to find the best hyperparameters.
+
 
 \subsection{Ethical Considerations}
 In the deployment of advanced machine learning technologies for visitor localization and engagement analysis, this research proactively addresses privacy concerns through the implementation of image obscuration techniques. These methods ensure that no personally identifiable information is captured or communicated, thus significantly reducing privacy risks associated with visitor tracking in cultural spaces such as museums and aquariums.
