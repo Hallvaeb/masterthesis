@@ -101,13 +101,28 @@ Labeling speed: about 10 images per minute, when calculating in the time of dele
 \subsection{Model Training}
 \label{sec:model_training}
 
-\subsubsection{Hyperparameter Optimization}
+\subsubsection{Hyperparameter Tuning}
 todo finskriv... Not really optimization.. More like finding... Since we're doing a cheeky approach to this. Done with autogluon, follow this guide for installation: https://auto.gluon.ai/stable/install.html. I had to run pip install autogluon twice for the imports to see autogluon.
 
 This guide could be used to fine tune the hyperparameters of the model: https://auto.gluon.ai/scoredebugweight/tutorials/course/script.html. A simpler guide was implemented to find the hyperparameters. This was to save time, and since our models require an okay level of hyperparameters. However, this choice to not give every dataset the same "fighting chance" with their optimal hyperparameters might have led to a lower validity of this experiments results. 
 
-The hyperparameters were optimized for a yolov3 fitting to the 2nd iteration dataset, which was used for evaluation of all the models. To do this, the 1st iteration dataset was used for training data and the 2nd iteration dataset was used for validation data. No data was saved for testing, as this model was trained only to find the best hyperparameters.
+Experiment 1: Do we need to run inference on the whole 2939 images to evaluate our model performance or will the results of evaluation on a subset be relative to the results of evaluation on the whole?
 
+The standard yolov3 and yolov9 models were tested on the 1st and 2nd iteration images to see their out-of the box performance. Then, the yolov9 (which performed slightly better) was ran again but with a higher imgsz which typically increases the accuracy of the model. The three inferences: 1) yolov3 with imgsz 1280, 2) yolov9 with imgsz 1280 and 3) yolov9 with imgsz 1280 were then evaluated on the 1st iteration images and 2nd iteration images. 
+
+As expected, the inferences using a hightened imgsz was better. Another key takeaway was that the scores were relative, meaning evaluating on the full dataset was unnecessary. Moving forward, the 2nd iteration images from the acquarium were used to evaluate the models, while the 1st iteration images were used for training (and validation). This decision is also motivated by the fact that the 2nd iteration images are the most similar to the real-world application of the models.
+
+We'd like the hyperparameter tuning process to focus on finding the hyperparameters that will best infer on images from the 2nd iteration. Therefore, an amateur would plan to tune the hyperparameters for each of the models using their respective dataset's training data and the 2nd iteration FIMUS dataset for validation data. This means the yolov9 CrowdHuman model would use the same data for validation and testing, but only to find the right hyperparameters. Then, after using the testing data for tuning the hyperparameters, we replace the FIMUS 2nd iteration images for the datasets validation images and train the models using the optimal hyperparameters. This as a method to find the optimal hyperparameters may seem intuitive, as it has the strength of focusing on the right data when doing transfer learning with data other than the specialized task the model is specializing for. This means that the models would, during training, train to infer on data different from what it sees during training, which is what it will be doing after deployment.
+
+The aforementioned approach is completely ignorant to how machine learning works, however. In supervision machine learning, the validation set is used to tune the hyperparameters, and the test set is used to evaluate the model's performance. The test set should be representative of the data the model will see after deployment, and the validation set should be representative of the data the model will see during training. The test set should not be used to tune the hyperparameters, as this would lead to overfitting the model to the test data.
+
+Then, the . Tuning the hyperparameters for the test data means that the validation data used for training later will not at all be representative of the situation earlier, meaning the optimal hyperparameters will no longer be valid. Such an approach would not 
+
+
+The CrowdHuman dataset has some data where the 
+
+
+What makes this project interesting is not the varying nature of datasets. Usually, one wants the best, most similar, and most data possible, and it's therefore irrelevant to see what using a less relevant dataset would do to the model. In this project the focus is more about how much of the high quality data is needed to make an impact. If 100 labeled images does the same work as 1000, then much work can be saved by only labeling 100 images. If only 100 images is needed then setting up a proper labeling tool might not even be necessary, as it may be done faster using a sub-optimal but fast-to-employ labeling tool. The insights may also be useful when 
 
 \subsection{Ethical Considerations}
 In the deployment of advanced machine learning technologies for visitor localization and engagement analysis, this research proactively addresses privacy concerns through the implementation of image obscuration techniques. These methods ensure that no personally identifiable information is captured or communicated, thus significantly reducing privacy risks associated with visitor tracking in cultural spaces such as museums and aquariums.

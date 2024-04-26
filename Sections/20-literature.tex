@@ -50,6 +50,16 @@ Being able to detect and locate people in dark-lit environments have been previo
 \label{sec:dataset_specialization}
 Comparison of various algorithms performance enhancement when data has been optimized for the use case. What is the role of a training dataset in the task of determining the weights in a yolov9 artificial neural network, and how can would special training data optimize the weights for a specific use case?
 
+Transfer learning is typically when a trained model is used as a starting point for a new model, and then fine-tuned on a new dataset. This is a useful to extend the trained models capabilities to for example learn how to correctly identify a new object class. In this thesis, the goal is to improve the performance of the YOLOv9 model by training it on a dataset that is specialized for the museum environment. The dataset used for training the YOLOv9 model in this thesis is the COCO dataset, which is a large dataset of images with 80 different classes. The COCO dataset is a general dataset, and the YOLOv9 model trained on this dataset may not perform optimally in the museum environment. By training the YOLOv9 model on datasets that are more similar to the acquarium environment, we will not extend the models capabilities in the same way as what is typically done in transfer learning as we are trying to reduce the number of classes to 1 (person), and we are trying to improve on it's already learnt capability of identifying persons.
+
+\textbf{The datasets of this project are slightly different from each other.}
+The CrowdHuman dataset is bigger than the others, but is not very different than the dataset (COCO) that the pretrained model has already been trained on apart from only containing images where people are the main focus. This dataset is big, and it's performance tells us to which extent adding more data would improve the model. The model was trained with various amounts of training data, to 
+
+The football-players dataset contains images that are all from the same perspective and in the same light and quality. This dataset is added to see if the model improves just by specializing to single class data, or if the specialization quality and relevancy matters. It's also used as a matter of having more datasets in the experiment where differences in the datasets are clear enough to attribute differences in performance to the difference in nature of the datasets and not to other confounding factors. 
+
+The person reidentification in the wild dataset is the 2nd largest one. This dataset is more similar to our use case than the others, as it exclusively contains images of people. The persons are sometimes occluded, and in many cases they are of approximately the same scale as the persons we will be detecting in the acquarium. 
+
+
 
 
 \subsection{Summary of Literature Review}
