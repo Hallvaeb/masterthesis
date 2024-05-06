@@ -2,4 +2,27 @@
 \label{sec:results}
 This chapter will present the results of the human detection and tracking system, including the system's performance in the museum environment, the effects of adding labeled images from the museum environment to the training dataset, and the system's ability to detect and track humans in real-time.
 
+The FIMUS 2nd iteration images were used as the test set for all of the evaluations. This dataset consists of 295 images of similar light condition and image quality. They are the closest representation of the images the device will be capturing in the experimental setting. All images are of 3264x2464 resolution (which is the maximum for the hardware).
+
+The following models were tested:
+
+"Standard models:"
+	Yolov3
+	Yolov9 using imgsz 640 for inference
+	Yolov9 using imgsz 1280 for inference
+
+"Specialized models:"
+	FIMUS trained 5 epochs
+	FIMUS trained 50 epochs
+	CrowdHuman trained 5 epochs
+
+
+
+
+\subsubsection*{Model Evaluation}
+The full model evaluation jupyter notebook can be seen in appendix todo insert model evaluation ipynb.
+
+
+
+
 \label{sec:results_heatmaps}

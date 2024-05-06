@@ -1,27 +1,19 @@
 \section{Introduction}
+On-device processing is emerging as a vital component of modern human detection and tracking systems as an approach to ensure privacy. The ability to detect and track humans in real-time is crucial for a wide range of applications, from security surveillance to visitor analytics in cultural institutions. However, the deployment of such systems raises concerns about privacy and data security. Particularly in sensitive environments like museums and aquariums. This thesis details the development of a privacy-preserving human localization system. The developed system was then deployed and tested in a acquarium in Denmark. 
 
-Hei!
+The method of human detection and tracking in public spaces has evolved significantly over the past decade, driven by advancements in computer vision and machine learning. Traditional surveillance systems relied on centralized processing, where video feeds were transmitted to a remote server for manual human analysis. However, this approach raised privacy concerns as it involved transmitting raw video data over the network, potentially exposing sensitive information. Additionally, it also required a human to manually analyze the video feed, which was time-consuming, prone to errors, lacking of scalability, and not privacy-preserving.
 
-hallo
+\textit{On-device} processing addresses this issue by performing analytics locally on the edge device, removing the need to transmit raw video data and thus enhancing privacy.
 
-On-device processing is emerging as a vital component of modern human detection and tracking systems as an approach to ensure privacy. The ability to detect and track humans in real-time is crucial for a wide range of applications, from security surveillance to visitor analytics in cultural institutions. However, the deployment of such systems raises concerns about privacy and data security, particularly in sensitive environments like museums and aquariums. This project aims to develop a privacy-preserving human analytics system that can be deployed in these environments while ensuring visitor privacy and data security.
+A device was deployed in the acquarium of "Fiskeri og Søfartsmuseet" in Esbjerg, Denmark. This was done to demonstrate the feasibility and effectiveness of such on-device human detection and localization in a practical and realistic setting. The system not only faced the inherent challenges of running the analysis on-device, but also faced the challenges of a suboptimal lighting environment. Such challenges are typical in museums and acquariums where the art may be damaged, the mood may be spoiled, or the fish may be disturbed if the light is to bright. The project in this thesis demonstrates how to overcome said challenges. A Raspberry Pi 4 with a camera V2.1 module and a pre-trained yolo object detection model was used. The thesis further explores how using labeled images from the museum environment as the training dataset may affect the models performance. The implementation is described in detail. The dataset is available on Google Drive: \href{todo}{todo}.  
 
-*Faller følgende to avsnitt under bakgrunn/motivasjon, generell introduksjon, eller problembeskrivelse?*
 
-generell intro er jo bakgrunn og motivasjon
+todo amund er det over nok om background and motivation, problem description?
 
-The method of human detection and tracking in public spaces has evolved significantly over the past decade, driven by advancements in computer vision and machine learning. Traditional surveillance systems relied on centralized processing, where video feeds were transmitted to a remote server for manual human analysis. 
+\subsection{Scope}
 
-dette er problembeskrivelse? Og generell problem beskrivelse"""However, this approach raised privacy concerns as it involved transmitting raw video data over the network, potentially exposing sensitive information. Additionally, it also required a human to manually analyze the video feed, which was time-consuming, prone to errors, lacking of scalability, and not privacy-preserving. """
+\subsubsection{Research Questions}
 
-On-device processing addresses this issue by performing analytics locally on the edge device, reducing the need to transmit raw video data and enhancing privacy.  
+\subsubsection{Research Objectives}
 
-* to demonstrate feasibility and effectiveness... Er jo privacy jeg sørger for. Hvis man leser alt i ett, så er det lettere å se sammenhengen. Kanskje utheve med: such on-device processing..
-
-** on top of the ... Trønder-engelsk?
-
-A device was deployed in the acquarium of "Fiskeri og Søfartsmuseet" in Esbjerg, Denmark, to demonstrate the feasibility and effectiveness of on-device human detection and tracking in a practical and realistic setting. On top of the inherent challenges of running the analysis on-device in real-time, the system also faced the challenge of a suboptimal lighting environment. Such challenges are usual in museums where bildene vil bli skadet. It is also common in especially in acquarium settings. The project postuleted in this thesis demonstrates how to overcome said challenges by the use of a Raspberry Pi 4 with a camera, running a pre-trained yolov9 object detection model. The thesis further explores the effects of adding labeled images from the museum environment to the training dataset to improve the model's performance in the specific setting. The implementation is described in detail. The dataset is available at the following link: *TODO add link*. 
-
-Heller korte ned setninger. Prøve å bryte setningene opp i flere. Hold "great" unna vitenskapelige tekster. Forsøket ble gjort i fortid. Det som står i oppgaven er i presens.
-
-*Inkluderer også noe (mer) om background and motivation, problem description, scope (research questions og research objectives) og struktur av oppgaven...*
+\subsection{Structure}
