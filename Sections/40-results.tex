@@ -22,6 +22,26 @@ The following models were tested:
 \subsubsection*{Model Evaluation}
 The full model evaluation jupyter notebook can be seen in appendix todo insert model evaluation ipynb.
 
+% 7.mai
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Increase vertical padding
+    \setlength{\tabcolsep}{1em}
+    \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        \rowcolor{gray!25}
+        \textbf{Model} & \textbf{AP50} & \textbf{AP75} & \textbf{AP90} & \textbf{mAP50-95} \\ \hline
+        FIMUS 5 Epochs       & 0.97 & 0.89 & 0.67 & 0.87 \\ \hline
+        FIMUS 15 Epochs      & 0.94 & 0.67 & 0.44 & 0.71 \\ \hline
+        FIMUS 50 Epochs      & 0.95 & 0.75 & 0.51 & 0.76 \\ \hline
+        CrowdHuman 5 Epochs  & 0.97 & 0.94 & 0.78 & 0.92 \\ \hline
+        Standard Yolov3      & 0.97 & 0.90 & 0.65 & 0.87 \\ \hline
+        Standard Yolov9 640  & 0.98 & 0.95 & 0.91 & 0.95 \\ \hline
+        Standard Yolov9 1280 & 0.98 & 0.94 & 0.80 & 0.92 \\ \hline
+    \end{tabular}
+    \caption{\centering Performance Metrics of Object Detection Models}
+    \label{tab:performance_metrics}
+\end{table}
 
 
 

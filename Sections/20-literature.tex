@@ -307,7 +307,7 @@ Due to the aforementioned gamified nature of machine learning models, which metr
 
 However, the most used measurement of performance for an object detector model is the \textit{mean Average Precision} (mAP) for varying values of \textit{IoU thresholds} (\cite{zou2023object_detection_in_20_years}). 
 
-The average precision is the average when taking the sum of precision values under various recalls. The mean is when this is averaged for all the object classes in the dataset. The IoU brings bounding box positioning into the equation, representing how well the predicted box fits to the ground truth. A detailed explanation of what this means is given in the following paragraphs.
+The average precision is the average when taking the average of precision values under various recalls. The mean is when this is averaged for all the object classes in the dataset. The IoU brings bounding box positioning into the equation, representing how well the predicted box fits to the ground truth. A detailed explanation of what this means is given in the following paragraphs.
 
 First we need to understand the concepts of true positives, false positives, false negatives, the confusion matrix, precision and recall. These are easiest to explain if the task is image classification and not object detection. For \ref{sec:understandingtp} and \ref{sec:understandingprecision}, we will use the example of image classification, but the concepts are the same for object detection, with the difference that the bounding box positioning is also taken into account.
 
