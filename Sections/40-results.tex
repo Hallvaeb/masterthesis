@@ -22,6 +22,8 @@ The following models were tested:
 \subsubsection*{Model Evaluation}
 The full model evaluation jupyter notebook can be seen in appendix todo insert model evaluation ipynb.
 
+For reproducibility, if the same experiment is to be performed, make sure to set confidence threshold at 0.1. The FIMUS 5, 15 and 50 epochs are models pretuned on the COCO dataset, and fine-tuned with the FIMUS 1st iteration dataset. These were all trained for and detected at imgsz 640. The CrowdHuman 5 Epochs model was fine-tuned with 5 epocs on the training/validation datasets of CrowdHuman. The rest of the models were not fine-tuned.
+
 % 7.mai
 \begin{table}[H]
     \centering
@@ -31,18 +33,45 @@ The full model evaluation jupyter notebook can be seen in appendix todo insert m
         \hline
         \rowcolor{gray!25}
         \textbf{Model} & \textbf{AP50} & \textbf{AP75} & \textbf{AP90} & \textbf{mAP50-95} \\ \hline
-        FIMUS 5 Epochs       & 0.97 & 0.89 & 0.67 & 0.87 \\ \hline
-        FIMUS 15 Epochs      & 0.94 & 0.67 & 0.44 & 0.71 \\ \hline
-        FIMUS 50 Epochs      & 0.95 & 0.75 & 0.51 & 0.76 \\ \hline
-        CrowdHuman 5 Epochs  & 0.97 & 0.94 & 0.78 & 0.92 \\ \hline
-        Standard Yolov3      & 0.97 & 0.90 & 0.65 & 0.87 \\ \hline
-        Standard Yolov9 640  & 0.98 & 0.95 & 0.91 & 0.95 \\ \hline
-        Standard Yolov9 1280 & 0.98 & 0.94 & 0.80 & 0.92 \\ \hline
+		Standard Imagesize 320 		           & 0.92 & 0.85 & 0.62 & 0.84 \\ \hline
+		Standard Imagesize 640 		           & 0.96 & 0.93 & 0.90 & 0.94 \\ \hline
+		Standard Imagesize 1280		           & 0.97 & 0.93 & 0.79 & 0.92 \\ \hline
+		Fimus Fine-Tuned 5 Epochs              & 0.97 & 0.89 & 0.67 & 0.88 \\ \hline
+		Fimus Fine-Tuned 15 Epochs             & 0.94 & 0.67 & 0.44 & 0.71 \\ \hline
+		Fimus Fine-Tuned 50 Epochs             & 0.94 & 0.75 & 0.51 & 0.77 \\ \hline
+		CrowdHuman Fine-Tuned for 5 Epochs	   & 0.96 & 0.93 & 0.77 & 0.91 \\ \hline
+		Yolov3 							       & 0.95 & 0.88 & 0.63 & 0.87 \\ \hline
+		DETR 							       & 0.63 & 0.56 & 0.30 & 0.53 \\ \hline 
     \end{tabular}
-    \caption{\centering Performance Metrics of Object Detection Models}
+    \caption{\centering Performance Metrics of Object Detection Models. }
     \label{tab:performance_metrics}
 \end{table}
 
+% 7.mai
+% \begin{table}[H]
+%     \centering
+%     \renewcommand{\arraystretch}{1.5} % Increase vertical padding
+%     \setlength{\tabcolsep}{1em}
+%     \begin{tabular}{|l|c|c|c|c|}
+%         \hline
+%         \rowcolor{gray!25}
+%         \textbf{Model} & \textbf{AP50} & \textbf{AP75} & \textbf{AP90} & \textbf{mAP50-95} \\ \hline
+% 		FIMUS 5 Epochs              & 0.97 & 0.89 & 0.67 & 0.87 \\ \hline
+% 		FIMUS 15 Epochs             & 0.94 & 0.67 & 0.44 & 0.71 \\ \hline
+% 		FIMUS 50 Epochs             & 0.95 & 0.75 & 0.51 & 0.76 \\ \hline
+% 		CrowdHuman 5 Epochs         & 0.97 & 0.94 & 0.78 & 0.92 \\ \hline
+% 		Standard Yolov3             & 0.97 & 0.90 & 0.65 & 0.87 \\ \hline
+% 		Standard Yolov9 160         & 1.00 & 0.86 & 0.36 & 0.81 \\ \hline
+% 		Standard Yolov9 320         & 0.99 & 0.93 & 0.70 & 0.91 \\ \hline
+% 		Standard Yolov9 640         & 0.98 & 0.95 & 0.91 & 0.95 \\ \hline
+% 		Standard Yolov9 1280        & 0.98 & 0.94 & 0.80 & 0.92 \\ \hline
+% 		Standard Yolov9 c-converted & 0.96 & 0.92 & 0.81 & 0.91 \\ \hline
+% 		Standard Yolov9 e-converted & 0.99 & 0.97 & 0.95 & 0.98 \\ \hline
+%     \end{tabular}
+%     \caption{\centering Performance Metrics of Object Detection Models. }
+%     \label{tab:performance_metrics}
+% \end{table}
 
+The weights are available in multiple versions of the Yolov9 model. The typical versions are with regards to the sizes of the networks, where the standard for these results have been to use the largest. This is called 'yolov9-e' in the github repo\footnote{Yolov9 github repo: \href{https://github.com/WongKinYiu/yolov9}{https://github.com/WongKinYiu/yolov9}}. Additionally, after it's release, some
 
 \label{sec:results_heatmaps}
