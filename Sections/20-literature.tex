@@ -1,19 +1,34 @@
 \section{Literature Review}
 The advent of "modern" object detection has enabled more sophisticated and automated methods for understanding visitor engagement and flow in cultural institutions. This literature review aims to explore the current state of research on object detection and visitor behaviour analysis in cultural institutions, focusing on privacy-preserving techniques, dataset specialization for enhanced object detection accuracy, and case studies of technology implementation.
 
-\subsection{Analysis of Traditional and Technological Methods for Visitor Behavior Studies}
+\subsection{Visitor Behavior Analysis}
 
-Studies on traditional methods of analyzing visitor behavior\footnote{Traditional methods include surveys, manual counting, and direct observation} reveal both their use cases and limitations.
+Some of the traditional methods of analyzing visitor behavior include surveys, manual counting, and direct observation. Today, more technology-driven and practical applications may be used to gain insights in visitor engagement and experience in a museum or acquarium setting. In this subsection, we look at an alternative to computer vision tracking systems. Afterwards, we bring forth a study on the percieved value of visitor tracking to museum stakeholders. 
 
-\citeauthor{la2017museumbehaviouranalysis} explored alternative technological approaches in their study on museum visitor behavior and its perceived value to museum curators (\citeyear{la2017museumbehaviouranalysis}). Wearable RFID trackers were given to the visitors, and beacons were positioned at positions deemed important by the museum curators. The beacons would then communicate the positions of the visitors to the system. This allowed for the collection of data on key metrics like exhibit popularity, average visit duration, and common visitor paths. They noted that technology-based visitor behavior analysis was generally well-received by museum curators, offering valuable data that could enhance the visitor experience.
+\paragraph{Questions asked by visitors in a mobile app}
+\citeauthor{co2023appquestionairre} had visitors ask questions in a mobile app while moving through the museum \citeyear{co2023appquestionairre}. Visitor movement through the museum was inferred from the data by leveraging question keyword content, knowledge of exhibit layout, and question timestamps. This removed the need for more costly, vision-based applications for detecting and tracking visitor movement. This study illustrates one way of conducting affordable, dependable and scalable visitor analysis without the need for costly devices.
 
-However, the requirement for visitors to wear RFID trackers represents a significant drawback, as it may be perceived as intrusive (although completely privacy preservant).
+\paragraph{Percieved value to museum stakeholders}
+\citeauthor{la2017museumbehaviouranalysis} explored an alternative approach to museum visitor behavior analysis, and its perceived value to museum curators, administrators and department heads (\citeyear{la2017museumbehaviouranalysis}). Wearable RFID trackers\footnote{The requirement for visitors to wear RFID trackers represents a significant drawback (as we will see in section \ref{sec:interview}), as it may be perceived as intrusive (although completely privacy preservant).} were given to the visitors, and beacons were positioned at positions deemed important by the museum curators. The beacons would then communicate the positions of the visitors to the system. This allowed for the collection of data on key metrics like exhibit popularity, average visit duration, and common visitor paths. The authors noted that technology-based visitor behavior analysis was generally well-received by museum curators, offering valuable data that could enhance the visitor experience.
 
-The study of \citeauthor{la2017museumbehaviouranalysis} also highlighted divergent views on the utility of visitor behavior analysis systems (\citeyear{la2017museumbehaviouranalysis}). Administrators and department heads generally viewed these systems favorably, citing the financial justification for expensive exhibitions: "We really need to know if this expenditure was worthwhile" (\cite{la2017museumbehaviouranalysis}). On the contrary, museum curators expressed skepticism. One curator remarked, "A temporary exhibition won’t change after you deploy it, and understanding how it is used by the public would not help me in my next exhibition, since they are each very different. My main reason to analyze behavior would be to satisfy my curiosity." This contrast underscores the varied perspectives within museums regarding the value and implications of behavior analysis technologies.
+The study of \citeauthor{la2017museumbehaviouranalysis} further discussed the divergent views between the curators and the administrators on the utility of visitor behavior analysis systems (\citeyear{la2017museumbehaviouranalysis}). Administrators and department heads generally viewed these systems favorably, citing the financial justification for expensive exhibitions: "We really need to know if this expenditure was worthwhile" (\cite{la2017museumbehaviouranalysis}). On the contrary, museum curators expressed skepticism. One curator remarked, "A temporary exhibition won’t change after you deploy it, and understanding how it is used by the public would not help me in my next exhibition, since they are each very different. My main reason to analyze behavior would be to satisfy my curiosity." This contrast underscores the varied perspectives within museums regarding the value and implications of behavior analysis technologies.
 
-\subsection{Privacy}
+
+\subsection{Individual Privacy}
 \label{sec:lit-privacy}
-Section \ref{sec:lit-privacy}, is a rewritten and improved version of the same section in an unpublished pre-thesis project written by the same candidate as this master thesis.
+
+The first definition of privacy was given by \citeauthor{br1890righttoprivacy} in \citeyear{br1890righttoprivacy} as the "right to be let alone". A more comprehensive definition of privacy that is more relevant to the modern age of digitalization and the topics of this thesis is the following:
+
+\begin{myquote}{Privacy as informational self-determination}
+    “Privacy is the claim of individuals, groups and institutions to determine for themselves, when, how and to what extent information about them is communicated to others” \cite{we1967privacydefinition}.
+\end{myquote}
+
+There are multiple dimentions of privacy. The above quote would mainly cover informational privacy, which is most relevant to this thesis. The definition by \citeauthor{we1967privacydefinition} includes groups and institutions. However, in most legal systems, privacy is defined as a basic human right that only applies to natural persons (see section \ref{sec:naturalpersons}). The term "individual privacy"\footnote{Individual privacy is sometimes referred to as personal privacy.} encapsulates the individual focus of privacy as opposed to the broader interpretations of privacy that might apply to groups, organizations, or institutions. Other dimensions of privacy, which are less relevant for this thesis include spatial privacy, territorial privacy, bodily privacy (\cite{fi2017privacybookchapter53}). 
+
+The general data protection regulation (GDPR) is a single set of regulations to guarantee privacy and protecion of personal data. Informational privacy is mostly concerned with protection of personal data (we will define personal data in section \ref{sec:personal_data}), and informational privacy is what may be violated by the experiment of this thesis. Therefore, the GDPR is highly relevant for this thesis. Regardless, a quick review of the GDPR should be on the agenda of anyone affiliated with systems not inherently preservant of informational privacy.
+% todo under ethichal considerations burde jeg skrive noe om etisk ansvar man har som utvikler og det å forstå hva gdpr er før man utvilker noe som bryter med det. ansvar for utvikling. Stille krav til etisk morals kompass, selv om ikke alltid dette blir gjort i andre yrker alltid? Jo ofte, veterinærer som velger å ikke avlive unge kjæledyr som familier bare er gått lei av å passe for eksempel.
+
+ is a rewritten and improved version of the section on privacy in an unpublished pre-thesis project written by the same candidate as this master thesis.
 
 \subsubsection{The General Data Protection Regulation}
 \label{sec:GDPR}
@@ -22,6 +37,7 @@ This section serves as a summarization of some aspects of the GDPR relevant to t
 The GDPR entered into applicability in the EU on 25th of May 2018 as a way for people to have more control over their data, and for having a level playing field for all companies. There is now one set of data protection rules for all companies operating in the European Economic Area (EEA). The EEA consists of all EU countries plus Iceland, Liechtenstein and Norway. The most relevant parts of the GDPR are the regulations regarding personal data.
 
 \paragraph{Personal Data}
+\phantomsection
 \label{sec:personal_data}
 Personal data is any form of information that can be connected to an identifiable data subject. The following definition was given by the european parliament in 2016:
 
@@ -251,22 +267,38 @@ A questionnaire study of 328 students indicated that blurred images were not con
 \subsubsection{Ethical Considerations in the Development of Localization Technologies}
 \label{sec:ethics_localization_tech}
 
-As we advance the capabilities of technologies such as YOLOv9 for human localization, it becomes imperative to consider the ethical implications of our developments. The narrative of George Orwell's dystopian novel \textit{1984} serves as a stark reminder of the potential societal consequences of pervasive surveillance and control. Orwell's portrayal of a society where history is constantly rewritten and individual privacy is obliterated highlights the dangerous path we might tread if these technologies are misused.
+As we advance the capabilities of technologies such as YOLOv9 for human localization, it becomes imperative to consider the ethical implications of our developments. The narrative of George Orwell's dystopian novel \textit{1984} serves as a reminder of the potential societal consequences of intelligent, extensive and automated surveillance. Orwell's portrayal of a society where history is constantly rewritten and individual privacy is obliterated highlights the dangerous path we might tread if these technologies are misused by those in control of political power.
 
-
-\begin{wrapfigure}{r}{0.5\textwidth}
-    \centering
-    \includegraphics[width=0.48\textwidth]{Images/Ethical/redmon-twutter-stoppedCV.png}
-    \caption{Redmon Quit Computer Vision Research Due to Ethical Concerns}
-    \label{fig:redmon-twitter-stoppedCV}
-\end{wrapfigure}
-
-\paragraph{Historical Precedents and Personal Accountability}
-The decision by Joseph Redmon, the creator of the initial versions of YOLO, to cease his work on the project due to its military applications illustrates a profound ethical stance. Redmon's choice underscores the responsibility that developers bear in considering the broader impacts of their work, paralleling Orwell’s caution against allowing technological advances to override ethical judgments. Joseph Redmon's resignation from the development of YOLO due to ethical concerns marks a critical point in the discourse on the moral responsibilities of researchers and developers in the field of artificial intelligence and machine learning. The discussion of AI development is still very much ongoing.
-
-\begin{myquote}{Greed's Grief}
-    For the love of money is a root of all kinds of evil. Some people, eager for money, have wandered from the faith and pierced themselves with many griefs. -1 Timothy 6:10, The Bible.
+\begin{myquote} {1984 on greed of power}
+    "The Party seeks power entirely for its own sake. We are not interested in the good of others; we are interested solely in power, pure power." -George Orwell, 1984.
 \end{myquote}
+
+% \begin{wrapfigure}{r}{0.5\textwidth}
+    %     \vspace{-15pt}
+    %     \centering
+    %     \includegraphics[width=0.5\textwidth]{Images/Ethical/redmon-twutter-stoppedCV.png}
+    %     \caption{Redmon Quit Computer Vision Research Due to Ethical Concerns}
+    %     \label{fig:redmon-twitter-stoppedCV}
+    % \end{wrapfigure}
+    
+\paragraph{Joseph Redmon}
+Joseph Redmon, the creator of the initial versions of YOLO, decided to cease his work on the project due to its military applications. This illustrates a profound ethical stance. Redmon's choice underscores the responsibility of developers in considering the broader impacts of their work. The resignation marks a critical point in the discourse on the moral responsibilities of researchers and developers in the field of artificial intelligence and machine learning. The discussion of how to responsibly regulate and develop AI applications is very much ongoing, and the decisions made by individuals like Redmon are crucial in shaping the future of the field.
+
+\begin{myquote} {Joseph Redmon's Twitter Posts:}
+    I stopped doing CV research because I saw the impact my work was having. I loved the work but the military applications and privacy concerns eventually became impossible to ignore.-Joseph Redmon, Twitter (\cite{re2020twitter_feb}).
+
+    But basically all facial recognition work would not get published if we took Broader Impacts sections seriously. There is almost no upside and enormous downside risk.-Joseph Redmon, Twitter (\cite{re2020twitter_feb}).
+
+    [...] I bought in to the myth that science is apolitical and research is objectively moral and good no matter what the subject is.-Joseph Redmon, Twitter (\cite{re2020twitter_feb}).
+
+
+    If you worked in a knife factory and a guy came in and thanked you for making knives because he killed many people with those knives and then he showed you a video of himself killing people with a knife you made how would you feel then about working in your knife factory? -Joseph Redmon, Twitter (\cite{re2020twitter_june}).
+\end{myquote}
+
+
+% \begin{myquote}{Greed's Grief}
+%     For the love of money is a root of all kinds of evil. Some people, eager for money, have wandered from the faith and pierced themselves with many griefs. -1 Timothy 6:10, The Bible.
+% \end{myquote}
 
 \paragraph{Ethical Framework for Development}
 In developing technologies capable of tracking and analyzing human behavior, we must establish robust ethical frameworks that prevent misuse and ensure that advancements enhance societal welfare without infringing on individual rights and freedoms. This involves transparent development processes, clear privacy safeguards, and continuous monitoring of technology deployment.
@@ -281,6 +313,13 @@ The development of localization technologies presents complex ethical challenges
 This subsection includes a brief summarization of the evolution of object detection, including the transition from traditional methods to morw modern methods such as the YOLO series and vision transformers.
 
 The evolution of object detection can be divided into two major historical phases: before and after 2014, as illustrated in Figure \ref{fig:object_detect_20_years}. Prior to 2014, traditional object detection methods, such as the Viola-Jones detectors (\cite{vi2001viola-jones-orig}), Histogram of Oriented Gradients (HOG), and Deformable Part-Based Models (DPMs) were prevalent\footnote{These are just some honorable mentiones of some of the most sucessful and widely adopted models of the time (\cite{li2012violajonessuccessful})}. During this era, "mixture models" were developed to improve detection granularity by recognizing the different parts of the same object, such as the doors and windows of a car.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Images/Diagrams/object_detection_20years.png}
+    \caption{The evolution of object detection (\cite{zou2023object_detection_in_20_years})}
+    \label{fig:object_detect_20_years}
+\end{figure}
 
 Despite these advancements, it was not until the introduction of Region-based Convolutional Neural Networks (R-CNN) in 2014 that the accuracy of object detection systems began to improve significantly. This paradigm shift marked a substantial advancement in the field, leveraging deep learning techniques to enhance detection performance dramatically (\cite{zou2023object_detection_in_20_years}). The period following 2014 has seen rapid progress, introducing sophisticated object detectors like You Only Look Once (YOLO) and Detection Transformers (DETR). These are explored in greater detail in section \ref{sec:rtdetr} and \ref{sec:yolov9}
 
@@ -323,14 +362,17 @@ These may be defined as follows:
     \item False Positive (FP): The number of instances where the model incorrectly identifies a negative instance as positive. This could occur if the model identifies a person in an image where there is no person.
 \end{enumerate}
 
-The confusion matrix is a table used to illustrate these numbers. An example of a confusion matrix is shown in figure \ref{fig:confusion_matrix}. This model has identified 915 people correctly, failed to identify 128 people, and incorrectly identified 97 instances as people when there were none.
-
-\begin{figure}
+\begin{wrapfigure}{r}{0.7\textwidth}
+    \vspace{-20pt}
     \centering
-    \includegraphics[width=0.5\linewidth]{Images/Diagrams/confusion_matrix.png}
-    \caption{An example of a confusion matrix.}
+    \includegraphics[width=0.7\textwidth]{Images/Diagrams/confusion_matrix.png}
+    \caption{Example Confusion Matrix.}
     \label{fig:confusion_matrix}
-\end{figure}
+    \vspace{-20pt} 
+\end{wrapfigure}
+The confusion matrix is a table used to illustrate these numbers. An example of a confusion matrix is shown in figure \ref{fig:confusion_matrix}. 
+
+The confusion matrix in \ref{fig:confusion_matrix} displays that the model has detected 915 people correctly, failed to detect 128 people, and incorrectly detected 97 people where there were none. For classification tasks, it is common to have the table show which class the model has detected, and which class the object actually is. For single class object detection, the confusion matrix is sufficient as-is.
 
 Further the TPs, FNs and FPs are used to calculate the precision, recall and F1 score of a machine learning model.
 
@@ -340,48 +382,63 @@ Further the TPs, FNs and FPs are used to calculate the precision, recall and F1 
 For a balanced metric of precision and recall we also have the F1 Score, combining the two in a single value. Here’s a breakdown of each:
 
 Precision: Measures the accuracy of positive predictions. It is the ratio of correctly predicted positive observations to the total predicted positives. High precision relates to a low rate of false positives. For object detecion of persons, precision would be how accurate the model is when it claims to detect a person.
-\[
-\text{Precision} = \frac{TP}{TP + FP}	
-\]
+\begin{equation}
+    \text{Precision} = \frac{TP}{TP + FP}	
+\end{equation}
 
 Recall (Sensitivity or True Positive Rate): Measures the ability of the model to find all the relevant cases within a dataset. It is the ratio of correctly predicted positive observations to the all observations in actual class. High recall relates to a low rate of false negatives. For object detection of persons, recall would tell us how many of the actual persons in the image the model was able to detect.
-\[
-text{Recall} = \frac{TP}{TP + FN}	
-\]
+\begin{equation}
+    \text{Recall} = \frac{TP}{TP + FN}	
+\end{equation}
 
 F1 Score: The weighted average of Precision and Recall. This score takes both false positives and false negatives into account. It is particularly useful when the class distribution is uneven. F1 Score is best if there is some sort of balance between Precision and Recall in the system.
-\[
-\text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
-\]
+\begin{equation}
+    \text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+\end{equation}
 
-To assess a regular machine learning model's performance, the precision-recall curve is still a common practice. The precision-recall curve is a graph that shows the trade-off between precision and recall for different thresholds for confidence in the object class. As you allow your model to be more uncertain in it's inferences on the image, the number of hallucinations will also increase and thus the precision drops.
-
-todo sett inn precision recall curve
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=1\linewidth]{Images/Diagrams/object_detection_20years.png}
-%     \caption{The evolution of object detection (\cite{zou2023object_detection_in_20_years})}
-%     \label{fig:object_detect_20_years}
-% \end{figure}
-
-\paragraph{Understanding the IoU metric}
-
-Accuracy in object detection refers to both detecting the object \textit{and} it's location accurately. Combining both in one metric would simplify benchmarking. The precision, recall and f1-score all neglect the positioning precision of bounding boxes. For assessing localization accuracy, the Intersection over Union (IoU) is calculated. This compares the predicted bounding box and the ground truth bounding box in a way so boxes need to fit as closely to the ground truth bounding box as possible to get the best score (which is 1.0). See figure \ref{fig:IoU} for an illustration. The equation is simple:
-
-\[
-    \text{Intersect over Union} = \frac{\text{Area of Overlap}}{\text{Area of Union}}
-\]
-
-Following the introduction of MS-COCO datasets in 2014, researchers started to pay more attention to the accuracy of object localization. Instead of using a fixed IoU threshold\footnote{A fixed IoU threshold is typically set at 0.5 or higher. Which value is best dependends on the accuracy demands of the sceneario, and is why having the value the ability to adjust the threshold is a good idea when implementing an object detector}, MS-COCO AP is averaged over multiple IoU thresholds between 0.5 and 0.95, which encourages more accurate object detector localizations (\cite{zou2023object_detection_in_20_years}.
+To assess a regular machine learning model's performance, the precision-recall curve is common practice (see figure \ref{fig:precisionrecallcurveexample} for an example). The precision-recall curve is a graph that shows the trade-off between precision and recall for different thresholds for confidence in the object class. As you allow your model to be more uncertain in it's inferences on the image, the number of hallucinations will also increase and thus the precision drops. The area under this curve is the average precision (AP) of the model. 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{Images/Diagrams/IoU.jpg}
-    \caption{Intersection over Union (IoU) metric}
+    \includegraphics[width=0.7\linewidth]{Images/Results/PR-curve standard e 640.png}
+    \caption{Example Precision-Recall Curve.}
+    \label{fig:precisionrecallcurveexample}
+\end{figure}
+
+The area under the Precision-Recall curve is the average precision (AP) of the model. This can be expressed as follows:
+\begin{equation}
+    \text{AP} = \sum_{n} (R_n - R_{n-1}) P_n
+\end{equation}
+where $R_n$ is the recall at the $n$ n-th threshold, $R_{n-1}$ is the recall at the previous threshold, and $P_n$ is the precision at the $n$ n-th threshold.
+
+Alternatively, AP can be represented as an integral:
+\begin{equation}
+    \text{AP} = \int_{0}^{1} P(R) dR
+\end{equation}
+where $P(R)$ is the precision as a function of recall $R$. 
+
+
+\paragraph{Understanding the IoU metric}
+
+Accuracy in object detection refers to both detecting the object \textit{and} it's location accurately. Combining both in one metric would simplify benchmarking. The precision, recall and f1-score all neglect the positioning precision of bounding boxes. 
+
+For assessing localization accuracy, the Intersection over Union (IoU) is calculated. This compares the predicted bounding box and the ground truth bounding box in a way so boxes need to fit as closely to the ground truth bounding box as possible to get the best score (which is 1.0). See figure \ref{fig:IoU} for an illustration. In this figure we can see that high IoU values equates to having a good fit with the ground truth bounding box. If the IoU value is over a threshold (image to the left), we define the detection to be a true positive. If we make a bounding box somewhere else (image in the middle), we get a false positive (a hallucination). If we don't have detections for a ground truth bounding box (image to the right), we have a false negative.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{Images/Diagrams/IoU_better.jpg}
+    \caption{Intersection over Union (IoU).}
     \label{fig:IoU}
 \end{figure}
 
+The equation is simple:
+\begin{equation}
+    \text{Intersect over Union} = \frac{\text{Area of Overlap}}{\text{Area of Union}}
+\end{equation}
+
+The single-most important metric for object detection in the COCO dataset challenge was the mean Average Precision (mAP) over 10 IoU thresholds of .50:.05:.95. This rewards the detectors with more accurate localization (\cite{li2014cocodataset}).
+
+Following the introduction of MS-COCO datasets in 2014, researchers started to pay more attention to the accuracy of object localization instead of using a fixed IoU threshold\footnote{A fixed IoU threshold is typically set at 0.5 or higher. Which value is best dependends on the accuracy demands of the sceneario, and is why having the value the ability to adjust the threshold is a good idea when implementing an object detector} (\cite{zou2023object_detection_in_20_years}).
 
 
 % evne til å forbedre mørke scener i mobiltelefonteknologi vil kanskje også over noen år bli overført til mer lavnivåsystemer.
@@ -393,7 +450,7 @@ Following the introduction of MS-COCO datasets in 2014, researchers started to p
 \label{sec:rtdetr}
 The Real Time Detection Transformer (RT-DETR) is a real-time object detection model developed by the Facebook (Meta) Research team. The model uses a Transformer encoder-decoder architecture similar to a large language model. See figure \ref{fig:detrarchitecture} for an illustration of the architecture.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{Images/Diagrams/DETR2.png}
     \caption{The architecture of the DETR model (\cite{carion2020endtoend}).}

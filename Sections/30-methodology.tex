@@ -37,7 +37,7 @@ Due to many technical difficulties the first few times images were being capture
 
 For the second image-shooting session, the camera configurations had been more thorougly tested to obtain more consistent images in terms of colors and brightness. This means using non-auto auto white balancing and exposure settings, and reducing the amount of post-processing brightness adjustment. Also, some friends were invited in this session. Due to a reduced post-processing brightness augmentation, the exposure speed had to be increased to get sufficient light in the images. This meant more unclear outlines of moving subjects in the frame. It also meant more time was spent capturing and storing each image. This increased from 1.3$\frac{s}{image}$ to 6.3$\frac{s}{image}$, which means the time available for image capturing was spent less productively than with the previous camera configuration. Depending on the impacts of image consistency on inference accuracy vs. amount of training data, capturing with a higher exposure speed and then post-processing the images to be brighter might be the better solution. Also, as pointed out by TODO insert mikkels master, augmenting the brightness might only slightly impact the model performance. This is because a model may see slight differences in pixel-level values invisible to humans, thus enabling it to still recognize the patterns of human outlines. A sufficiently bright image would still be required for the sake of model verification and ground truth obtainment (by human annotators). 
 
-
+Image settings were $awb1.5_1.5_br55_co0_ec0_iso640_3264x2464_sm3_ss79989_20000_fr6$.
 
 
 TODO send til mikkel når internett:
@@ -79,12 +79,18 @@ The 4th iteration was with the same exact setup as the 3rd iteration, but with 2
 \label{sec:labeling}
 The detector needs to know the ground truth of the correct person positions when training and validating on the images. 
 
-The images was first inferenced by a yolov9 detector pre-trained on the COCO dataset. This is a way to greatly speed up the labeling process, instead of manually labeling every image. The detector had close to zero hallucinations due to a sufficiently high confidence rate of 0.5. Out of the 2939 images in the 1st-iteration dataset, 1076 came out with no detections and had to be manually labeled. The rest of the images were then validated. In 74 of the images, a part of one the fish tanks were identified to be human, as it was a moving seaweed that sometimes had a human-like shape. In one image the person was carrying a ladder which was identified to be a person. 
+The images was first inferenced by a YOLOv9 model trained on the COCO dataset. This is a way to greatly speed up the labeling process, instead of manually labeling every image. The detector had close to zero hallucinations due to a sufficiently high confidence rate of 0.5. Of the 2939 images in the 1st-iteration dataset, 1863 images had detections by the model and only had to be verified. This was a much faster process. The most time consuming part was loading the inferences onto the images so it would be possible to modify, delete and create new annotations. This was done using \href{}{Label Studio}. 1076 came out with no detections and had to be manually labeled. The rest of the images were validated. In 74 of the images, a part of one the fish tanks were identified to be human, as it was a moving seaweed that sometimes had a human-like shape. In one image the person was carrying a ladder which was identified to be a person. 
 
 The 2nd iteration images were brighter, and in these images one of the roof-lamps were sometimes identified to be human.
 
 In one image, the lamp and the seaweed were the only persons in the image. insert 120324-163917-84. 
-In another, the seaweed was more man than I. \includegraphics[width=0.4\textwidth]{Images/Fun/seaweed-man-more-than-I.png}.
+In another, the seaweed was more man than I. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\textwidth]{Images/Fun/seaweed-man-more-than-I.png}.
+    \caption{The seaweed is more person than I am.}
+\end{figure}
 
 TODO hører hjemme i en recommendations eller discussion? selv-kritiske kommentarer.. I forstudien hadde jeg en "reflections" etter diskusjon som sa litt om hva jeg ville gjort anerledes og forklarte noen av de valgene jeg tok. 
 The time to understand the tools and develop this pipeline was similar to what it would take to manually label all the images, but can now be used for future applications also. The approach to label the images is described in section: \ref{sec:labeling}.
@@ -153,3 +159,7 @@ Tried to download/use model from Roboflow, but either image has to be sent to an
     This task would mean setting up a strong device to host a network to which the weak units might connect to, and send images to. The issue is whenever images are sent, a lot of transmission is used... But the model takes image input size of 416x416. Would it be similar to just downscale the image before sending, or would this give the model less detail to work with?
 
 Will now run several models on datasets from the web, i.e. the CrowdHuman dataset to see their accuracies. Will then deploy the models to device in acquarium to see if the best-performing model is an option in terms of size and inference speed. If it is preferable, I will attempt to increase it's accuracy by accumulating and annotating a specialized dataset for that setting, and training the final layers on the data. Can this be done with a 
+
+
+
+% A lot of time was spent setting up the arrangement in the acquarium and having the raspberry pi communicate correctly. The dataset collection process was also time-consuming, as it required the acquarium to be empty of non-consenting persons. Precautions were made in order not to upset the acquarium staff. This included not capturing outside opening hours, and not asking the visitors themselves if they could be in the images. The initial idea was to send a start-capture signal to the devices, and then a stop-capture signal once visitors entered the room. However, this was more time-consuming to set up than anticipated, as the choice was made to make them communicate over usb-mobile network connections.
