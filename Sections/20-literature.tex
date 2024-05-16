@@ -1,21 +1,23 @@
 \section{Literature Review}
-The advent of "modern" object detection has enabled more sophisticated and automated methods for understanding visitor engagement and flow in cultural institutions. This literature review aims to explore the current state of research on object detection and visitor behaviour analysis in cultural institutions, focusing on privacy-preserving techniques, dataset specialization for enhanced object detection accuracy, and case studies of technology implementation.
+\label{sec:literature}
+The advent of "modern" object detection has enabled more sophisticated and automated methods for understanding visitor engagement and flow in cultural institutions. This literature review aims to explore the current state of research on the various topics of this thesis, including visitor behaviour analysis, individual privacy, object detection, the influence of fine-tuning models on specialized data, and already existing third-party services for deploying similar systems.
 
 \subsection{Visitor Behavior Analysis}
 
 Some of the traditional methods of analyzing visitor behavior include surveys, manual counting, and direct observation. Today, more technology-driven and practical applications may be used to gain insights in visitor engagement and experience in a museum or acquarium setting. In this subsection, we look at an alternative to computer vision tracking systems. Afterwards, we bring forth a study on the percieved value of visitor tracking to museum stakeholders. 
 
-\paragraph{Questions asked by visitors in a mobile app}
+\subsubsection{Questions asked by visitors in a mobile app}
 \citeauthor{co2023appquestionairre} had visitors ask questions in a mobile app while moving through the museum \citeyear{co2023appquestionairre}. Visitor movement through the museum was inferred from the data by leveraging question keyword content, knowledge of exhibit layout, and question timestamps. This removed the need for more costly, vision-based applications for detecting and tracking visitor movement. This study illustrates one way of conducting affordable, dependable and scalable visitor analysis without the need for costly devices.
 
-\paragraph{Percieved value to museum stakeholders}
+\subsubsection{Percieved value to museum stakeholders}
 \citeauthor{la2017museumbehaviouranalysis} explored an alternative approach to museum visitor behavior analysis, and its perceived value to museum curators, administrators and department heads (\citeyear{la2017museumbehaviouranalysis}). Wearable RFID trackers\footnote{The requirement for visitors to wear RFID trackers represents a significant drawback (as we will see in section \ref{sec:interview}), as it may be perceived as intrusive (although completely privacy preservant).} were given to the visitors, and beacons were positioned at positions deemed important by the museum curators. The beacons would then communicate the positions of the visitors to the system. This allowed for the collection of data on key metrics like exhibit popularity, average visit duration, and common visitor paths. The authors noted that technology-based visitor behavior analysis was generally well-received by museum curators, offering valuable data that could enhance the visitor experience.
 
 The study of \citeauthor{la2017museumbehaviouranalysis} further discussed the divergent views between the curators and the administrators on the utility of visitor behavior analysis systems (\citeyear{la2017museumbehaviouranalysis}). Administrators and department heads generally viewed these systems favorably, citing the financial justification for expensive exhibitions: "We really need to know if this expenditure was worthwhile" (\cite{la2017museumbehaviouranalysis}). On the contrary, museum curators expressed skepticism. One curator remarked, "A temporary exhibition won’t change after you deploy it, and understanding how it is used by the public would not help me in my next exhibition, since they are each very different. My main reason to analyze behavior would be to satisfy my curiosity." This contrast underscores the varied perspectives within museums regarding the value and implications of behavior analysis technologies.
 
-
 \subsection{Individual Privacy}
-\label{sec:lit-privacy}
+\label{sec:individual_privacy}
+
+This section is heavily influenced by previous work of the same author. See the disclaimers-section \ref{sec:disclaimers} for more details.
 
 The first definition of privacy was given by \citeauthor{br1890righttoprivacy} in \citeyear{br1890righttoprivacy} as the "right to be let alone". A more comprehensive definition of privacy that is more relevant to the modern age of digitalization and the topics of this thesis is the following:
 
@@ -23,12 +25,10 @@ The first definition of privacy was given by \citeauthor{br1890righttoprivacy} i
     “Privacy is the claim of individuals, groups and institutions to determine for themselves, when, how and to what extent information about them is communicated to others” \cite{we1967privacydefinition}.
 \end{myquote}
 
-There are multiple dimentions of privacy. The above quote would mainly cover informational privacy, which is most relevant to this thesis. The definition by \citeauthor{we1967privacydefinition} includes groups and institutions. However, in most legal systems, privacy is defined as a basic human right that only applies to natural persons (see section \ref{sec:naturalpersons}). The term "individual privacy"\footnote{Individual privacy is sometimes referred to as personal privacy.} encapsulates the individual focus of privacy as opposed to the broader interpretations of privacy that might apply to groups, organizations, or institutions. Other dimensions of privacy, which are less relevant for this thesis include spatial privacy, territorial privacy, bodily privacy (\cite{fi2017privacybookchapter53}). 
+There are multiple dimentions of privacy. The above quote would mainly cover informational privacy, which is most relevant to this thesis. The definition by \citeauthor{we1967privacydefinition} includes groups and institutions. However, in most legal systems, privacy is defined as a basic human right that only applies to natural persons\footnote{A natural person (also sometimes referred to as a physical person) is a title used to identify an individual human being. This is different from a legal person, which can be an individual or a company (\cite{te2023naturalperson}).}. The term "individual privacy"\footnote{Individual privacy is sometimes referred to as personal privacy.} encapsulates the individual focus of privacy as opposed to the broader interpretations of privacy that might apply to groups, organizations, or institutions. Other dimensions of privacy, which are less relevant for this thesis include spatial privacy, territorial privacy, bodily privacy (\cite{fi2017privacybookchapter53}). 
 
 The general data protection regulation (GDPR) is a single set of regulations to guarantee privacy and protecion of personal data. Informational privacy is mostly concerned with protection of personal data (we will define personal data in section \ref{sec:personal_data}), and informational privacy is what may be violated by the experiment of this thesis. Therefore, the GDPR is highly relevant for this thesis. Regardless, a quick review of the GDPR should be on the agenda of anyone affiliated with systems not inherently preservant of informational privacy.
 % todo under ethichal considerations burde jeg skrive noe om etisk ansvar man har som utvikler og det å forstå hva gdpr er før man utvilker noe som bryter med det. ansvar for utvikling. Stille krav til etisk morals kompass, selv om ikke alltid dette blir gjort i andre yrker alltid? Jo ofte, veterinærer som velger å ikke avlive unge kjæledyr som familier bare er gått lei av å passe for eksempel.
-
- is a rewritten and improved version of the section on privacy in an unpublished pre-thesis project written by the same candidate as this master thesis.
 
 \subsubsection{The General Data Protection Regulation}
 \label{sec:GDPR}
@@ -310,6 +310,7 @@ Just as Orwell warns against the dangers of forgetting or altering history, the 
 The development of localization technologies presents complex ethical challenges that require us to be vigilant and proactive. By embedding ethical considerations into the fabric of our technological innovations, we can avoid the dystopian futures forewarned by Orwell and ensure that these tools serve to support and enhance human society, rather than diminish it.
 
 \subsection{Object Detection}
+\label{sec:object_detection}
 This subsection includes a brief summarization of the evolution of object detection, including the transition from traditional methods to morw modern methods such as the YOLO series and vision transformers.
 
 The evolution of object detection can be divided into two major historical phases: before and after 2014, as illustrated in Figure \ref{fig:object_detect_20_years}. Prior to 2014, traditional object detection methods, such as the Viola-Jones detectors (\cite{vi2001viola-jones-orig}), Histogram of Oriented Gradients (HOG), and Deformable Part-Based Models (DPMs) were prevalent\footnote{These are just some honorable mentiones of some of the most sucessful and widely adopted models of the time (\cite{li2012violajonessuccessful})}. During this era, "mixture models" were developed to improve detection granularity by recognizing the different parts of the same object, such as the doors and windows of a car.
@@ -481,21 +482,11 @@ Being able to detect and locate people in dark-lit environments have been previo
 
 todo les YOLO in the Dark - Domain Adaptation Method for Merging Multiple Models
 
-\subsubsection{Effectiveness of Training Dataset Specialization}
+\subsubsection{Transfer Learning and the Effectiveness of Fine-tuning}
 \label{sec:dataset_specialization}
-Comparison of various algorithms performance enhancement when data has been optimized for the use case. What is the role of a training dataset in the task of determining the weights in a yolov9 artificial neural network, and how can would special training data optimize the weights for a specific use case?
-
-Transfer learning is typically when a trained model is used as a starting point for a new model, and then fine-tuned on a new dataset. This is a useful to extend the trained models capabilities to for example learn how to correctly identify a new object class. In this thesis, the goal is to improve the performance of the YOLOv9 model by training it on a dataset that is specialized for the museum environment. The dataset used for training the YOLOv9 model in this thesis is the COCO dataset, which is a large dataset of images with 80 different classes. The COCO dataset is a general dataset, and the YOLOv9 model trained on this dataset may not perform optimally in the museum environment. By training the YOLOv9 model on datasets that are more similar to the acquarium environment, we will not extend the models capabilities in the same way as what is typically done in transfer learning as we are trying to reduce the number of classes to 1 (person), and we are trying to improve on it's already learnt capability of identifying persons.
-
-\textbf{The datasets of this project are slightly different from each other}
-The CrowdHuman dataset is bigger than the others, but is not very different than the dataset (COCO) that the pretrained model has already been trained on apart from only containing images where people are the main focus. This dataset is big, and it's performance tells us to which extent adding more data would improve the model. The model was trained with various amounts of training data, to
-
-The football-players dataset contains images that are all from the same perspective and in the same light and quality. This dataset is added to see if the model improves just by specializing to single class data, or if the specialization quality and relevancy matters. It's also used as a matter of having more datasets in the experiment where differences in the datasets are clear enough to attribute differences in performance to the difference in nature of the datasets and not to other confounding factors.
-
-The person reidentification in the wild dataset is the 2nd largest one. This dataset is more similar to our use case than the others, as it exclusively contains images of people. The persons are sometimes occluded, and in many cases they are of approximately the same scale as the persons we will be detecting in the acquarium.
+Transfer learning is the process of transferring knowledge from a source domain to a different but related target domain. In practice, this means having a pre-trained model fine-tune on a dataset that is specialized for the task at hand. Extending a model's capabilities to learn to correctly identify a new object class or improving the detection accuracy are typical examples of transfer learning use cases. 
 
 \subsection{Third-Party Services}
-
 Roboflow is a platform designed to simplify and enhance the process of building and deploying machine learning models, particularly in the domain of computer vision. The platform offers comprehensive tools for data management, model training, and deployment, making it highly valuable for applications requiring precise object detection, including the localization and detection of persons.
 
 \subsubsection{Roboflow}

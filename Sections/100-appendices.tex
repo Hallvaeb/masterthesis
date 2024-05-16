@@ -1,7 +1,38 @@
 \appendix
-\label{app:images}
-\includegraphics[width=\textwidth]{Images/DeviceImages/1st-iteration/cal1.jpg}
-\includegraphics[width=\textwidth]{Images/DeviceImages/1st-iteration/cal1.jpg}
-\includegraphics[width=\textwidth]{Images/DeviceImages/1st-iteration/cal1.jpg}
-\includegraphics[width=\textwidth]{Images/DeviceImages/1st-iteration/cal1.jpg}
-\includegraphics[width=\textwidth]{Images/DeviceImages/1st-iteration/cal1.jpg}
+\section{Code Snippets}
+\label{app:code_snippets}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Images/Code Screenshots/camerahandler.png}
+	\caption{CameraHandler class initialization.}
+	\label{fig:code_camerahandler}
+\end{figure}
+
+\section{Technical Challenges}
+\paragraph{Pi out of memory on image capture}
+Context: tweaking camera settings, leading to larger size images
+Error: mal port enable failed to enable connected port... Out of resources.
+Solution: allocating more memory to the GPU by going through raspi-config Performance Options -> GPU Memory
+
+\paragraph{AWB Gains}
+Context: setting picamera.awg gains has no effect
+Error: no change
+Solution: set awb gains after awb mode has been set to off, and capture an image. The control seems to not set before after capturing an image. Thus, setting these values and then checking the values, it might seem the modification has not been made altough it will show on the images.
+
+\section{Camera Settings Explanation}
+\label{app:camera_settings_explanation}
+\begin{itemize}
+	\item $awb\_gains$ - Set the auto white balance gains red and blue. Set as a (red, blue) set. Each value may range from 0.0 to 8.0. Typical is 0.9-1.9. Only has an effect when $awb\_mode$ is 'off'. IMPORTANT: awb and exposure mode must be set to off BEFORE setting the $awb\_gains$.
+	\item $awb\_mode$ - Auto white balance. Default is auto. Disabling auto white balance mode allows for manual setting of AWB gains, ensuring consistent image color temperature. 'off' 'auto' 'sunlight' 'cloudy' 'shade' 'tungsten' 'fluorescent' 'incandescent' 'flash' 'horizon'
+	\item \textit{brightness} - Adjusts the post-processing brightness of the image. Default is 50, representing no adjustment. 0 to 100.
+	\item contrast - Adjusts the post-processing contrast of the image. Default is 0, representing no adjustment. -100 to 100.
+	\item $exposure\_compensation$- Adjusts the exposure compensation level. Range is -25 to 25. Default is 0.
+	\item $exposure\_mode$ - Disabling auto-exposure allows for manual control over exposure settings. 'off' 'auto' 'night' 'nightpreview' 'backlight' 'spotlight' 'sports' 'snow' 'beach' 'verylong' 'fixedfps' 'antishake' 'fireworks'.
+	\item $exposure\_speed$ - Indicates the effective exposure speed, which may differ from the set shutter speed after adjustments.
+	\item \textit{framerate} - Sets the number of frames per second captured by the camera.
+	\item \textit{iso} - Sets the ISO sensitivity of the camera sensor. Values: 100, 200, 320, 400, 500, 640, 800. 0 is auto.
+	\item $metering\_mode$ - Sets the metering mode. 'average' 'spot' 'backlit' 'matrix'. Backlit is the largest area. Default is average.
+	\item $sensor\_mode$ - Controls the sensor mode, where '3' typically corresponds to standard image capturing.
+	\item $shutter\_speed$ - Sets the shutter speed in microseconds. 0 to 6000000. Default 0. 0 is auto. Max 6s.
+	\item \textit{resolution} - Sets the resolution of the image frame.
+\end{itemize}
