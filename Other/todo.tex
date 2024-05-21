@@ -77,3 +77,28 @@ Ved levering:
 
 My project is to measure how much dataset specialization affects person detection accuracy.
 
+punktum på slutten av image captions?
+Captionalization of words in titles of sections, paragraphs
+
+Kaller vi datasettene inconsistent og consistent?
+
+
+
+
+
+Fikse AP calculations... Bevare det vi hadde som averager over begge. Regne ut COCO sin også, evt Pascal COCO sin methode. Så kan jeg diskutere fordeler og ulemper med metodene... 
+‍The Precision-Recall curve is often presented in one of two ways: with a fixed IoU and a varying confidence threshold (i.e. PASCAL VOC challenge), or with a varying IoU and a fixed confidence threshold (i.e. COCO challenge).
+
+Misconception #2: There is a standard way of computing mAP by third party libraries  
+Reality: There is no consensus with respect to a unified way of computing mAP by third party libraries, hence you need to verify that your team, your customers and other collaborators are using the same definition across your experiments.
+
+To make it crystal clear, there are at least two ways to compute mAP:
+
+Pascal VOC: the mAP as presented in the Pascal VOC challenges was the standard approach, this definition uses a single IoU=0.5, and averages over multiple confidence thresholds.
+COCO challenge: a new variant (and the current dominant one) to compute mAP was introduced in this challenge. The mAP is averaged over 10 IoU thresholds (0.5, 0.55, …, 0.95) while using a single confidence threshold. There might be some cases where users average over both thresholds: they average over multiple confidences, and also over multiple IoU thresholds, hence it's crucial that your mAP definition is consistent across your experiments.
+
+Key takeaway: Avoid inconsistent results in your detector performance by making sure your team is using the same mAP library so that you use the same mAP definition across your experiments.
+
+In case you are curious, some of the most used libraries in Pytorch such as TorchMetrics and pycocotools compute mAP as follows:
+
+AP and AR are averaged over multiple Intersection over Union (IoU) values. Specifically we use 10 IoU thresholds of .50:.05:.95.

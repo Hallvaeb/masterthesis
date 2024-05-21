@@ -36,3 +36,13 @@ Solution: set awb gains after awb mode has been set to off, and capture an image
 	\item $shutter\_speed$ - Sets the shutter speed in microseconds. 0 to 6000000. Default 0. 0 is auto. Max 6s.
 	\item \textit{resolution} - Sets the resolution of the image frame.
 \end{itemize}
+
+\section{TinyML and Frugal Devices}
+\label{app:tinyML}
+TinyML is when machine learning models are aimed at deployment to heavily resource constrained environments, like what are called frugal devices. These are, as previously mentioned in the introduction, devices where the microcontroller units (MCUs) are accompanied by memory measured in kilobytes, and processor speeds measured in megahertz. 
+
+Machine learning networks applied to tiny robots are subject to challenges from size, weight, area, and power (SWAP) (\cite{ne2022robotstinymlconstraints}). Many of the same challenges apply even in applications where the SWAP challenges are not the main concerns. \citeauthor{ra2023reformabletinyml} mentions the open challenges and future directions of the next generation tinyML. Catastrophic forgetting, which is when information from previous tasks while learning new ones are forgotten, are a result of the frugal devices' computational resources and memory. The first recommendation for future directions from the authors is to investigate fog computing as a means to offload tasks from the frugal devices.
+
+\citeauthor{ma2023tinyML_speech_recognition} (\citeyear{ma2023tinyML_speech_recognition}) explore the ways of speech processing on microcontrollers to improve car AI systems. They employed their trained and optimized model to an Arduino Nano 33 BLE. The model achieved accuracies in above 85 percent on recognizing whether the voice was that of an adult or a child, and to detect whether the speech was a replay (synthetic) or "live". 
+
+Furthermore, \citeauthor{ra2023reformabletinyml} discuss some of the challenges in industrial IoT environments with several smart object devices, where having the devices share a collective dataset of anomalies within a manufacturing environment would be advantageous for utilizing collective learning to improve the ML models in each of the devices (\citeyear{ra2023reformabletinyml}). This means the devices will all learn from observations of the other devices, such that the training period from when a network of devices is deployed within a new environment to when they are fully functioning with regards to accuracy in their predictions is reduced. See more about this in section \ref{sec:federated_learning} about federated learning as a way of implementing a collective learning network for the edge devices.

@@ -10,7 +10,7 @@ Some of the traditional methods of analyzing visitor behavior include surveys, m
 \citeauthor{co2023appquestionairre} had visitors ask questions in a mobile app while moving through the museum \citeyear{co2023appquestionairre}. Visitor movement through the museum was inferred from the data by leveraging question keyword content, knowledge of exhibit layout, and question timestamps. This removed the need for more costly, vision-based applications for detecting and tracking visitor movement. This study illustrates one way of conducting affordable, dependable and scalable visitor analysis without the need for costly devices.
 
 \subsubsection{Percieved value to museum stakeholders}
-\citeauthor{la2017museumbehaviouranalysis} explored an alternative approach to museum visitor behavior analysis, and its perceived value to museum curators, administrators and department heads (\citeyear{la2017museumbehaviouranalysis}). Wearable RFID trackers\footnote{The requirement for visitors to wear RFID trackers represents a significant drawback (as we will see in section \ref{sec:interview}), as it may be perceived as intrusive (although completely privacy preservant).} were given to the visitors, and beacons were positioned at positions deemed important by the museum curators. The beacons would then communicate the positions of the visitors to the system. This allowed for the collection of data on key metrics like exhibit popularity, average visit duration, and common visitor paths. The authors noted that technology-based visitor behavior analysis was generally well-received by museum curators, offering valuable data that could enhance the visitor experience.
+\citeauthor{la2017museumbehaviouranalysis} explored an alternative approach to museum visitor behavior analysis, and its perceived value to museum curators, administrators and department heads (\citeyear{la2017museumbehaviouranalysis}). Wearable RFID trackers\footnote{The requirement for visitors to wear RFID trackers represents a significant drawback as it may be perceived as intrusive (although completely privacy preservant).} were given to the visitors, and beacons were positioned at positions deemed important by the museum curators. The beacons would then communicate the positions of the visitors to the system. This allowed for the collection of data on key metrics like exhibit popularity, average visit duration, and common visitor paths. The authors noted that technology-based visitor behavior analysis was generally well-received by museum curators, offering valuable data that could enhance the visitor experience.
 
 The study of \citeauthor{la2017museumbehaviouranalysis} further discussed the divergent views between the curators and the administrators on the utility of visitor behavior analysis systems (\citeyear{la2017museumbehaviouranalysis}). Administrators and department heads generally viewed these systems favorably, citing the financial justification for expensive exhibitions: "We really need to know if this expenditure was worthwhile" (\cite{la2017museumbehaviouranalysis}). On the contrary, museum curators expressed skepticism. One curator remarked, "A temporary exhibition won’t change after you deploy it, and understanding how it is used by the public would not help me in my next exhibition, since they are each very different. My main reason to analyze behavior would be to satisfy my curiosity." This contrast underscores the varied perspectives within museums regarding the value and implications of behavior analysis technologies.
 
@@ -129,7 +129,7 @@ K-anonymity claimed to be a mathematically proven method for anonymyzation of pe
         \caption{Delete the image. This is the most effective and secure, but removes the possibility of verifying results and is unsuitable for most vision-based applications.}
     \end{subfigure}
 
-    \caption{Six methods to enhance individual privacy in images}
+    \caption{Six methods to enhance individual privacy in images.}
     \label{fig:obfuscation_methods}
 \end{figure}
 
@@ -215,10 +215,10 @@ According to \citeauthor{hu2022accurateobjectdetectionatedge} (\citeyear{hu2022a
 \end{table}
 
 \paragraph{Data encryption}
-The first method, data encryption, would be one way of transmitting images in a more secure way. This must be done in a losses way to maintain the image quality to preserve the accuracy of the detectors. Doing so is not trivial, and is a research field on it's own. A few methods are discussed in section \ref{sec:post_analysis_operations}.
+The first method, data encryption, would be one way of transmitting images in a more secure way. This should be done in a lossless way to maintain the image quality to preserve the accuracy of the detectors. Doing so is not trivial, and is a research field on it's own. A few methods that may function well, e.g. blurring only the faces, are discussed in section \ref{sec:obfuscation}.
 
 \paragraph{Traditional machine learning}
-The second method of running traditional machine learning methods, might not the greatest solution either, as they have been less accurate than the deep learning models (see figure \ref{fig:object_detect_20_years}). They may, however, be a good option for devices with low computing power and memory resources as they are generally low-demanding. The methods need less data, are more transparent, but are most applicable to use cases with clear, deterministic logic. Traditional machine learning methods were the most prominent prior to 2014, while deep learning based detection models have been the completely dominant approach to image recognition tasks. Figure \ref{fig:road_map} illustrates a road map of what have been the most popular machine learning approaches to object detection. To achieve similar accuracies to those of the deep learning models but with the low computational demands of traditional machine learning, one might consider to investigate the field of tinyML, discussed in section \ref{sec:tiny_ml_and_frugal_devices}.
+The second method of running traditional machine learning methods, might not the greatest solution either, as they have been less accurate than the deep learning models (see figure \ref{fig:object_detect_20_years}). They may, however, be a good option for devices with low computing power and memory resources as they are generally low-demanding. The methods need less data, are more transparent, but are most applicable to use cases with clear, deterministic logic. Traditional machine learning methods were the most prominent prior to 2014, while deep learning based detection models have been the completely dominant approach to image recognition tasks. Figure \ref{fig:road_map} illustrates a road map of what have been the most popular machine learning approaches to object detection. To achieve similar accuracies to those of the deep learning models but with the low computational demands of traditional machine learning, one might consider to investigate the field of tinyML, which was scoped out of this thesis \ref{sec:scope_tinyML}. Some considerations are, however, added in appendix \ref{app:tinyML}.
 
 \begin{figure}[H]
     \centering
@@ -228,7 +228,7 @@ The second method of running traditional machine learning methods, might not the
 \end{figure}
 
 \paragraph{Task sharing}
-The third method, sharing the workload over multiple devices, is not an uncommon practice in technology. See for example Eufy's solution with a "home-base" device in section \ref{par:eufycam}), where camera devices take images and send them to a more powerful computer for doing the heavy computing. This reserves privacy as the images are never sent outside of the local network, and can be achieved by simple TCP/IP\footnote{Transmission Control Protocol/Internet Protocol is a set of standardized rules that allow devices to communicate with each other on a network.} communication between the nodes. This gives low latency, fast networks, but introduces (1) the need of having a central hub, (2) extra work of setting up the transmission protocols, (3) another source of error and (4) the need to encrypt/decrypt images prior/post transmission to ensure security. However, due to scarcity in specialized hardware such as the GPU, this could be a nice solution, as one GPU per facility may be sufficient and achieve a higher throughput than processing large data on the CPUs of multiple edge devices.
+The third method, sharing the workload over multiple devices, is not an uncommon practice in technology. See for example Eufy's solution with a "home-base" device in section \ref{sec:eufycam}), where camera devices take images and send them to a more powerful computer for doing the heavy computing. This reserves privacy as the images are never sent outside of the local network, and can be achieved by simple TCP/IP\footnote{Transmission Control Protocol/Internet Protocol is a set of standardized rules that allow devices to communicate with each other on a network.} communication between the nodes. This gives low latency, fast networks, but introduces (1) the need of having a central hub, (2) extra work of setting up the transmission protocols, (3) another source of error and (4) the need to encrypt/decrypt images prior/post transmission to ensure security. However, due to scarcity in specialized hardware such as the GPU, this could be a nice solution, as one GPU per facility may be sufficient and achieve a higher throughput than processing large data on the CPUs of multiple edge devices.
 
 \paragraph{Deep learning}
 As opposed to traditional machine learning,
@@ -238,11 +238,16 @@ This section outlines some methods to retain the privacy of individuals by using
 A widely used approach within the domain of anonymous fall detection, is to use of RGB depth cameras to capture depth information (\cite{wa2020elderly_fall_detection_meta}). As only depth information is captured, the data remains completely anonymous from the start.
 
 \subsubsection{Deletion of images}
-The deployment of visual systems in public spaces presents challenges related to privacy, not only because of the immediate access to private data, but also due to the recent breakthroughs in object detection allowing the extraction of sensitive information from visual data. The altogether only completely safe way to ensure complete and total privacy of data, is to not have the data at all. This may be achieved by the following approach called edge computing.
+\label{sec:deletion_of_images}
+In an investigation of an already existing internet of things (IoT) system for wildlife monitoring: 'Where's The Bear', relying on motion-triggered cameras, three challenges of visual systems in such applications were discussed \cite{el2017WTB}. The drawbacks were (1) the transmission of enormous numbers (sometimes millions) of images over low-bandwidth networks, which tend to happen in automatically (motion-) triggered applications, (2) motion sensors triggered by weather conditions or by animals that were not of interest, and (3) redundancy of images taken of the same individual animal. While the 2nd and 3rd drawbacks are not applicable to this project, the 1st is.
 
-Edge computing is to have the visual device perform the analysis directly on the device (so called 'on-device processing'). With this approach, the image is obscured or deleted right after analysis without ever leaving the edge device, and only the anonymous analysis results are communicated online. This would mean that the personal data (1) exists \textit{just} while the analysis is running, (2) is never sent online, and (3) is thus a lot less vulnerable to attacks. The perpetrator's device would need to be physically connected to the device and the attack would need to happen in real time. In those cases, the perpetrator could quite likely just as well take the photo himself.
+\citeauthor{el2017WTB} proposed a solution to this challenge: edge computing. Edge computing, also referred to as on-device processing, encapsulates similar concepts but emphasizes slightly different aspects of the computing approach. While "on-device processing" specifically indicates that the computational tasks are carried out directly on the device itself, "edge computing" underscores that these tasks are performed close to the data sources, i.e., at the "edge" of the network.
 
-The images would in some cases benefit in multiple ways from being heavily obscured instead of deleted. This approach is discussed in the following paragraph.
+The deployment of visual systems in public spaces presents challenges related to privacy, not only because of the immediate access to private data, but also due to the recent breakthroughs in object detection allowing the extraction of sensitive information from visual data. The altogether only completely safe way to ensure complete and total privacy of data, is to not have the data at all.
+
+Edge computing and on-device processing allows for the image is obscured or deleted right after analysis without ever leaving the edge device. In this way, only the anonymous analysis results are communicated online. This would mean that the personal data (1) exists \textit{just} while the analysis is running, (2) is never sent online, and (3) is thus a lot less vulnerable to attacks. The perpetrator's device would need to be physically connected to the device and the attack would need to happen in real time. In those cases, the perpetrator could quite likely just as well take the photo himself. This is an approach to achieve low-latency, high bandwidth, high availability, low cost communications and fast response to/from the sensors.
+
+The images would in some cases benefit in multiple ways from being obscured instead of deleted. This approach is discussed in the following paragraph.
 
 \subsubsection{Obfuscation}
 \label{sec:obfuscation}
@@ -260,7 +265,7 @@ A questionnaire study of 328 students indicated that blurred images were not con
     \centering
     \includegraphics[width=0.6\textwidth]{Images/ed2012results.png}
     \caption{Privacy enhancements methods in the study of  \citeauthor{ed2012privacy_review} (\citeyear{ed2012privacy_review})}
-    \RaggedRight The study indicates that the methods of blurring an image is not perceived privacy preservant. However, as we will see in section \ref{sec:deletion_vs_obs_discussion}, the results of this study might not be a reason by itself to throw the method of blurring an image out the window.
+    \RaggedRight The study indicates that the methods of blurring an image is not perceived privacy preservant. However, as we will see in section \ref{sec:obfuscation}, the results of this study might not be a reason by itself to throw the method of blurring an image out the window.
     \label{fig:ed_results}
 \end{figure}
 
@@ -322,9 +327,9 @@ The evolution of object detection can be divided into two major historical phase
     \label{fig:object_detect_20_years}
 \end{figure}
 
-Despite these advancements, it was not until the introduction of Region-based Convolutional Neural Networks (R-CNN) in 2014 that the accuracy of object detection systems began to improve significantly. This paradigm shift marked a substantial advancement in the field, leveraging deep learning techniques to enhance detection performance dramatically (\cite{zou2023object_detection_in_20_years}). The period following 2014 has seen rapid progress, introducing sophisticated object detectors like You Only Look Once (YOLO) and Detection Transformers (DETR). These are explored in greater detail in section \ref{sec:rtdetr} and \ref{sec:yolov9}
+Despite these advancements, it was not until the introduction of Region-based Convolutional Neural Networks (R-CNN) in 2014 that the accuracy of object detection systems began to improve significantly. This paradigm shift marked a substantial advancement in the field, leveraging deep learning techniques to enhance detection performance dramatically (\cite{zou2023object_detection_in_20_years}). The period following 2014 has seen rapid progress, introducing sophisticated object detectors like You Only Look Once (YOLO) and Detection Transformers (DETR). These are explored in greater detail in section \ref{sec:rtdetr} and \ref{sec:yolov9}.
 
-Machine learning can be seen as a gamified\footnote{apply typical elements of game playing (e.g. point scoring, competition with others, rules of play) to (an activity), typically as an online marketing technique to encourage engagement with a product or service. (\cite{ox2023gamification})} version of statistics and software engineering. Object detection is a subset of machine learning. Modifications and new advances in object detection methods may be instantly evaluated by running inference on benchmark datasets and compare them to the other state of the art (SOTA) models.
+Machine learning can be seen as a gamified\footnote{Gamification is the practice of applying typical elements of game play (e.g. point scoring, competition with others, rules of play) to an activity, typically as an online marketing technique, to encourage engagement with a product or service (\cite{ox2023gamification}).} version of statistics and software engineering. Object detection is a subset of machine learning. Modifications and new advances in object detection methods may be instantly evaluated by running inference on benchmark datasets and compare them to the other state of the art (SOTA) models.
 
 \subsubsection{Performance benchmark}
 \label{sec:performance_benchmark}
@@ -343,9 +348,9 @@ In real-world applications there are licenses for using datasets for training a 
 \paragraph{Accuracy of Model Inferences}
 \phantomsection
 \label{sec:accuracy_of_model_inferences}
-Due to the aforementioned gamified nature of machine learning models, which metrics are deemed important may have a significant impact on the development of the models. According to \citeauthor{zou2023object_detection_in_20_years}, these developments primarily pursue two main goals: enhancing prediction accuracy and increasing computational efficiency (\citeyear{zou2023object_detection_in_20_years}. Additionally, the evaluation of object detectors extends to more, harder-to-measure, abilities. This can be their ability to transfer their capabilities to new domains, such as learning to detect a new category it has not previously been trained for.
+Partly due to the aforementioned gamified nature of machine learning models, which metrics are deemed important may have a significant impact on the development of the models. There are competitions on the data science platform "\href{Kaggle}{kaggle.com}" where data and machine learning specialists may compete for the best scores on competitions. The winners of the competitions are, for many competitions, awarded prize money. This is a great way to gain experience in the machine learning field. What the target variables are for the competitions are what drives the development. According to \citeauthor{zou2023object_detection_in_20_years}, these developments primarily pursue two main goals: enhancing prediction accuracy and increasing computational efficiency (\citeyear{zou2023object_detection_in_20_years}. Additionally, the evaluation of object detectors extends to more, harder-to-measure, abilities. This can be their ability to transfer their capabilities to new domains, such as learning to detect a new category it has not previously been trained for. There's not yet been a focus on energy efficiency, which needs to happen soon, should development continue for "AI" in the current pace (\cite{lu2023AIenergyefficieny}).
 
-However, the most used measurement of performance for an object detector model is the \textit{mean Average Precision} (mAP) for varying values of \textit{IoU thresholds} (\cite{zou2023object_detection_in_20_years}). 
+The most used measurement of performance for an object detector model is the \textit{mean Average Precision} (mAP) for varying values of \textit{IoU thresholds} (\cite{zou2023object_detection_in_20_years}). 
 
 The average precision is the average when taking the average of precision values under various recalls. The mean is when this is averaged for all the object classes in the dataset. The IoU brings bounding box positioning into the equation, representing how well the predicted box fits to the ground truth. A detailed explanation of what this means is given in the following paragraphs.
 
@@ -363,15 +368,14 @@ These may be defined as follows:
     \item False Positive (FP): The number of instances where the model incorrectly identifies a negative instance as positive. This could occur if the model identifies a person in an image where there is no person.
 \end{enumerate}
 
-\begin{wrapfigure}{r}{0.7\textwidth}
-    \vspace{-20pt}
+The confusion matrix is a table used to illustrate these numbers. An example of a confusion matrix is shown in figure \ref{fig:confusion_matrix}. 
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{Images/Diagrams/confusion_matrix.png}
     \caption{Example Confusion Matrix.}
     \label{fig:confusion_matrix}
-    \vspace{-20pt} 
-\end{wrapfigure}
-The confusion matrix is a table used to illustrate these numbers. An example of a confusion matrix is shown in figure \ref{fig:confusion_matrix}. 
+\end{figure}
 
 The confusion matrix in \ref{fig:confusion_matrix} displays that the model has detected 915 people correctly, failed to detect 128 people, and incorrectly detected 97 people where there were none. For classification tasks, it is common to have the table show which class the model has detected, and which class the object actually is. For single class object detection, the confusion matrix is sufficient as-is.
 
@@ -449,7 +453,7 @@ Following the introduction of MS-COCO datasets in 2014, researchers started to p
 
 \subsubsection{Real-Time Detection Transformer}
 \label{sec:rtdetr}
-The Real Time Detection Transformer (RT-DETR) is a real-time object detection model developed by the Facebook (Meta) Research team. The model uses a Transformer encoder-decoder architecture similar to a large language model. See figure \ref{fig:detrarchitecture} for an illustration of the architecture.
+The Real Time Detection Transformer (RT-DETR) is a real-time object detection model developed by the Facebook (Meta) Research team. The model uses a transformer encoder-decoder architecture similar to a large language model. See figure \ref{fig:detrarchitecture} for an illustration of the architecture.
 
 \begin{figure}[H]
     \centering
@@ -460,10 +464,7 @@ The Real Time Detection Transformer (RT-DETR) is a real-time object detection mo
 
 In the paper first introducing the model, \citeauthor{carion2020endtoend} claim it outperforms competitive baselines on panoptic segmentation\footnote{This is a challenging pixel-level segmentation task. In segmentation tasks, an image is divided into meaningful regions. Altough different from object detection.} with a simple segmentation head trained on top of a pre-trained DETR. 
 
-The conclusions of the paper are as follows:
-"We presented DETR, a new design for object detection systems based on transformers and bipartite matching loss for direct set prediction. The approach achieves comparable results to an optimized Faster R-CNN baseline on the challenging COCO dataset. DETR is straightforward to implement and has a flexible architecture that is easily extensible to panoptic segmentation, with competitive results. In addition, it achieves significantly better performance on large objects than Faster R-CNN, likely thanks to the processing of global information performed by the self-attention. This new design for detectors also comes with new challenges, in particular regarding training,  optimization and performances on small objects. Current detectors required several years of improvements to cope with similar issues, and we expect future work to successfully address them for DETR." (\cite{carion2020endtoend}).
-
-And 
+The conclusions of the paper are as follows: "We presented DETR, a new design for object detection systems based on transformers and bipartite matching loss for direct set prediction. The approach achieves comparable results to an optimized Faster R-CNN baseline on the challenging COCO dataset. DETR is straightforward to implement and has a flexible architecture that is easily extensible to panoptic segmentation, with competitive results. In addition, it achieves significantly better performance on large objects than Faster R-CNN, likely thanks to the processing of global information performed by the self-attention. This new design for detectors also comes with new challenges, in particular regarding training,  optimization and performances on small objects. Current detectors required several years of improvements to cope with similar issues, and we expect future work to successfully address them for DETR." (\cite{carion2020endtoend}).
 
 \subsubsection{YOLOv9}
 \label{sec:yolov9}
@@ -474,10 +475,8 @@ The YOLO (You Only Look Once) object detection algorithm is a popular choice for
 \end{myquote}
 
 
-
 \subsubsection{Dark-Lit Environments}
-Being able to detect and locate people in dark-lit environments have been previously attempted, usually for security concerns in public spaces. \citeauthor{pa2020PersonDetectionNightTimeFLIR} developed a system for detecting people in dark-lit environments using a convolutional neural network. They modified the three input channels which usually take RGB to take as input instead (i) the original infrared image, (ii) a difference image from the previous frame, and (iii) a background subtraction mask. Their dataset is vastly different from the setting for this thesis, as the individuals in their photos were far away from the cameras. However, they found that their system was able to detect people in dark-lit environments with an accuracy of 90\%. This is a promising result, as it shows that it is possible to detect people in dark-lit environments using infrared imaging and CNNs. They used FLIR cameras, which make images from heat. Doing inferences on pure infrared images may be harder because the infrared radiation may be less prevalent than the heat a FLIR camera may capture. The FLIR cameras are expensive, and thus not considered viable for this project.
-\cite{pa2020PersonDetectionNightTimeFLIR}.
+Being able to detect and locate people in dark-lit environments have been previously attempted, usually for security concerns in public spaces. \citeauthor{pa2020PersonDetectionNightTimeFLIR} developed a system for detecting people in dark-lit environments using a convolutional neural network (\citeyear{pa2020PersonDetectionNightTimeFLIR}). They modified the three input channels which usually take RGB to take as input instead (i) the original infrared image, (ii) a difference image from the previous frame, and (iii) a background subtraction mask. Their dataset is vastly different from the setting for this thesis, as the individuals in their photos were far away from the cameras. However, they found that their system was able to detect people in dark-lit environments with an accuracy of 90\%. This is a promising result, as it shows that it is possible to detect people in dark-lit environments using infrared imaging and CNNs. They used FLIR cameras, which make images from heat. Doing inferences on pure infrared images may be harder because the infrared radiation may be less prevalent than the heat a FLIR camera may capture. The FLIR cameras are expensive, and thus not considered viable for this project.
 
 
 todo les YOLO in the Dark - Domain Adaptation Method for Merging Multiple Models
@@ -487,10 +486,10 @@ todo les YOLO in the Dark - Domain Adaptation Method for Merging Multiple Models
 Transfer learning is the process of transferring knowledge from a source domain to a different but related target domain. In practice, this means having a pre-trained model fine-tune on a dataset that is specialized for the task at hand. Extending a model's capabilities to learn to correctly identify a new object class or improving the detection accuracy are typical examples of transfer learning use cases. 
 
 \subsection{Third-Party Services}
+\label{sec:thirdparty}
 Roboflow is a platform designed to simplify and enhance the process of building and deploying machine learning models, particularly in the domain of computer vision. The platform offers comprehensive tools for data management, model training, and deployment, making it highly valuable for applications requiring precise object detection, including the localization and detection of persons.
 
 \subsubsection{Roboflow}
-
 Roboflow's ecosystem comprises several key components that streamline the development of computer vision models:
 \begin{itemize}
     \item \textbf{Data Management}: Roboflow provides tools for annotating, organizing, and augmenting image data. These features facilitate the creation of high-quality datasets that are essential for training accurate models. Datasets created with these tools are then stored and hosted on the Roboflow server, open for other people to use.
@@ -508,27 +507,79 @@ Roboflow excels in scenarios requiring the detection of specific objects within 
 One application would be using Roboflow to train models on the CrowdHuman dataset todo denne beskrevet tidligere?. Users can train custom models using this dataset, fine-tuned for scenarios such as monitoring museum traffic. On Roboflows website, there are multiple guides for how such applications may be implemented.
 
 \subsubsection{GPT-4 with Vision on Object Detection}
-
 The well known large language models (LLM) have been generalized to perform more tasks, and are thus applicable to than just text. The ChatGPT-4 with Vision is one such large \textit{multimodal} model (LMM). Numerous solutions already incorporate OpenAI's chatGPT as a fundamental component of their product. Expanding the role of GPT to include visual processing could potentially yield additional benefits. LLMs with vision may enable applications capable of semantically understanding scenes. This could mean the application may for example understand when a riot is about to break out in a bar street in England, or when a fish tank feeding is taking place in the acquarium, and what the crowds general reactions are to the show \footnote{Detecting the mood of people is also much researched and could be implemented for images with high enough resolution and quality. One model would then detect people or faces, and another would get cut-outs of those faces to detect the mood of each individual.}. This may allow automated applications to provide insights to their users so they don't need to analyze the data. The resulting solution may be faster, less error prone and more scalable than the "surveillance-system with human interference"-paradigm we have today for public surveillance and intelligence.
 
 One issue arises from the generative nature of the GPTs. It is not given that a model performing well one day will be as good the next. Many experiments are performed to measure the performance of the LMM, and some show promising results. However, most experiments are frozen in time and will not reflect how well the model may perform from one day to the next. This may result in models performing well when tested, but no longer doing their jobs post-deployment.
 
 To tackle this issue, a \href{https://www.gptcheckup.com/}{website} has been dedicated to measure how the GPT-4 with Vision \footnote{Previously called GPT-4V \href{https://platform.openai.com/docs/guides/vision}{https://platform.openai.com/docs/guides/vision}.} performs across a range of experiments. The website is made by the team at Roboflow, but let's other users submit their experiments for daily checkups through git pull requests. Out of 13 of the experiments currently posted, 5 have failed every day the last 7 days, and 2 have failed at least once in the last 7 days. One of the experiments, counting fruits in a bowl, is alternating every day between success and failure. This proves the point that generative models may still be considered too unreliable for many applications.
 
-\subsubsection{Drawbacks of Utilizing Third-Party Services}
-The two preceding sections highlights the strenths and capabilities of third-party services such as Roboflow and GPT4-V, but there are some more downsides not yet mentioned that need to be evaluated before moving forward with a third-party option.
+The two preceding sections highlights the strengths and capabilities of third-party services such as Roboflow and GPT4-V, but there are some more downsides not yet mentioned that need to be evaluated before moving forward with a third-party option. Further discussion of third-party services are found in section \ref{sec:discuss_thirdparty}. 
 
-\begin{enumerate}
-    \item \textbf{Complete Control Over the System:} Developing your own application allows for full customization in terms of software architecture, data processing, and system integration. This total control facilitates the optimization of the system to meet specific performance and operational requirements. In addition, a system built separately would have the benefit of being independent from the performance and existence of Roboflow.
-    \item \textbf{Data Privacy and Security:} On-device processing ensures that all data processing is kept on-device, enhancing data security and privacy. Roboflow offers local deployment, but this comes as part of their more expensive business-level subsxription plan.
-    \item \textbf{Cost Efficiency:} Managing your own system can be more cost-effective in the long run, particularly if the application demands extensive processing power or high throughput, as it eliminates recurring costs associated with third-party platforms. Roboflow's plans include costs related to "inference credits", making the system great for small applications but less likely to be a good fit for bigger enterprise solutions looking to leverage the margins. GPT4-V may be accessed via Azure's OpenAI service, which is also priced by how much the service is used and how
-    \item \textbf{Performance Optimization:} Owning the inference system allows for hardware and software optimizations that are not possible when using third-party services. This can lead to better performance, especially in terms of processing speed and latency.
-    \item \textbf{Scalability and Integration Flexibility:} Implementing your own solution allows for easier scaling and integration with existing IT infrastructure, which is beneficial for maintaining seamless data workflows and supporting business growth without being limited by external platform constraints.
-\end{enumerate}
+\subsection{Third-Party Products}
+\label{sec:thirdparty_products}
+Intelligent visual edge image/video devices seem to have an endless number of applications. In the following section we will take a look at some actors and their products to get an overview of the market of edge AI cameras.
 
-\subsubsection{Conclusion}
+The target of products such as the 'EufyCam 3' and the 'Aqara FP2 mmWave' is the private smart home sector. The i-PRO's WV-S71300-F3 has many of the same functionalities but targets enterprises instead. These products can be seen in figure \ref{fig:solutions_on_the_market} and are presented in the following paragraphs.
 
-In conclusion, third-party services offer convenient solutions that may align perfectly with specific requirements for object detection systems, providing a quick and efficient path to implementation. However, despite their benefits, these services come with inherent drawbacks such as dependency on external providers, potential privacy concerns, and limitations in customization and control. While leveraging third-party services can expedite development, it is imperative for researchers and practitioners in the field of object detection, particularly in contexts such as person detection where privacy may be of cencern, to carefully weigh these considerations. Exploring alternative methods of implementation, including developing systems from scratch, can offer greater flexibility, control, and potential for innovation.
+\subsubsection{Eufy}
+\label{sec:eufycam}
+The EufyCam 3 is a battery driven camera with solar a panel, only requiring two hours of sunlight to become fully charged. The EufyCam has functionality for face recognition. This is a self-learning AI which improves with time, up to an accuracy of 99.9\% \cite{eufycam}. To do this, the cameras communicate to an edge computing 'home base' to perform the machine learning tasks, and to save images to a hard drive. You may see an image of the EufyCam product in figure \ref{fig:eufycam_3}.
+
+The EufyCam deals with low light situations in two different ways: a motion activated spotlight, turning on to film in the dark with a self-provided source of light, and a black and white night vision using six infrared LEDs to capture the video. There's also functionality to set activity areas, and to detect animals or cars. 
+
+Eufy's product does not assure privacy by deleting or obscuring images, but rather keeps them on the local area network (LAN). The user's privacy is preserved through storing the videos and images on a private in-house 1TB device, communicated from the camera devices via 2.4GHz WiFi.  
+
+The EufyCam 3 product is an edge computing device, and the Prasidh Chhadbria, director of Harvard Undergraduate AI, highlight three main advantages of the edge computing approach (\citeyear{ch2022youtube_edge_computing_eufycam}). (1) Time saved, as the edge devices do not have to constantly send a lot of data to the cloud; (2) Save on cost in terms of cheaper local storage, rather than more expensive cloud storage; (3) Privacy. The data is not sent to another server, but exists on the device itself so you have more control over where your data is going.
+
+
+\subsubsection{Aqara}
+The Aqara FP2 utilizes multiple passive infrared (PIR) sensors rather than a RGB camera to make detections. The FP2 may detect falls, and can localize up to 5 persons in an area, but a device may only do one of the functionalities at a time. This is due to the fact that fall detection requires the device to be mounted in the ceiling, while presence detections are only accurate when the device is mounted on the wall. 
+
+However, the devices has more functionalities. With the ability to set rules for separate zones in the area, one may toggle lights only where a person is located, for example over a workbench. Making this application part of a visual system would possibly facilitate for more applications such as being able to automatically label specific items in the area. One could combine the use of zones with a visual computing module where it would only compute and analyze data, not only when something in the frame is moving (which is typical for wildlife detection cameras (\ref{sec:deletion_of_images})), but when certain rules are triggered, such that a person has been located in a certain zone for a specified amount of time.   
+
+\subsubsection{i-PRO}
+Another big actor is i-PRO, providing AI network cameras to the market with edge computed people counting, face detection, and people attribute search 
+(See their product: \href{https://i-pro.com/products_and_solutions/en/surveillance/products/wv-s71300-f3}{product wv-s71300-f3}). The applications of the cameras they offer are often video monitoring and security features. i-PRO has informational web pages about surveillance policies and security. Most, if not all, of their cameras are NDAA compliant as well, which is a requirement to use them on american federal ground with regards to who produces the hardware of the system. Trusted manufacturers is a requirement for products capable of breaching privacy. See \href{https://i-pro.com/}{i-PRO's website} for more information.
+
+i-PRO had a big project where over a 100 cameras were installed in a arts museum in Monaco, where their cameras AI VMD that will give intrusion alerts when movement is detected in areas that should not be accessed, and virtual line crossing, giving alerts when people have crossed a digitally set line of an image. They also had AI scene change detection, detecting any changes in the image in a fixed part of the scenery. Also, AI people detection was used so to generate details about the visitors, so that guards that were interested in specific individuals had to opportunity to track specific individuals. These applications also generated statistics so the costumer had an overview of knowing in real time how many visitors were in the museum and even in the separate rooms or in front of each gallery. The cameras used in this solution were all fish-eye models, illustrating how fish-eye lenses may be the way to go for inside-application areas. 
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Products/eufycam3.jpg}
+        \caption{EufyCam 3}
+        \label{fig:eufycam_3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Products/aquara_fp2.jpg}
+        \caption{Aquara FP2}
+        \label{fig:aquara_fp2}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Products/iPRO_wv-s71300-f3.png}
+        \caption{i-PRO WV-S71300-F3}
+        \label{fig:i-PRO_camera}
+    \end{subfigure}
+    \caption{Smart cameras from Aquara, Eufy and i-PRO}
+    \label{fig:solutions_on_the_market}
+\end{figure}
+
+\subsubsection{Viso}
+\label{sec:viso}
+Viso.ai has applications for nearly every use case from abandoned luggage at airports, real time video stream weapon detections, detection of stopped vehicles, to parking space information. Their no-code platform (Viso Suite) enables a fast pipeline for developing new applications out of existing software. Viso.ai also has a lot of great articles on their web page regarding visual computing topics (see for example \cite{bo2023yolov7_guide}). The Viso Suite is marketed as a way to "Automate manual work, reduce development costs, solve scaleability, privacy and security end-to-end, accelerating every step of the enterprise computer vision development life cycle". (This thesis is not sponsored).
+
+\subsubsection{VMukti} 
+Not only does VMukti have some of the longest and most confusing product names on the market ("Real-time Edge AI based Smart Cloud Camera"), but also some of the biggest fishes in their pond of costumers. This pond includes Google, Amazon Web Services, Azure \textit{and} Microsoft. Azure, owned by Microsoft, \textit{and} Microsoft.. Anyways, one of their products, the "Real-time Edge AI based Smart Cloud Camera", provides the user with a live stream of video from the camera. This may create privacy issues should the wrong user get access to the video stream, and it is likely demanding more power and network bandwidth than what it would take to only communicate the results of an analysis. VMukti's other product, the "Edge AI Based 5MP PTZ ANPR Bullet Camera VM-72BPTZ5AIVE" has some cutting edge technologies, including "local data processing, filtered data transfer to the cloud and faster decision-making". However, it's hard to figure out from their website what data is processed locally, and what their decision-making is faster than.
+
+For outside monitoring, VMukti offer cameras that may connect through the mobile network, for monitoring outside remote locations. 
+
+VMukti delivers solutions for surveillance of vehicles, school buses, healthcare, shopping malls, smart cities, warehouses, campuses, examinations, premises, elections and banking.
+
 
 \subsection{Summary of Literature Review}
 A summarization of the current state of research, and where my thesis aims to contribute.

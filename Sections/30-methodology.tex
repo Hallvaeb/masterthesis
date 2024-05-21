@@ -115,7 +115,7 @@ The detector requires precise ground truth positions of persons for training, va
 
 To expedite the labeling process, the images were initially processed using a pre-trained YOLOv9 model on the COCO dataset, rather than manually labeling each image. Out of the 2939 images in the first-iteration dataset, the model prosuced 1863 detections that needed verification. This includes modifications, deletions, and additions to the annotations. The remaining 1076 images, which had no initial detections, required manual labeling from scratch.
 
-Additionally, validation of the annotations uncovered specific errors: in 74 images, moving seaweed in one of the fish tanks was mistakenly identified as a human due to its human-like movement and shape. In some of the images (see figure \ref{fig:seaweed_man}), this 'seaweed-man' was assumed by the detector to more likely be a person than the human. In another instance, a person carrying a ladder was incorrectly recognized as one person carrying another. 
+Additionally, validation of the annotations uncovered specific errors: in 74 images, moving seaweed in one of the fish tanks was mistakenly identified as a human due to its human-like movement and shape. In some of the images (see figure \ref{fig:seaweed_man}), this 'seaweed-man' was presumably more likely to be a person than the human. In another instance, a person carrying a ladder was incorrectly recognized as one person carrying another.
 
 \begin{figure}[H]
     \centering
@@ -138,34 +138,38 @@ Additionally, validation of the annotations uncovered specific errors: in 74 ima
 "Label Studio" was used to label the images. This online tool allows for setting up a machine learning backend for automatically generating predictions for the images, to speed up the process. The setup of this backend was not trivial, however, and another approach was taken. The images were inferred on, the labels converted to label-studio json format, and then imported. This was a less 'automatic' approach but nevertheless effective. The label-studio tool was the used to modify, delete, and add annotations to the images. Finally, the annotations were exported and converted to the YOLO format. The code for converting yolo-to-label-studio and label-studio-to-yolo is found in Other/Code/Utils on \href{https://github.com/Hallvaeb/masterthesis}{https://github.com/Hallvaeb/masterthesis}.
 
 \subsection{External Datasets}
-The datasets of this project are slightly different from each other.
+This project utilizes multiple external datasets for developing and testing the object detection models. Each dataset was selected based on its relevance to the project, specifically for containing labeled images of the person class, and they vary in the number of images, capturing angle, and image diversity.
 
-\subsubsection{Common Objects in Context}
-The COCO dataset is a large dataset of 118 000 images and 80 different classes. The dataset is used to pre-train the models, and 
+\subsubsection{Common Objects in Context (COCO)}
+\label{sec:dataset_COCO}
+The COCO dataset is a large dataset of 118 000 images and 80 different classes. The COCO-2017 train dataset was used to pre-train the models. The COCO-2017 validation dataset was used to evaluate the performance of the finalized models, as is industry standard. 
 
 \subsubsection{CrowdHuman}
-The CrowdHuman dataset is the largest, but is not very different than the dataset (COCO) that the pretrained model has already been trained on apart from only containing images where people are the main focus. This dataset is big, and it's performance tells us to which extent adding more data would improve the model. The model was trained with various amounts of training data, to
-
-The football-players dataset contains images that are all from the same perspective and in the same light and quality. This dataset is added to see if the model improves just by specializing to single class data, or if the specialization quality and relevancy matters. It's also used as a matter of having more datasets in the experiment where differences in the datasets are clear enough to attribute differences in performance to the difference in nature of the datasets and not to other confounding factors.
-
-The person reidentification in the wild dataset is the 2nd largest one. This dataset is more similar to our use case than the others, as it exclusively contains images of people. The persons are sometimes occluded, and in many cases they are of approximately the same scale as the persons we will be detecting in the acquarium.
+\label{sec:dataset_CrowdHuman}
+CrowdHuman, the largest dataset used, focuses exclusively on images where people are the main subject, contrasting with COCO’s broader class range. This dataset was employed to assess how additional data might enhance model performance, with experiments conducted across various training data volumes.
 
 \subsubsection{Person Reidentification in the Wild}
-Person reidentification in the wild is a dataset of 13 000 images of people in the wild. This dataset is more similar to our use case than the others, as it exclusively contains images of people. The persons are sometimes occluded, and in many cases they are of approximately the same scale as the persons we will be detecting in the acquarium.
-todo sjekk avsnittet over. Feil antall images ihverfall
+\label{sec:dataset_PRW}
+Person Reidentification in the Wild comprises 11,816 images of pedestrians and aligns closely with our application needs as it exclusively contains images of people. This dataset's relevance is heightened by the presence of occlusions and the similar scale of persons to those detected in the aquarium setting. The dataset contains 932 individuals, annotated in 34 304 separate annotated boxes. Although designed to facilitate the development of reidentification applications, this functionality was not utilized in this project (refer to the project scope in section \ref{sec:scope_object_detection} for details). 
+
+% \subsubsection{Football Players}
+% The football-players dataset, characterized by its uniform perspective and consistent lighting and quality, was introduced to determine whether model improvements derive solely from specializing to single-class data or if the specialization's quality and relevance are crucial. It also provides a clear contrast in dataset characteristics, aiding in attributing performance differences to dataset nature rather than other confounding factors.
+
 
 \subsection{Model Training}
 \label{sec:model_training}
 
+
+\paragraph{Licensing}
+An effort has been made to keep the solution free and open to use, but some conditions may apply. The object detection algorithm YOLOv9 is under a GPL-3.0 License. This is a copy-left licensing, meaning it is free to use but has the requirement that any derivative works are released under the same rights. Another algorithm discussed in this thesis, the YOLOv3, is under a free-to-use license (AGPL-3.0), but changing the code is not allowed. The final object detector discussed, which could provide a solution for a company interested in keeping their solution hidden from competitors, is the DETR algorithm. This is under an Apache-2.0 license, which permits users to use and modify the code to fit their needs.
+
 \subsubsection{Transfer Learning}
 In this thesis, we are transferring the knowledge of a model that is pre-trained on a general dataset, to a model that is optimized for an aquarium environment. The general dataset in this case is the COCO dataset, a large dataset of 118 000 images and 80 different classes.
 
-
-
 \subsubsection{Hyperparameter Tuning}
-todo finskriv... Not really optimization.. More like finding... Since we're doing a cheeky approach to this. Done with autogluon, follow this guide for installation: \href{AutoGluon guide}{https://auto.gluon.ai/stable/install.html}. I had to run pip install autogluon twice for the imports to see autogluon.
+todo finskriv... Not really optimization.. More like finding... Since we're doing a cheeky approach to this. Done with autogluon, follow this guide for installation: \href{https://auto.gluon.ai/stable/install.html}{AutoGluon guide}. I had to run pip install autogluon twice for the imports to see autogluon.
 
-This guide could be used to fine tune the hyperparameters of the model: https://auto.gluon.ai/scoredebugweight/tutorials/course/script.html. A simpler guide was implemented to find the hyperparameters. This was to save time, and since our models require an okay level of hyperparameters. However, this choice to not give every dataset the same "fighting chance" with their optimal hyperparameters might have led to a lower validity of this experiments results.
+\href{https://auto.gluon.ai/scoredebugweight/tutorials/course/script.html}{This guide} could be used to fine tune the hyperparameters of the model. A simpler guide was implemented to find the hyperparameters. This was to save time, and since our models require an okay level of hyperparameters. However, this choice to not give every dataset the same "fighting chance" with their optimal hyperparameters might have led to a lower validity of this experiments results.
 
 Experiment 1: Do we need to run inference on the whole 2939 images to evaluate our model performance or will the results of evaluation on a subset be relative to the results of evaluation on the whole?
 
@@ -178,10 +182,6 @@ We'd like the hyperparameter tuning process to focus on finding the hyperparamet
 The aforementioned approach is completely ignorant to how machine learning works, however. In supervision machine learning, the validation set is used to tune the hyperparameters, and the test set is used to evaluate the model's performance. The test set should be representative of the data the model will see after deployment, and the validation set should be representative of the data the model will see during training. The test set should not be used to tune the hyperparameters, as this would lead to overfitting the model to the test data.
 
 Then, the . Tuning the hyperparameters for the test data means that the validation data used for training later will not at all be representative of the situation earlier, meaning the optimal hyperparameters will no longer be valid. Such an approach would not
-
-
-The CrowdHuman dataset has some data where the
-
 
 What makes this project interesting is not the varying nature of datasets. Usually, one wants the best, most similar, and most data possible, and it's therefore irrelevant to see what using a less relevant dataset would do to the model. In this project the focus is more about how much of the high quality data is needed to make an impact. If 100 labeled images does the same work as 1000, then much work can be saved by only labeling 100 images. If only 100 images is needed then setting up a proper labeling tool might not even be necessary, as it may be done faster using a sub-optimal but fast-to-employ labeling tool. The insights may also be useful when
 
@@ -211,9 +211,42 @@ In summary, by prioritizing privacy through the use of image obscuration techniq
 
 \subsection{Heatmaps}
 \label{sec:heatmaps}
+Heatmaps are a powerful visualization tool that can provide insights into visitor behavior patterns and engagement levels within a museum or aquarium setting. By aggregating anonymized data from the tracking system, heatmaps can reveal areas of high visitor activity, peak visitation times, and popular exhibit locations. These visual representations offer valuable information for museum staff and curators, enabling them to optimize exhibit layouts, plan interactive experiences, and enhance visitor engagement. For this project, heatmaps were attempted to be created using 3 different python packages.
+
+\paragraph{On the attempts to make heatmaps}
+The first attempt was made asking chatGPT 4 to provide the code. The AI chose to draw circles using the python package "OpenCV", which without modifications did not render satisfactory results. Instead of tweaking a suboptimal solution, the attempt was then made to use the modules from Ultralytics to create the heatmap. The results of the first attempts may be seen in figure \ref{fig:heatmap_drafts}.
+
+Ultralytics, a company from Los Angeles, is the same company that developed YOLOv5 on which the YOLOv9 is built upon. They also have premade modules for creating heatmaps. However, the solution neccessitates a detector model to make inferences live, and has no optional arguments to pass your own inferences. An attempt was made to modify the code and pass mock-data in the right format, but the result was unsatisfactory. The heatmaps were thus created with another module instead.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Analytics/heatmap_gpt.jpg}
+        \caption{Heatmap Draft 1: ChatGPT-4 solution}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{Images/Analytics/heatmap_ultralytics.jpg}
+        \caption{Heatmap Draft 2: Ultralytics solution}
+    \end{subfigure}
+    \caption{Heatmap Development Drafts}
+    \label{fig:heatmap_drafts}
+\end{figure}
+
+\subsubsection{Supervision Heatmaps}
+Supervision is a module created by Roboflow, to make reusable and user friendly computer vision tools. It is designed to be model agnostic. The github repo may be found \href{https://github.com/roboflow/supervision}{here}.
+
+The solution incorporating Supervision rendered satisfactory results and may be seen in figure \ref{fig:heatmap_final}. This solution supports generating heatmaps from data in a pandas dataframe, allowing for filtering the dataframe to generate the preferred heatmaps based on for example the relevant times of the day or for the correct time interval.
 
 \subsection*{Notes}
-Tried to download/use model from Roboflow, but either image has to be sent to an API which would not retain privacy, or the device has to host an API itself to run the inference... Seems unlikely to be the most preferable solution, as the device would have to set up the service and run it locally. Possibly an interesting solution would be to do this with multiple devices. This supports the master-slave pattern of having multiple weaker computers and have them send to the stronger unit. Setting up private TCP connection between the weaker units and the strong unit and have the images sent to the stronger, so it can detect on them and send information etc... How many weak units do we need in order to make it profitable to have a strong GPU unit to do the processing? This whole systems sounds to be complicating processes, not making the product modular and easy-to-use. Includes a lot of connection/networking to make the weaker units find and connect to strong, physically close device.
+
+Tried to download/use model from Roboflow, but either image has to be sent to an API which would not retain privacy, or the device has to host an API itself to run the inference... Seems unlikely to be the most preferable solution, as the device would have to set up the service and run it locally. 
+
+Possibly an interesting solution would be to do this with multiple devices. This supports the master-slave pattern of having multiple weaker computers and have them send to the stronger unit. 
+Setting up private TCP connection between the weaker units and the strong unit and have the images sent to the stronger, so it can detect on them and send information etc. How many weak units do we need in order to make it profitable to have a strong GPU unit to do the processing? This whole systems sounds to be a complicating setuo process, not making the product modular and easy-to-use. Includes a lot of connection/networking to make the weaker units find and connect to strong, physically close device.
+
 This task would mean setting up a strong device to host a network to which the weak units might connect to, and send images to. The issue is whenever images are sent, a lot of transmission is used... But the model takes image input size of 416x416. Would it be similar to just downscale the image before sending, or would this give the model less detail to work with?
 
 Will now run several models on datasets from the web, i.e. the CrowdHuman dataset to see their accuracies. Will then deploy the models to device in acquarium to see if the best-performing model is an option in terms of size and inference speed. If it is preferable, I will attempt to increase it's accuracy by accumulating and annotating a specialized dataset for that setting, and training the final layers on the data. Can this be done with a
