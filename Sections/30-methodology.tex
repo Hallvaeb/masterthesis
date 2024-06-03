@@ -1,25 +1,49 @@
 \section{Methodology}
 \label{sec:methodology}
-Two cameras were deployed in a room of acquariums at "Fiskeri- og Søfartsmuseet" in Esbjerg to take images for building a specialized dataset and to evaluate the effects of developing a highly specialized detector rather than using a general.
+Two devices were deployed in the aquarium of "Fiskeri- og Søfartsmuseet" in Esbjerg. The devices were set in the corner of the room to capture the largest area of the room as possible. The environment, angles and final achieved image quality can be seen in Figure \ref{fig:device_deployments}.
 
-\subsection{Project}
-To investigate the effects of dataset quality in fine-tuning of models on the performance (primary objective 3, see section \ref{sec:research_objectives}), a dataset was collected from the aquarium. The details of dataset construction is found in section \ref{sec:dataset_construction}. Here, we explain how the dataset consists of three partitions: "inconsistent", "consistent-1", and "consistent-2". Many models were created to evaluate the effects of dataset quality. These include pre-trained but not fine-tuned "standard" models, models fine-tuned on the inconsistent partition, models fine-tuned on Consistent-1, and models fine-tuned on the external datasets PRW and CrowdHuman. All models were tested on the Consistent-2 partition. Also, multiple of the models were tested on all the consistent images (consistent-1 and 2), in order to evaluate different aspects of the models such as the influence of imgsz and number of epochs.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/DeviceImages/3rd/130524-155118_hm12.jpg}
+        \caption{Image taken from the 'left' device}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/DeviceImages/3rd/130524-155118_hm40.jpg}
+        \caption{Image taken from the 'right' device}
+    \end{subfigure}
+    \caption{Images Displaying the Camera Deployment Environment and Angle}
+    \label{fig:device_deployments}
+\end{figure}
 
-% todo sjekk at stemmer med primary objective nummer
-% inconsistent er 1st, 
-% Consistent 2 er 2nd 
-% consisten 1 er 3rd
+\subsection{Project Outline}
+\label{sec:project}
+A dataset was collected from the devices in the aquarium to investigate the effects of dataset quality in fine-tuning of models on the performance. The details of dataset construction is found in Section \ref{sec:dataset_construction}. Here, we explain how the dataset consists of three partitions: \textit{Inconsistent}, \textit{Consistent-1}, and \textit{Consistent-2}. 
+
+Multiple models were created to evaluate the effects of dataset quality. These include the following:
+\begin{itemize}
+    \item Pre-trained "standard" models (DETR, YOLOv3, YOLOv9)
+    \item YOLOv9 models fine-tuned on the inconsistent partition
+    \item YOLOv9 models fine-tuned on Consistent-1\footnote{Whilst all the other models were evaluated on the Consistent dataset, this model was only evaluated on the Consistent-2 dataset.}
+    \item YOLOv9 models fine-tuned on the external dataset PRW
+    \item YOLOv9 models fine-tuned on the external dataset CrowdHuman
+\end{itemize}
+
+All models were evaluated on the Consistent-1 and Consistent-2 partitions, hereby referred to as \textit{Consistent}. Additionally, the standard models were evaluated with differing hyperparameters for input image size, and the YOLOv9 models that were fine-tuned on the inconsistent partition was evaluated with 5, 15 and 50 epochs.
 
 \subsection{The FIMUS Dataset}
 \label{sec:dataset_construction}
-This subsection provides an in-depth explanation of the dataset construction process, including the image capturing setup, image characteristics consistency, camera settings, technical challenges, image capture, and labeling process.
+This subsection provides an in-depth explanation of the FIMUS dataset construction, including the camera configurations, the image capturing process, and the labeling process.
 
 \subsubsection{Camera Configurations}
-\paragraph{Mechanical adjustment of the aperture}
-The Raspberry PI camera v2.1 aperture can be modified by rotating the lens with a mechanical tool,configuring its depth focus. This, however, is for very close focuses. In its default position at 0 degrees, the focus is set at "infinity". Turning the lens to 45 degrees will focus the camera at 32cm, being much shorter than any object detection application would need. This is the only camera property which is set manually. The rest of the camera settings are configured programmatically through the picamera API class. The camera settings used for the consistent images are detailed in table \ref{tab:picamera_settings}.
+\paragraph{Mechanical adjustment of the aperture was ignored}
+The Raspberry PI camera v2.1 aperture can be modified by rotating the lens with a mechanical tool,configuring its depth focus. This, however, is for very close focuses. In its default position at 0 degrees, the focus is set at "infinity". Turning the lens to 45 degrees will focus the camera at 32cm. Some applications may need this, i.e. production line systems or automated recycling facilities, but it is vastly shorter than the types of applications discussed in this thesis. All the rest of the camera settings are configured programmatically through the picamera API class. The camera settings used for the consistent images are detailed in Table \ref{tab:picamera_settings}.
 
 \paragraph{Inconsistent images}
-For the inconsistent images, the exposure mode and auto white balance mode were set to 'auto'. The automatically set values resulted in variation of image color temperature, exposure speed, and brightness, and generally lower quality images. To achieve an adequate level of brightness to label the images, the postprocessing-property \textit{brightness} of the picamera was utilized. This resulted in artificially bright images. The brightness value was found experimentally and remotely by applying brightness and blurring the images before transmission. The brightness values of 60, 70, and 80 are displayed in figure \ref{fig:brightness_experimentation}. A brightness value of 65 was used for the images in the inconsistent dataset. Finally, the last value set for the inconsistent dataset was resolution of the images, which was set to maximum (3264x2464).
+For the inconsistent images, the exposure mode and auto white balance mode were set to 'auto'. The automatically set values resulted in variation of image color temperature, exposure speed, and brightness, and generally lower quality images. To achieve an adequate level of brightness to label the images, the postprocessing-property \textit{brightness} of the picamera was utilized. This resulted in artificially bright images. The brightness value was found experimentally and remotely by applying brightness and blurring the images before transmission. The brightness values of 60, 70, and 80 are displayed in Figure \ref{fig:brightness_experimentation}. A brightness value of 65 was used for the images in the inconsistent dataset. Finally, the last value set for the inconsistent dataset was resolution of the images, which was set to maximum (3264x2464).
 
 \begin{figure}[H]
     \centering
@@ -44,10 +68,12 @@ For the inconsistent images, the exposure mode and auto white balance mode were 
     \label{fig:brightness_experimentation}
 \end{figure}
 
-Further, only one person is present in each image of the inconsistent partition of the dataset. This is to simulate the probable real-world scenario of having a single technician tasked with fine-tuning a detector. The inconsistent partition is suitable for testing how a poorly captured but highly relevant dataset may function as training data for model fine-tuning.
+Further, only one person is present in each image of the inconsistent partition of the dataset. This is to simulate the probable real-world scenario of having a single technician tasked with fine-tuning a detector. The inconsistent partition is suitable for testing how a poorly captured but highly relevant dataset may function as training data for model fine-tuning. Most research in the field trains the model on a vast amount of available data, not specific to the real-world sceneario. The transfer learning experiments where models are fine tuned, the images for fine tuning are almost always of great quality. The results from this analysis aims to measure the performance when highly relevant but low quality images are utilized for fine-tuning.
 
 \paragraph{Consistent images}
-The "Consistent-1" and "Consistent-2" partitions have consistent image characteritics. For these images, the camera settings were explicitly set to experimentally proven values to achieve the best image quality. The camera settings may be seen in table \ref{tab:picamera_settings}. The consistent partition of the dataset contains images with 1-4 persons in each image. The consistent images are split in two partitions to facilitate experiments using one partition as training data and the other for evaluation. This is suitable for testing how a well-captured dataset may function as training data for model fine-tuning. The settings used are found in table \ref{tab:picamera_settings}.
+The "Consistent-1" and "Consistent-2" partitions have consistent image characteritics\footnote{Their differences are detailed in Section \ref{sec:consistent_datasets_differences}}. For these images, the camera settings were explicitly set to experimentally proven values to achieve the best image quality. The camera settings may be seen in Table \ref{tab:picamera_settings}. The consistent partition of the dataset contains images with 1-4 persons in each image. The consistent images are split in two partitions to facilitate experiments using one partition as training data and the other for evaluation. This is suitable for testing how a well-captured and highly relevant dataset may function as training data for model fine-tuning. 
+
+The settings used are found in Table \ref{tab:picamera_settings}. Note that the ordering matters when setting the picamera properties. The ordering used to achieve consistent image capturing for project of this thesis is displayed in Figure \ref{fig:code_camerahandler} in appendix \ref{app:code_snippets}.
 
 \begin{table}[H]
     \centering
@@ -68,45 +94,92 @@ The "Consistent-1" and "Consistent-2" partitions have consistent image character
         \textit{iso}                & 640            \\ \hline
         $sensor\_mode$              & 3              \\ \hline
         $shutter\_speed$            & 80000          \\ \hline
-        \textit{resolution}         & 3264x2464      \\ \hline
+        \textit{resolution}         & (3264, 2464)   \\ \hline
     \end{tabular}
-    \caption{\centering Camera settings for the image capturing of 2nd and 3rd iteration of image capturing.}
+    \caption{\centering Camera settings for the image capture of consistent images.}
     {See appendix \ref{app:camera_settings_explanation} for a more detailed explanation of the camera settings.}
     \label{tab:picamera_settings}
 \end{table}
 
 \subsubsection{The Image Capturing Process}
-Images were captured using a script that sequentially recorded data, storing each image directly onto a 32GB micro SD card installed in the device. This local storage approach was adopted to eliminate data transmission costs and potential security risks associated with transmitting sharp, identifiable images over the internet. The class \textit{Image} from the python package \textit{PIL} was used to store the images, and to address the limited storage capacity on the computer storing the dataset images, a save quality of 90 was used for all the images.
+Images were captured using a script that sequentially captured images, storing them directly onto a 32GB micro SD card installed in the device. This local storage approach was adopted to eliminate data transmission costs and potential security risks associated with potentially transmitting sharp, identifiable images over the internet. Instead, should unwitting individuals wander into the frames during the capturing process, these images were deleted manually once they had been transferred to the computer. 
 
-The dataset was built capturing images while no other visitors were present in the aquarium expect those who'd volunteer to participate. This was due to the restriction detailed in the project scope (section \ref{sec:scope_opening_hours}). A way to cancel image capturing was needed in case visitors entered the room. The simplest way of achieving this would be to pull the plug. This was challenging, however, as the devices and their power supplies were mounted high on the wall. The selected approach was to SSH\footnote{(Secure Shell (SSH) is not detailed in this thesis, see section \ref{sec:scope_ssh})} into the devices to start and stop the image capturing process.
+The class \textit{Image} from the python package \textit{PIL} was used to store the images, and to address the limited storage capacity on the computer storing the dataset images, the images were stored with a save quality value of 90.
 
-Note that the ordering matters when setting the picamera properties. The ordering used to achieve consistent image capturing for project of this thesis is displayed in figure \ref{fig:code_camerahandler} in appendix \ref{app:code_snippets}.
+The dataset was built capturing images while no other visitors were present in the aquarium expect those who'd volunteer to participate. This was due to the restriction detailed in the project scope (Section \ref{sec:scope_opening_hours}). A way to cancel image capturing was needed in case visitors entered the room. The simplest way of achieving this would be to pull the plug. This was challenging, however, as the devices and their power supplies were mounted high on the wall. The selected approach was to SSH\footnote{(Secure Shell (SSH) is not detailed in this thesis, see Section \ref{sec:scope_ssh})} into the devices to start and stop the image capturing process. 
+
+An attempt was made to implement the lightweight messaging protocol MQTT for the devices to subscribe to a topic, providing them commands to perform preset operations such as capturing and storing sharp images. Through the use of a phone application such as \href{https://www.easymqtt.app/}{\textit{EasyMQTT}} (for iOS), this could've allowed for command transmissions to the devices from the phone, simplifying the image capturing process and allowing for image capturing without having to bring a laptop. However, the development progress stagnated due to significant resources being diverted to resolving issues related to authentication token generation and configuring a broker accessible via a public domain name. The SSH tunneling approach was thus deemed to be sufficient.
 
 Every once in a while, when a lot of visitors entered the room, the devices were demounted and the SD card plugged into the computer to extract the captured images. This resulted in slightly different angles when remounting the device, as finding the same configuration was challenging.
 
-\paragraph{1st iteration: the inconsistent images}
-\textit{Total number of images: 1312 (day 1), 986 (day 2) and 641 (day 3), total 2939. 1 subject.}
+\paragraph{Setbacks in the image capturing process}
+\phantomsection
+\label{sec:challenges_in_image_capturing}
+There were a few setbacks for the image capture process that are worth mentioning. These were: readjustments of camera settings, corrupted images, and nonlinear increase in capture time when increasing the shutter speed. The setbacks are detailed below.
 
-The first iteration of image capture was made with non-optimized camera configurations. To sufficiently brighten the images, the picamera.brightness attribute was set to 65. This is a postprocessing operation, which gave brighter but also artificially lit images. Also, the camera would sometimes focus on the bright fish-tanks in the museums, rendering the rest of the image rather dark. This was an effect of the awb mode and exposure mode being set to auto, and led to images of varying brightness and color. These images were still included in the dataset however, as images seen as suboptimal to the human eye may still be useful to the training of detectors. These images may be used to inspect the impact of captured image quality on inference performance.
+Firstly, settings had to be completely readjusted between the environment the device was tested to the environment the devices were deployed. See Figure \ref{fig:capture_environment_settings} to see how a shutter speed of 20 000 is in the office versus in the aquarium. This was after auto-settings were disabled and the images in theory should only vary slightly due to the slightly lower light levels in the aquarium. However, the Raspberry PI camera v2.1 seems highly sensitive to its settings.
 
-The images were then used to build a proof of concept for the project pipeline, verifying and developing the steps needed for a successful project. The following steps in the project pipeline are described after the description of the 2nd and 3rd iterations of image captures.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/DeviceImages/2nd-iteration/ss20000_office.jpg}
+        \caption{Shutter speed 20 000 in the office}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/DeviceImages/2nd-iteration/ss20000_fimus.jpg}
+        \caption{Shutter speed 20 000 in the aquarium}
+    \end{subfigure}
+    \caption{The effect of the same shutter speed in different environments.}
+    \label{fig:capture_environment_settings}
+\end{figure}
 
-Due to many technical difficulties the first few times images were being captured for the dataset, only the developer and author of this thesis is present in the images\footnote{Initially, an attempt was made to pass MQTT messages as a way to initialize image capture so multiple cameras could be deployed in several locations, thus speeding up and simplifying the image capturing process. This was discarded due to technical difficulties related to efficiently stopping the image capturing. For this single-deployment angle and area project, however, the approach with ssh-ing into the device worked fine.}.
+A few images were corrupted and thus could not be used. This was another minor setback. One anonymous employee of a company employing the same camera in their devices, revealed that they had experienced the same issue. The occurences of corrupted images seems highly random, and only happened 4-5 times in total for the dataset capture. Examples of corrupted images can be seen in Figure \ref{fig:corrupted_images}. These were easy to detect and thus did not create further trouble.
 
-\paragraph{2nd iteration: the consistent-1 images}
-\textit{Total number of images: 295. 1-4 subjects.}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/DeviceImages/2nd-iteration/corrupted1.jpg}
+        \caption{Corrupted image 1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/DeviceImages/2nd-iteration/corrupted2.jpg}
+        \caption{Corrupted image 2}
+    \end{subfigure}
+    \caption{Examples of rolling shutter artefacts.}
+    \label{fig:corrupted_images}
+\end{figure}
+
+Without going into further detail on the Raspberry PI camera, the image in Figure \ref{fig:corrupted_images}a reveals the camera has a rolling shutter\footnote{The rolling shutter was confirmed by looking in the \href{https://picamera.readthedocs.io/en/release-1.13/fov.html}{camera hardware documetation}.}. The way images is captured with a rolling shutter is by capturing the image from the top to the bottom. The camera is constantly renewing rows of image data. The corrupted rows in \ref{fig:corrupted_images}a are purple, while at the bottom the camera has resumed it's correct operation. The corrupted images are similar in size to the normal images, so the way to remove them and retake an image would be to inspect the image data values instead to determine it is mainly purple. The corrupted images were removed from the dataset. Today, Raspberry PI offers a camera with a global shutter to alleviate the aforementioned bug. As mentioned on their website, the global shutter camera is \textit{a specialised 1.6-megapixel camera that can capture rapid motion without introducing artefacts typical of rolling shutter cameras. Ideal for fast motion photography and machine vision applications.}
+
+The last setback, vastly more impactful than the previous, was the nonlinear increase of capture time when camera settings were modified between the capture of Inconsistent and Consistent. The reasons are still unknown due to lack of time to investigate why. The prioritization was to capture images over further developing on the image capture script, already having spent more than anticipated resources on getting the configurations set up correctly. The total time to capture an image went from approximately 2 seconds per image for the capturing of the inconsistent images, to approximately 8 seconds for the consistent images. This resulted in the relatively bigger inconsistent dataset partition of 2637 images compared to the consistent partition of 757 images. 
+
+\paragraph{The inconsistent images}
+\textit{Total number of images: total 2637. 1 subject. Captured over 3 days.}
+
+The first iteration of image capture, and what resulted in the \textit{inconsistent} partition of the dataset, was made with non-optimized camera configurations. To sufficiently brighten the images, the picamera.brightness attribute was set to 65. This is a postprocessing operation, which gave brighter but also artificially lit images. Also, the camera would sometimes focus on the bright fish-tanks in the museums, rendering the rest of the image rather dark. This was an effect of the awb mode and exposure mode being set to auto, and led to images of varying brightness and color. These images were still included in the dataset however, as images seen as suboptimal to the human eye may still be useful to the training of detectors. These images may be used to inspect the impact of captured image quality on inference performance.
+
+The images were then used to build a proof of concept for the project pipeline, verifying and developing the steps needed for a successful project.
+
+\paragraph{The consistent-1 images}
+\textit{Total number of images: 292. 1-4 subjects.}
 
 For the second image-capturing session, the camera configurations had been more thorougly tested to obtain more consistent images in terms of colors and brightness. This means using non-auto auto white balancing and exposure settings, and reducing the amount of post-processing brightness adjustment. Also, some friends were invited in this session. Due to a reduced post-processing brightness augmentation, the exposure speed had to be increased to get sufficient light in the images. This meant more unclear outlines of moving subjects in the frame. It also meant more time was spent capturing and storing each image. This increased from 1.3$\frac{s}{image}$ to 6.3$\frac{s}{image}$, which means the time available for image capturing was spent less productively than with the previous camera configuration. Depending on the impacts of image consistency on inference accuracy vs. amount of training data, capturing with a higher exposure speed and then post-processing the images to be brighter might be the better solution. Also, as pointed out by TODO insert mikkels master, augmenting the brightness might only slightly impact the model performance. This is because a model may see slight differences in pixel-level values invisible to humans, thus enabling it to still recognize the patterns of human outlines. A sufficiently bright image would still be required for the sake of model verification and ground truth obtainment (by human annotators).
 
-The camera was repositioned three times during this iteration of image capturing. This is a drawback as it complicates the process of mapping the person positions in the images to real world locations in the acquarium. This is because the positions are represented as x,y values from the corner of the image, and for a person standing at exactly the same position in two images, the x,y-values will differ if the camera position has moved. Serving as a dataset for machine learning applications and not for analytics generation based on real world positions, this was not an issue.
+The camera was repositioned three times during this iteration of image capturing. This is a drawback as it complicates the process of mapping the person positions in the images to real world locations in the aquarium. This is because the positions are represented as x,y values from the corner of the image, and for a person standing at exactly the same position in two images, the x,y-values will differ if the camera position has moved. Serving as a dataset for machine learning applications and not for analytics generation based on real world positions, this was not an issue.
 
 \paragraph{NoIR camera}
 During the 2nd iteration of image capturing, 60 images with a Raspberry Pi NoIR camera module version 2.1 were captured to determine its efficacy in enhancing human detection under low-light conditions. The "no" in NoIR signifies it's lack of an infrared filter. It was hypothized by the author that this meant the camera could then operate with a lower shutter speed, which showed promising results in initial tests. However, once deployed in the aquarium, this proved to be wrong. The NoIR camera is said to give the ability to look in the dark \textit{with infrared lightning}. Despite its potential, the noir camera was used as a regular camera module thereafter, capturing a different angle than the first device, for the remaining image capturing iterations. The 60 images were not used in the project, as the models trained on inconsistent data had already been trained.
 
-\paragraph{3rd iteration: the consistent-2 images}
-\textit{Total number of images: 466. 1-2 subjects.}
+\paragraph{The consistent-2 images}
+\textit{Total number of images: 465. 1-2 subjects.}
 
-Similar to the 2nd iteration, but with 1-2 subjects instead of 1-4.
+Similar to the consistent-1 images, but with 1-2 subjects instead of 1-4. In this iteration of image capture, the left camera was also used to capture images for the dataset. The dataset characteristics are detailed in \ref{sec:consistent_datasets_differences}.
 
 \subsubsection{Labeling}
 \label{sec:labeling}
@@ -115,7 +188,7 @@ The detector requires precise ground truth positions of persons for training, va
 
 To expedite the labeling process, the images were initially processed using a pre-trained YOLOv9 model on the COCO dataset, rather than manually labeling each image. Out of the 2939 images in the first-iteration dataset, the model prosuced 1863 detections that needed verification. This includes modifications, deletions, and additions to the annotations. The remaining 1076 images, which had no initial detections, required manual labeling from scratch.
 
-Additionally, validation of the annotations uncovered specific errors: in 74 images, moving seaweed in one of the fish tanks was mistakenly identified as a human due to its human-like movement and shape. In some of the images (see figure \ref{fig:seaweed_man}), this 'seaweed-man' was presumably more likely to be a person than the human. In another instance, a person carrying a ladder was incorrectly recognized as one person carrying another.
+Additionally, validation of the annotations uncovered specific errors: in 74 images, moving seaweed in one of the fish tanks was mistakenly identified as a human due to its human-like movement and shape (see Figure \ref{fig:seaweed_man}). In another instance, a person carrying a ladder was incorrectly recognized as one person carrying another.
 
 \begin{figure}[H]
     \centering
@@ -124,69 +197,222 @@ Additionally, validation of the annotations uncovered specific errors: in 74 ima
         \includegraphics[width=\textwidth]{Images/Fun/seaweed-man-more-than-I.png}
         \caption{Seaweed and (presumably) a person}
     \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.30\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Images/Fun/seaweed-man-closeup.png}
-        \caption{Seaweed-man}
-    \end{subfigure}
-    \caption{"Sometimes, it feels like the seaweed is more man than I" -Anonymous Visitor}
+    \caption{Sometimes, the seaweed is deemed 'more' person than the human.}
     \label{fig:seaweed_man}
 \end{figure}
 
 \paragraph{Label Studio}
 "Label Studio" was used to label the images. This online tool allows for setting up a machine learning backend for automatically generating predictions for the images, to speed up the process. The setup of this backend was not trivial, however, and another approach was taken. The images were inferred on, the labels converted to label-studio json format, and then imported. This was a less 'automatic' approach but nevertheless effective. The label-studio tool was the used to modify, delete, and add annotations to the images. Finally, the annotations were exported and converted to the YOLO format. The code for converting yolo-to-label-studio and label-studio-to-yolo is found in Other/Code/Utils on \href{https://github.com/Hallvaeb/masterthesis}{https://github.com/Hallvaeb/masterthesis}.
 
+\subsubsection{Dataset Characteristics and Applications}
+The FIMUS dataset consists of in total 3394 images, of which 2637 are in the inconsistent partition, 292 are in consistent-1 and 465 are in consistent-2 (Consistent total: 757 images). The dataset is well suited for the task of measuring and analysing the impact of image quality on the performance of object detectors, and whether a model performance on a general dataset is a better or worse indication of real-life performance than a specialized but poorly captured dataset. 
+
+The rough standard for train-validation-test splits is 60-80\% training data, 10-20\% validation data, and 10-20\% test data. If the images in Inconsistent are used for training and validation, and the images in Consistent are used for testing, we would get a have 78\% data for training and validation, and the remaining 22\% of data for testing. 
+
+Another application of the dataset would be to use Consistent-2 for training and Consistent-1 for testing to measure the impact of a small, but highly relevant dataset from two different angles on a fine-tuned model performance on images from the same environment and with the same settings. This would give a split of 61\% for training and validation, and 39\% for testing.
+
+\paragraph{Consistent-1 and Consistent-2 differences}
+\phantomsection
+\label{sec:consistent_datasets_differences}
+The differences in angle and colors are visually represented in Figure \ref{fig:consistent_datasets_differences} and are explained below.
+
+Consistent-1 is from a group of friends of 4 people in almost all the images, moving around the aquarium and talking in a group in various location. All images are taken from the right device, i.e. nearly the same angle. The subjects are 3 persons of approximately 1.80m height, 2 female and 2 males and various light and dark clothes, all wearing pants. Consistent-1 are the closest representation of the images the device will be capturing in the experimental setting.
+
+Consistent-2 has many images with a single subject, then two subjects. The images are primarily from the right device, but contains some taken from the left device. The subjects in Consistent-2 are both approximately 1.80m, one wearing glasses. One wearing a white tshirt, the other wearing a black tshirt, and both wearing shorts. 
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/DeviceImages/2nd-iteration/example.jpg}
+        \caption[Consistent-1 'right' image]{Consistent-1 'right' image. Captured with a regular camera.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/DeviceImages/3rd/example.jpg}
+        \caption[Consistent-2 'left' image (noIR)]{Consistent-2 'left' image. Captured with a noIR RPI camera.}
+    \end{subfigure}
+    \caption[Example representative images of the Consistent-1 and the Consistent-2 partitions.]{Example representative images of the Consistent-1 and the Consistent-2 partitions. Both include 'right' images, but only the Consistent-2 includes 'left' images.}
+    \label{fig:consistent_datasets_differences}
+\end{figure}
+
 \subsection{External Datasets}
+\label{sec:external_datasets}
 This project utilizes multiple external datasets for developing and testing the object detection models. Each dataset was selected based on its relevance to the project, specifically for containing labeled images of the person class, and they vary in the number of images, capturing angle, and image diversity.
 
 \subsubsection{Common Objects in Context (COCO)}
 \label{sec:dataset_COCO}
-The COCO dataset is a large dataset of 118 000 images and 80 different classes. The COCO-2017 train dataset was used to pre-train the models. The COCO-2017 validation dataset was used to evaluate the performance of the finalized models, as is industry standard. 
+The COCO dataset is a large dataset of 118 000 images and 80 different classes. The COCO-2017 train dataset was used to pre-train the models. The COCO-2017 validation dataset was used to evaluate the performance of the finalized models, as is industry standard.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/External_datasets/coco_1.jpg}
+        \caption{\centering Example Image 1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/External_datasets/coco_2.jpg}
+        \caption{\centering Example Image 2}
+    \end{subfigure}
+    \caption{\centering COCO Dataset Example Images}
+    \label{fig:COCO_examples}
+\end{figure}
+
+Figure \ref{fig:COCO_examples} is a great example of the widespread nature of the COCO dataset images. This makes for a great dataset for pre-training, as the trained model will have knowledge of a wide array of objects. It may then be wise to fine-tune such a model to a more specific use case, so the model can see more of the specialized data. 
+
+COCO was introduced in the article of \citeauthor{lin2015microsoft} (\citeyear{lin2015microsoft}).
 
 \subsubsection{CrowdHuman}
 \label{sec:dataset_CrowdHuman}
-CrowdHuman, the largest dataset used, focuses exclusively on images where people are the main subject, contrasting with COCO’s broader class range. This dataset was employed to assess how additional data might enhance model performance, with experiments conducted across various training data volumes.
+CrowdHuman, the largest dataset used, focuses exclusively on images where people are the main subject, contrasting with COCO's broader class range. This dataset was employed to assess how additional data might enhance model performance, with experiments conducted across various training data volumes.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/External_datasets/CrowdHuman_1.jpg}
+        \caption{\centering Example Image 1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/External_datasets/CrowdHuman_2.jpg}
+        \caption{\centering Example Image 2}
+    \end{subfigure}
+    \caption{\centering CrowdHuman Dataset Example Images}
+    \label{fig:CrowdHuman_examples}
+\end{figure}
+
+
+The CrowdHuman dataset was presented in the article of \citeauthor{shao2018crowdhuman} (\citeyear{shao2018crowdhuman}).
 
 \subsubsection{Person Reidentification in the Wild}
 \label{sec:dataset_PRW}
-Person Reidentification in the Wild comprises 11,816 images of pedestrians and aligns closely with our application needs as it exclusively contains images of people. This dataset's relevance is heightened by the presence of occlusions and the similar scale of persons to those detected in the aquarium setting. The dataset contains 932 individuals, annotated in 34 304 separate annotated boxes. Although designed to facilitate the development of reidentification applications, this functionality was not utilized in this project (refer to the project scope in section \ref{sec:scope_object_detection} for details). 
+Person Reidentification in the Wild comprises 11,816 images of pedestrians and aligns closely with our application needs as it exclusively contains images of people. This dataset's relevance is heightened by the presence of occlusions and the similar scale of persons to those detected in the aquarium setting. The dataset contains 932 individuals, annotated in 34 304 separate annotated boxes. Although designed to facilitate the development of reidentification applications, this functionality was not utilized in this project (refer to the project scope in Section \ref{sec:scope_object_detection} for details).
 
-% \subsubsection{Football Players}
-% The football-players dataset, characterized by its uniform perspective and consistent lighting and quality, was introduced to determine whether model improvements derive solely from specializing to single-class data or if the specialization's quality and relevance are crucial. It also provides a clear contrast in dataset characteristics, aiding in attributing performance differences to dataset nature rather than other confounding factors.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/External_datasets/PRW_1.jpg}
+        \caption{\centering Example Image 1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/External_datasets/PRW_2.jpg}
+        \caption{\centering Example Image 2}
+    \end{subfigure}
+    \caption{\centering PRW Dataset Example Images}
+    \label{fig:PRW_examples}
+\end{figure}
 
+The PRW dataset was presented in the article of \citeauthor{zheng2017person} (\citeyear{zheng2017person}).
+
+\subsubsection{Football Players Detection}
+The football-players dataset, characterized by its uniform perspective and consistent lighting and quality, was introduced to determine whether model improvements derive solely from specializing to single-class data or if the specialization's quality and relevance are crucial. It also provides a clear contrast in dataset characteristics, aiding in attributing performance differences to dataset nature rather than other confounding factors. A weakness that may confuse a model under training may be that the audience are not labeled. This is illustrated in Figure \ref{fig:football_examples}b. Therefore, fine-tuning a model on this dataset may result in a model that ignores perons of such tiny scale. 
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/External_datasets/football_1.jpg}
+        \caption{\centering Example Image}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/External_datasets/football_2.png}
+        \caption{\centering Example Labeled Image}
+    \end{subfigure}
+    \caption{\centering Football Players Detection Dataset Example Images}
+    \label{fig:football_examples}
+\end{figure}
+
+The Football Players Detection dataset is available at \href{https://universe.roboflow.com/roboflow-jvuqo/football-players-detection-3zvbc}{Roboflow}.
 
 \subsection{Model Training}
 \label{sec:model_training}
+In the thesis project, YOLOv9 was pre-trained on the COCO dataset and then optimized by fine-tuning on specialized data. The process of fine-tuning a pre-trained model is known as transfer learning (see Section \ref{sec:transfer_learning_fine_tuning}). The rest of this section outlines the processes and choices taken in the training process of these models.
 
-
-\paragraph{Licensing}
-An effort has been made to keep the solution free and open to use, but some conditions may apply. The object detection algorithm YOLOv9 is under a GPL-3.0 License. This is a copy-left licensing, meaning it is free to use but has the requirement that any derivative works are released under the same rights. Another algorithm discussed in this thesis, the YOLOv3, is under a free-to-use license (AGPL-3.0), but changing the code is not allowed. The final object detector discussed, which could provide a solution for a company interested in keeping their solution hidden from competitors, is the DETR algorithm. This is under an Apache-2.0 license, which permits users to use and modify the code to fit their needs.
-
-\subsubsection{Transfer Learning}
-In this thesis, we are transferring the knowledge of a model that is pre-trained on a general dataset, to a model that is optimized for an aquarium environment. The general dataset in this case is the COCO dataset, a large dataset of 118 000 images and 80 different classes.
+\paragraph{Licenses}
+A successful effort was made to create a system that is free and open to use, but some conditions apply. \textit{YOLOv9} is under a GPL-3.0 License. This is a copy-left licensing, meaning it is free to use but has the requirement that any derivative works are released under the same rights. Another algorithm discussed in this thesis, the YOLOv3, is under a free-to-use license (AGPL-3.0), but changing the code is not allowed. The final object detector algorithm discussed, DETR, is under an Apache-2.0 license, which permits users to use and modify the code to fit their needs. This could thus provide a solution for a company interested in keeping their solution hidden from competitors.
 
 \subsubsection{Hyperparameter Tuning}
-todo finskriv... Not really optimization.. More like finding... Since we're doing a cheeky approach to this. Done with autogluon, follow this guide for installation: \href{https://auto.gluon.ai/stable/install.html}{AutoGluon guide}. I had to run pip install autogluon twice for the imports to see autogluon.
+\label{sec:hyperparameter_tuning}
+One approach to tune the hyperparameters is to utilize Autogluon, an auto machine learning library. Installation may be tricky, but one may use this guide for installation: \href{https://auto.gluon.ai/stable/install.html}{AutoGluon guide}. Note that in some cases, 'pip install autogluon' must be evaluated twice. Further, \href{https://auto.gluon.ai/scoredebugweight/tutorials/course/script.html}{this guide} could be used to tune model hyperparameters. 
 
-\href{https://auto.gluon.ai/scoredebugweight/tutorials/course/script.html}{This guide} could be used to fine tune the hyperparameters of the model. A simpler guide was implemented to find the hyperparameters. This was to save time, and since our models require an okay level of hyperparameters. However, this choice to not give every dataset the same "fighting chance" with their optimal hyperparameters might have led to a lower validity of this experiments results.
+Another great guide for hyperparameter tuning was found \href{https://www.kaggle.com/code/biditsadhukhan/yolo-v9-hyperparameter-tuning-freezing-layers}{on Kaggle}. However, this would entail optimizing the hyperparameters for each of the datasets used in this project. Hyperparameter tuning is a time-consuming process, and the author of this thesis did not have the necessary means to perform this task.
 
-Experiment 1: Do we need to run inference on the whole 2939 images to evaluate our model performance or will the results of evaluation on a subset be relative to the results of evaluation on the whole?
+For this project, a simpler solution and less effective approach to hyperparameter tuning was adopted. This was to use the standard out-of-the-box hyperparameters. This is one source of bias in this project, as some standard parameters might be optimized for a certain dataset size. The fine-tuned models would achieve better performance had the hyperparameters been tuned. Due to the large scope of this project however, hyperparameter tuning/hyperparameter optimization was not prioritized.  
 
-The standard yolov3 and yolov9 models were tested on the 1st and 2nd iteration images to see their out-of the box performance. Then, the yolov9 (which performed slightly better) was ran again but with a higher imgsz which typically increases the accuracy of the model. The three inferences: 1) yolov3 with imgsz 1280, 2) yolov9 with imgsz 1280 and 3) yolov9 with imgsz 1280 were then evaluated on the 1st iteration images and 2nd iteration images.
+One modification was made to the hyperparameters however, which was the number of epochs. A major challenge and setback for the model training was a mistake made in choosing a slightly premature YOLOv9, for which the validation process was not yet implemented. This means that the models were essentially trained blindly, without providing the data to indicate whether the models overfitted or could benefit from more training. This is apparently still (24-05-2024) a \href{https://github.com/WongKinYiu/yolov9/issues/132}{github issue} for YOLOv9. A method to manually compute losses for the models was not implemented. Instead, the models were trained for 5, 10, 20 and 50 epochs, which are quite short periods.
 
-As expected, the inferences using a hightened imgsz was better. Another key takeaway was that the scores were relative, meaning evaluating on the full dataset was unnecessary. Moving forward, the 2nd iteration images from the acquarium were used to evaluate the models, while the 1st iteration images were used for training (and validation). This decision is also motivated by the fact that the 2nd iteration images are the most similar to the real-world application of the models.
+Mosaic data augmentation was used to enhance the datasets for the training process. This consists of several processes to create more training data from the the available images. Example images resulting from mosaic data augmentataion are seen in figure \ref{fig:mosaic}.
 
-We'd like the hyperparameter tuning process to focus on finding the hyperparameters that will best infer on images from the 2nd iteration. Therefore, an amateur would plan to tune the hyperparameters for each of the models using their respective dataset's training data and the 2nd iteration FIMUS dataset for validation data. This means the yolov9 CrowdHuman Smodel would use the same data for validation and testing, but only to find the right hyperparameters. Then, after using the testing data for tuning the hyperparameters, we replace the FIMUS 2nd iteration images for the datasets validation images and train the models using the optimal hyperparameters. This as a method to find the optimal hyperparameters may seem intuitive, as it has the strength of focusing on the right data when doing transfer learning with data other than the specialized task the model is specializing for. This means that the models would, during training, train to infer on data different from what it sees during training, which is what it will be doing after deployment.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/mosaic.jpg}
+        \caption{\centering Example Mosaic Image From the FIMUS Inconsistent Dataset Partition}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/mosaic_prw.jpg}
+        \caption{\centering Example Mosaic Image From the PRW Dataset}
+    \end{subfigure}
+    \caption{\centering Mosaic Data Augmentation}
+    \label{fig:mosiac}
+\end{figure}
 
-The aforementioned approach is completely ignorant to how machine learning works, however. In supervision machine learning, the validation set is used to tune the hyperparameters, and the test set is used to evaluate the model's performance. The test set should be representative of the data the model will see after deployment, and the validation set should be representative of the data the model will see during training. The test set should not be used to tune the hyperparameters, as this would lead to overfitting the model to the test data.
+\subsubsection{Google Cloud Services}
+Google Colab was used to train the models on VMs with GPUs to speed up the training process. The training thus took about 4.5 minutes per epochs for the FIMUS inconsistent dataset partition with 2636 images, and nearly 15 minutes per epoch for the 11815 images dataset PRW. Training on the CrowdHuman dataset took nearly 20 minutes per epoch, with it's 15000 training images. 
 
-Then, the . Tuning the hyperparameters for the test data means that the validation data used for training later will not at all be representative of the situation earlier, meaning the optimal hyperparameters will no longer be valid. Such an approach would not
+The pros with Google Colab is the possibility to borrow computational power without having to invest in expensive computers. For this project, 200 compute units, costing about 25USD, were sufficient for the training process, making it a cost-effective solution for developing a specialized system. Google Colab also allows for seamless file exchange by mounting a Google Drive to the VM, though the solution necessitates giving explicit consent to Google Drive that they may see and download all your data, including photos on Google Foto. For the convenience the service brings, however, this potential privacy infringement may be acceptable\footnote{This perspective is ironic and hypocritic, see Section \ref{sec:discussion_ethics_localization_tech}}. Another pro is the possibility to co-operate on notebooks. However, personal experience suggests that collaboration can be problematic, as changes made by one user require saving and refreshing the notebook for others to see
 
-What makes this project interesting is not the varying nature of datasets. Usually, one wants the best, most similar, and most data possible, and it's therefore irrelevant to see what using a less relevant dataset would do to the model. In this project the focus is more about how much of the high quality data is needed to make an impact. If 100 labeled images does the same work as 1000, then much work can be saved by only labeling 100 images. If only 100 images is needed then setting up a proper labeling tool might not even be necessary, as it may be done faster using a sub-optimal but fast-to-employ labeling tool. The insights may also be useful when
+There were also some cons with using Google Colab. As many cloud services, the optimal usage requires a connection to the VM. This connection would often be lost, even with the Google Colab page open using a Google Colab Pro subscription. The Google Colab computer is stateless, meaning that when this happens all data is lost. This resulted in hours of training progress being lost, having to connect to a new machine and download weights and training files all over again before initiating training. This is the motivation behind why the models in this project were trained in 10 epoch-intervals, saving the weights file to consistent storage (Google Drive) every 10th epoch of training.   
+
+\subsubsection{Validation Data}
+Since the hyperparameter tuning process of this thesis project was not of focus, the choice was made to not use validation data during training. Validation data is used to assess the models training process and to identify overfitting/underfitting. After the hyperparameters, such as the number of training epochs, has been set, the best practice is to train the model once more, using all available data to train. Google Colab was used to train the models on GPUs, and the initial plan was to train multiple more object detection models. The initial training was on the Consistent-2 dataset partition containing only 465 images and so the decision was made to drop the validation data for this model. Then, after multiple retries where long training sessions were lost due to disconnects to the Google cloud server and computing resources and time running out, the decision was made to train without the validation data. The fine-tuned models could then be assessed on the test set rather than the validation set. This was more overhead as it generated a lot of models that all needed to be evaluated, but it also means that once the models are complete there's no need to rerun with the optimal number of epochs and all the data from train and validation sets to achieve the best model.  
+
+\subsection{Model Presentation}
+\label{sec:model_presentation}
+The resulting models of this thesis project were the following: 
+\begin{enumerate}
+    \item YOLOv3 (not fine-tuned)
+    \item YOLOv9 (not fine-tuned)
+    \item YOLOv9 Fine-Tuned on FIMUS Inconsistent
+    \item YOLOv9 Fine-Tuned on FIMUS Consistent-2 (and will be evaluated on Consistent-1)
+    \item YOLOv9 Fine-Tuned on CrowdHuman 
+    \item YOLOv9 Fine-Tuned on PRW
+    \item YOLOv9 Fine-Tuned on Football Players Detection
+    \item DETR with a ResNet50 backbone (not fine-tuned)
+    \item DETR with a ResNet101 backbone (not fine-tuned)
+\end{enumerate}
+
+The final YOLO model is a standard \textit{YOLOv3} model from Ultralytics. This was added to see the performance gain from upgrading an older version to a newer YOLO version, and increase validity of the results by testing that our experiments gains results in accordance with previous research showing YOLOv9's superiority over YOLOv3.
+
+The last 2 models are built on the DETR architecture. The first is built with a ResNet50 backbone, while the other implement a more complex ResNet101 backbone. These are included as an alternative approach to the YOLO algorithm.
 
 \subsection{Model Evaluation}
+\label{sec:methodology_model_evaluation}
+As mentioned in \ref{sec:accuracy_of_model_inferences}, there have been multiple ways for object detection model evaluation. The most widely used has been to fix the confidence threshold, and average over 10 IoU thresholds from 0.5 to 0.95 in steps of 0.05. This is hereby denoted as COCO AP. For this thesis, both COCO AP and the more computationally expensive where both confidence and IoU thresholds are varied has been implemented to see if there's a different outcome for model evaluation based on which version of the evaluation metric is chosen. The more computationally expensive version is denoted as Vary-Both AP.
 
+What input image size is optimal depends on the dataset and use case, and should be tested for a given sceneario. According to \citeauthor{ga2024roboflow_custom_dataset}, to increase the input image size will augment the accuracy of a model:
+
+\begin{myquote}
+    We trained our model on images with a size of 640, which allows us to train a model with lesser computational resources. During inference, we increase the image size to 1280, allowing us to get more accurate results from our model. (\cite{ga2024roboflow_custom_dataset})
+\end{myquote}
+
+This postulates that even though a model is trained on images with size 640, more accurate results may be obtained by increasing the input image size during inference. This hypothesis was tested in the project, see Section \ref{sec:input_image_size} where input image size 320, 640 and 1280 were compared in terms of accuracy and inference latency. Except from this experiment, the models in this project inferenced with input image size of 640.
+
+The pre-trained weights were available in multiple sizes. The largest weights-file, called 'yolov9-e', is what has been used for this project. These weights are available for download on the \href{https://github.com/WongKinYiu/yolov9}{Yolov9 Github repository}. An assessment regarding the differences in accuracy of the different available pre-trained weights was also made. This includes the available weights as of May 2024, yolov9-m, -c, and -e.
 
 \subsection{Ethical Considerations}
 In the deployment of advanced machine learning technologies for visitor localization and engagement analysis, this research proactively addresses privacy concerns through the implementation of image obscuration techniques. These methods ensure that no personally identifiable information is captured or communicated, thus significantly reducing privacy risks associated with visitor tracking in cultural spaces such as museums and aquariums.
@@ -208,13 +434,12 @@ Furthermore, the project will adhere to an ongoing ethical review process, ensur
 
 In summary, by prioritizing privacy through the use of image obscuration techniques and adopting a comprehensive ethical framework, this research aims to advance the understanding of visitor engagement in a manner that is both innovative and respectful of individual privacy rights. This approach sets a precedent for the ethical application of machine learning technologies in cultural institutions, balancing the benefits of visitor behavior analysis with the imperative of protecting privacy.
 
-
 \subsection{Heatmaps}
 \label{sec:heatmaps}
 Heatmaps are a powerful visualization tool that can provide insights into visitor behavior patterns and engagement levels within a museum or aquarium setting. By aggregating anonymized data from the tracking system, heatmaps can reveal areas of high visitor activity, peak visitation times, and popular exhibit locations. These visual representations offer valuable information for museum staff and curators, enabling them to optimize exhibit layouts, plan interactive experiences, and enhance visitor engagement. For this project, heatmaps were attempted to be created using 3 different python packages.
 
 \paragraph{On the attempts to make heatmaps}
-The first attempt was made asking chatGPT 4 to provide the code. The AI chose to draw circles using the python package "OpenCV", which without modifications did not render satisfactory results. Instead of tweaking a suboptimal solution, the attempt was then made to use the modules from Ultralytics to create the heatmap. The results of the first attempts may be seen in figure \ref{fig:heatmap_drafts}.
+The first attempt was made asking chatGPT 4 to provide the code. The AI chose to draw circles using the python package "OpenCV", which without modifications did not render satisfactory results. Instead of tweaking a suboptimal solution, the attempt was then made to use the modules from Ultralytics to create the heatmap. The results of the first attempts may be seen in Figure \ref{fig:heatmap_drafts}.
 
 Ultralytics, a company from Los Angeles, is the same company that developed YOLOv5 on which the YOLOv9 is built upon. They also have premade modules for creating heatmaps. However, the solution neccessitates a detector model to make inferences live, and has no optional arguments to pass your own inferences. An attempt was made to modify the code and pass mock-data in the right format, but the result was unsatisfactory. The heatmaps were thus created with another module instead.
 
@@ -238,19 +463,11 @@ Ultralytics, a company from Los Angeles, is the same company that developed YOLO
 \subsubsection{Supervision Heatmaps}
 Supervision is a module created by Roboflow, to make reusable and user friendly computer vision tools. It is designed to be model agnostic. The github repo may be found \href{https://github.com/roboflow/supervision}{here}.
 
-The solution incorporating Supervision rendered satisfactory results and may be seen in figure \ref{fig:heatmap_final}. This solution supports generating heatmaps from data in a pandas dataframe, allowing for filtering the dataframe to generate the preferred heatmaps based on for example the relevant times of the day or for the correct time interval.
+The solution incorporating Supervision rendered satisfactory results. An example image is provided in Figure \ref{fig:heatmap_final_example} where a heat map has been created for a single day in May. This solution supports generating heatmaps from data in a pandas dataframe, allowing for filtering the dataframe to generate the preferred heatmaps based on any variable. This could be the interesting times of the day aggregated over a month, (e.g. every weekday from 10-11), or for a given time interval (e.g. week 39, 2024).
 
-\subsection*{Notes}
-
-Tried to download/use model from Roboflow, but either image has to be sent to an API which would not retain privacy, or the device has to host an API itself to run the inference... Seems unlikely to be the most preferable solution, as the device would have to set up the service and run it locally. 
-
-Possibly an interesting solution would be to do this with multiple devices. This supports the master-slave pattern of having multiple weaker computers and have them send to the stronger unit. 
-Setting up private TCP connection between the weaker units and the strong unit and have the images sent to the stronger, so it can detect on them and send information etc. How many weak units do we need in order to make it profitable to have a strong GPU unit to do the processing? This whole systems sounds to be a complicating setuo process, not making the product modular and easy-to-use. Includes a lot of connection/networking to make the weaker units find and connect to strong, physically close device.
-
-This task would mean setting up a strong device to host a network to which the weak units might connect to, and send images to. The issue is whenever images are sent, a lot of transmission is used... But the model takes image input size of 416x416. Would it be similar to just downscale the image before sending, or would this give the model less detail to work with?
-
-Will now run several models on datasets from the web, i.e. the CrowdHuman dataset to see their accuracies. Will then deploy the models to device in acquarium to see if the best-performing model is an option in terms of size and inference speed. If it is preferable, I will attempt to increase it's accuracy by accumulating and annotating a specialized dataset for that setting, and training the final layers on the data. Can this be done with a
-
-
-
-% A lot of time was spent setting up the arrangement in the acquarium and having the raspberry pi communicate correctly. The dataset collection process was also time-consuming, as it required the acquarium to be empty of non-consenting persons. Precautions were made in order not to upset the acquarium staff. This included not capturing outside opening hours, and not asking the visitors themselves if they could be in the images. The initial idea was to send a start-capture signal to the devices, and then a stop-capture signal once visitors entered the room. However, this was more time-consuming to set up than anticipated, as the choice was made to make them communicate over usb-mobile network connections.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Images/Analytics/heatmap_day_10052024.jpg}
+    \caption[Final Heat Map Example]{Final Heat Map Example.}
+    \label{fig:heatmap_final_example}
+\end{figure}

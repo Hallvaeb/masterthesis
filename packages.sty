@@ -147,27 +147,10 @@
 \definecolor{titlepagecolor}{cmyk}{1, 0.60, 0, 0.40}
 \DeclareFixedFont{\titlefont}{T1}{ppl}{b}{it}{0.5in}
 
-
-
-
-
-
-
 %%% Custom commands
-
-\NewEnviron{myquote}[1]
-  {\par\medskip\noindent
-  \centering
-  \begin{tikzpicture}
-    \node[inner sep=10pt] (box) {\parbox[t]{.9\textwidth}{%
-      \begin{minipage}{.9\textwidth}
-      \textbf{#1}\par\smallskip
-      \BODY
-      \end{minipage}\hfill}%
-    };
-    \draw[blue!75!black,line width=3pt] 
-      ( $ (box.north east) + (-5pt,3pt) $ ) -- ( $ (box.north east) + (0,3pt) $ ) -- ( $ (box.south east) + (0,-3pt) $ ) -- + (-5pt,0);
-    \draw[blue!75!black,line width=3pt] 
-      ( $ (box.north west) + (5pt,3pt) $ ) -- ( $ (box.north west) + (0,3pt) $ ) -- ( $ (box.south west) + (0,-3pt) $ ) -- + (5pt,0);
-  \end{tikzpicture}\par\medskip%
+\NewEnviron{myquote}[0]
+{
+  \hfill\begin{minipage}{\dimexpr\textwidth-1cm}
+    \BODY
+  \end{minipage}
 }

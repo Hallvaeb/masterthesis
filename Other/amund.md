@@ -1,18 +1,107 @@
-Heller korte ned setninger. Prøve å bryte setningene opp i flere. Hold "great" unna vitenskapelige tekster. Forsøket ble gjort i fortid. Det som står i oppgaven er i presens.
+Skriveteknisk:
+	Heller korte ned setninger. Prøve å bryte setningene opp i flere. Hold "great" unna vitenskapelige tekster. Forsøket ble gjort i fortid. Det som står i oppgaven er i presens. Rapporten skrives som om den er skrevet etter at alt er ferdig. 
 
-spm: Faller følgende to avsnitt under bakgrunn/motivasjon, generell introduksjon, eller problembeskrivelse?: 	 
-svar: generell intro er jo bakgrunn og motivasjon
+	Appendix prosjekt må kunne gjenskapes. Detaljer om oppsett burde finnes. Oversikt og struktur i det burde finnes for å gjøre riktig kompileringer osv. 
 
-spm: Hvor introduserer jeg datasettene jeg bruker i oppgaven?
-svar:
+	Forklar det tydelig. Forklare noe i pinlig detalj er ikke å anta at leser er idiot. 
 
-spm: skal man ha med vurderinger sånn som time to label? JEg har noen tall.. .men usikker på om det er relevant å nevne hva jeg har brukt av tid på de ulike stegene. KAnskje oppsummere på slutten hva jeg tenker tiden har gått til?
-context: Time to label varied greatly. For instance, the 466 images of the 3rd iteration image-capturing session had detections in all but 10 images, making it much faster to verify the images. This was done in 3 hours, from raw images to having deleted unwanted images, set bounding boxes for the false negatives, and deleted the false positives. The 1st iteration images, however, took a great deal longer. 
-svar:
+	Er det retningslinjer for formatering: Stor forbokstav for alle subsections, ikke for subsubsections. 
 
 
+Tittel: Er jo viktig å ha med privacy, mye handler om privacy. 
 
-Samme antall 
-Fine-tune for PRW
-Fine-tune for CrowdHuman
-Fine-tune for FIMUS
+Sammendrag:
+	hva er gjort, hva er oppnådd: faglig oversikt laget en sammenstilling, systematisert informasjon, dataset, sett på algoritmer. Kun det som finnes i oppgven.. , hva er konkluderinger.
+	Abstract, på engelsk OG NORSK.
+	hva hvorfor hvordan hva er resultat og hva er prinsipielll konklusjon.
+	Sammendrag, abstract, execution summary
+
+Introduksjon:
+	Struktur:
+		I struktur, har lagt til ting i appendiks, hvorfor er det tatt med osv. 
+
+		Denne får fram en følelse av tråd gjennom oppgaven. 
+
+		Det er en viktig ting dette rundt privacy. 
+
+Literature:
+	customer standardisation få alle iot devices til å kommunisere med hverandre. Matter. These are the home automation systems 
+	several standards exists for communication. To encompass more havee been suggested. Type USB-C. 
+
+	Ethicality må leses over, AI generert. 
+		Se også "Ethical Tech Development" chat med gpt for diskusjon.
+
+Metode
+	Fordel med mye og relevant data? Overflødig? Burde underbygge hva som menes, utdype. Er alltid mer data bra? Hører kanskje hjemme i Overall discussion? 
+
+	The last setback ... her stusser vi lenge. Burde forenkle denne.
+	Increasion er ikke et ord, det er increase. evt lengthening. 
+	nonlinear increase in time spent per image. 
+
+	Label studio was used to label... another approvach was taken.. was non-trivial and time consuming, and such another approach to implement 
+	Tydeliggjøre at det bare var denne automatiske backenden. 
+
+	Mangler det en linje i tabellene mine?
+
+	heatmap der jeg har feilet. Forklar hvorfor de har feilet. Hva vi ser. 
+	Jeg sier bare at de er not satisfactory. 
+	Kanskje inkludere et heatmap som viser hvordan et satisfactory et resultat.
+	Her er det lett å tenke at draft 1 feilet og draft 2 ikke feilet. 
+	Ikke may be seen i forklaringen av heat maps, det er helt sikkert at man ser. 
+
+	Notes nederst i metode mangler subjekt...
+
+Results and Discussion
+	relevant har jeg ikke sagt noe om etterpå. Jeg sier både noe om relevanse og diverse.
+	Irrelevant data kan være nyttig.. 
+
+	I resultatene, er det viktig å kommentere hva jeg ser. 
+	Her presens. Table x shows, ikke showed. Table 3 shows. Kunne skrevet "As displayed in ..", men heller være munnfast?
+
+Reflections \& Overall Discussions
+	Third party services 
+
+	ville et langt teori studie fått meg lengeR? argumentere imot det, for du vet ikke hva du leter etter i teorien før du også har utført et forsøk i praksis. Det er også kortere vei til å bruke noe i praksis når det er produsert tidligere. Snakke litt om det før.
+	Valg av hardware, software, er det noe jeg har valgt å gjøre der jeg kunne burde tatt et annet valg. kanskje ikekså stor betydning i mitt forsøk men i mitt forsøk gikk det ok. tenke over hva jeg har gjort.
+		Evne til å forbedre mørke scener i mobiltelefonteknologi vil kanskje også over noen år bli overført til mer lavnivåsystemer.
+
+		Avveie om lysstyrke, bevegelse, bilder, sett fra menneske og maskin er det samme.
+
+	Det jeg har gjort, har det noe betydning for noen noe sted til noe?
+	Ethicality, burde det også være ferdig? 
+		Tror det også vil være et stort pluss. Det er også noe de ber om, klarer kandidaten...
+		Ethical considerations skal enten strykes eller forbedres hvis tid. Ikke knyttet sterkt nok til literatur, er mest meg som synser i nåværende utgaven.
+			Ble ikke nevnt noe på av Amund, men kanskje samle/referere til refleksjonen her?
+
+	Drar fram NIS2 og principle of data minimization, plukke opp tråden i discussion. lagt opp til at jeg i diskusjon kan skrive at å slette bilder er det mest privacy preservant man kan gjøre.
+
+diskusjon og konklusjon er så viktig for karakteren så fokuser på det.
+
+
+Stå løpet helt inn, du har gjort en god jobb og dette burde bli bra!
+Ta en uke fri og få litt avstand fra oppgaven.
+
+
+
+Ubesvart:
+
+Discussions and insights... Er dette bare svada, eller er det verdt å nevne for å vise at jeg er selvkritisk? Det er vel en generell statement som hører hjemme i alle teser og artikler, og kan derfor strykes? Hører kanskje eventuelt hjemme i dislaimers i slutten av tesen?.    
+
+Er objektivene rett formulert? skal de være fortid eller presens?
+	Dette er en rapport, jeg har gjort et prosjekt. Det spørs om objektivet omhandler prosjektet/eksperimenter eller rapporten?
+	Burde skille i objektiver for master thesis og master thesis project? Master thesis er til for å kommunisere resultater fra prosjektet, objektivene burde være de samme?
+
+GDPR: ethichal considerations burde jeg skrive noe om etisk ansvar man har som utvikler og det å forstå hva gdpr er før man utvilker noe som kan bryte med det. ansvar for utvikling. Stille krav til etisk morals kompass, selv om ikke alltid dette blir gjort i andre yrker alltid? Jo ofte, veterinærer som velger å ikke avlive unge kjæledyr som familier bare er gått lei av å passe for eksempel. 
+	Jeg tror tesen er fin uten også...
+
+Referanselisten: 
+kan jeg endre titlene i store bokstaver til små?
+Hvor nøye er det med korrekt oppsett: dvs riktige titler som er i kursiv osv? Jeg ser eksempelvis at artikkel-titler skal være uten kursiv mens blogginnlegg skal være kursiv.
+
+Hva jeg selv ser at jeg mangler:
+literatur om andre studier med dårlig treningsdata.
+Hvor stor forbedringer tidligere prosjekter har oppnådd av å fine-tune modeller.
+	Er det snevert?
+Diskusjon og analyse, ferdigstille resultater. 
+
+

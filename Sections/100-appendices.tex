@@ -39,7 +39,7 @@ Solution: set awb gains after awb mode has been set to off, and capture an image
 
 \section{TinyML and Frugal Devices}
 \label{app:tinyML}
-TinyML is when machine learning models are aimed at deployment to heavily resource constrained environments, like what are called frugal devices. These are, as previously mentioned in the introduction, devices where the microcontroller units (MCUs) are accompanied by memory measured in kilobytes, and processor speeds measured in megahertz. 
+As mentioned in Section \ref{sec:scope_tinyML}, TinyML is when machine learning models are aimed at deployment to heavily resource constrained environments, e.g. what is called frugal devices. These are devices where the microcontroller units (MCUs) are accompanied by memory measured in kilobytes, and processor speeds measured in megahertz. 
 
 Machine learning networks applied to tiny robots are subject to challenges from size, weight, area, and power (SWAP) (\cite{ne2022robotstinymlconstraints}). Many of the same challenges apply even in applications where the SWAP challenges are not the main concerns. \citeauthor{ra2023reformabletinyml} mentions the open challenges and future directions of the next generation tinyML. Catastrophic forgetting, which is when information from previous tasks while learning new ones are forgotten, are a result of the frugal devices' computational resources and memory. The first recommendation for future directions from the authors is to investigate fog computing as a means to offload tasks from the frugal devices.
 

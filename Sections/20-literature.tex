@@ -1,182 +1,207 @@
 \section{Literature Review}
 \label{sec:literature}
-The advent of "modern" object detection has enabled more sophisticated and automated methods for understanding visitor engagement and flow in cultural institutions. This literature review aims to explore the current state of research on the various topics of this thesis, including visitor behaviour analysis, individual privacy, object detection, the influence of fine-tuning models on specialized data, and already existing third-party services for deploying similar systems.
+The advent of modern object detection has enabled more sophisticated and automated methods for understanding visitor engagement and flow in cultural institutions. This literature review aims to explore the current state of research on the various topics of this thesis. This includes visitor behaviour analysis, individual privacy, object detection, the influence of fine-tuning models on specialized data, and existing third-party services for deploying similar human localization systems.
 
-\subsection{Visitor Behavior Analysis}
-
-Some of the traditional methods of analyzing visitor behavior include surveys, manual counting, and direct observation. Today, more technology-driven and practical applications may be used to gain insights in visitor engagement and experience in a museum or acquarium setting. In this subsection, we look at an alternative to computer vision tracking systems. Afterwards, we bring forth a study on the percieved value of visitor tracking to museum stakeholders. 
+\subsection{Visitor Behaviour Analysis}
+\label{sec:visitor_behaviuor_analysis}
+Some of the traditional methods of analyzing visitor behaviour include surveys, manual counting, and direct observation. Today, more technology-driven and practical applications may be used to gain insights in visitor engagement and experience in a museum or acquarium setting. In this subsection, we look at an alternative to computer vision tracking systems. Afterwards, a study on the percieved value of visitor tracking to museum stakeholders is brought foreward.
 
 \subsubsection{Questions asked by visitors in a mobile app}
 \citeauthor{co2023appquestionairre} had visitors ask questions in a mobile app while moving through the museum \citeyear{co2023appquestionairre}. Visitor movement through the museum was inferred from the data by leveraging question keyword content, knowledge of exhibit layout, and question timestamps. This removed the need for more costly, vision-based applications for detecting and tracking visitor movement. This study illustrates one way of conducting affordable, dependable and scalable visitor analysis without the need for costly devices.
 
 \subsubsection{Percieved value to museum stakeholders}
-\citeauthor{la2017museumbehaviouranalysis} explored an alternative approach to museum visitor behavior analysis, and its perceived value to museum curators, administrators and department heads (\citeyear{la2017museumbehaviouranalysis}). Wearable RFID trackers\footnote{The requirement for visitors to wear RFID trackers represents a significant drawback as it may be perceived as intrusive (although completely privacy preservant).} were given to the visitors, and beacons were positioned at positions deemed important by the museum curators. The beacons would then communicate the positions of the visitors to the system. This allowed for the collection of data on key metrics like exhibit popularity, average visit duration, and common visitor paths. The authors noted that technology-based visitor behavior analysis was generally well-received by museum curators, offering valuable data that could enhance the visitor experience.
+\citeauthor{la2017museumbehaviouranalysis} explored an alternative approach to museum visitor behaviour analysis, and its perceived value to museum curators, administrators and department heads (\citeyear{la2017museumbehaviouranalysis}). Wearable RFID trackers\footnote{The requirement for visitors to wear RFID trackers represents a significant drawback as it may be perceived as intrusive (although completely privacy preservant).} were given to the visitors, and beacons were positioned at positions deemed important by the museum curators. The beacons would then communicate the positions of the visitors to the system. This allowed for the collection of data on key metrics like exhibit popularity, average visit duration, and common visitor paths. The authors noted that technology-based visitor behaviour analysis was generally well-received by museum curators, offering valuable data that could enhance the visitor experience.
 
-The study of \citeauthor{la2017museumbehaviouranalysis} further discussed the divergent views between the curators and the administrators on the utility of visitor behavior analysis systems (\citeyear{la2017museumbehaviouranalysis}). Administrators and department heads generally viewed these systems favorably, citing the financial justification for expensive exhibitions: "We really need to know if this expenditure was worthwhile" (\cite{la2017museumbehaviouranalysis}). On the contrary, museum curators expressed skepticism. One curator remarked, "A temporary exhibition won’t change after you deploy it, and understanding how it is used by the public would not help me in my next exhibition, since they are each very different. My main reason to analyze behavior would be to satisfy my curiosity." This contrast underscores the varied perspectives within museums regarding the value and implications of behavior analysis technologies.
+The study of \citeauthor{la2017museumbehaviouranalysis} further discussed the divergent views between the curators and the administrators on the utility of visitor behaviour analysis systems (\citeyear{la2017museumbehaviouranalysis}). Administrators and department heads generally viewed these systems favorably, citing the financial justification for expensive exhibitions: \textit{We really need to know if this expenditure was worthwhile} (\cite{la2017museumbehaviouranalysis}). On the contrary, museum curators expressed skepticism. One curator remarked: 
 
-\subsection{Individual Privacy}
-\label{sec:individual_privacy}
-
-This section is heavily influenced by previous work of the same author. See the disclaimers-section \ref{sec:disclaimers} for more details.
-
-The first definition of privacy was given by \citeauthor{br1890righttoprivacy} in \citeyear{br1890righttoprivacy} as the "right to be let alone". A more comprehensive definition of privacy that is more relevant to the modern age of digitalization and the topics of this thesis is the following:
-
-\begin{myquote}{Privacy as informational self-determination}
-    “Privacy is the claim of individuals, groups and institutions to determine for themselves, when, how and to what extent information about them is communicated to others” \cite{we1967privacydefinition}.
+\begin{myquote}
+    A temporary exhibition won't change after you deploy it, and understanding how it is used by the public would not help me in my next exhibition, since they are each very different. My main reason to analyze behaviour would be to satisfy my curiosity. (\cite{la2017museumbehaviouranalysis})
 \end{myquote}
 
-There are multiple dimentions of privacy. The above quote would mainly cover informational privacy, which is most relevant to this thesis. The definition by \citeauthor{we1967privacydefinition} includes groups and institutions. However, in most legal systems, privacy is defined as a basic human right that only applies to natural persons\footnote{A natural person (also sometimes referred to as a physical person) is a title used to identify an individual human being. This is different from a legal person, which can be an individual or a company (\cite{te2023naturalperson}).}. The term "individual privacy"\footnote{Individual privacy is sometimes referred to as personal privacy.} encapsulates the individual focus of privacy as opposed to the broader interpretations of privacy that might apply to groups, organizations, or institutions. Other dimensions of privacy, which are less relevant for this thesis include spatial privacy, territorial privacy, bodily privacy (\cite{fi2017privacybookchapter53}). 
+This contrast underscores the varied perspectives within museums regarding the value and implications of behaviour analysis technologies. 
 
-The general data protection regulation (GDPR) is a single set of regulations to guarantee privacy and protecion of personal data. Informational privacy is mostly concerned with protection of personal data (we will define personal data in section \ref{sec:personal_data}), and informational privacy is what may be violated by the experiment of this thesis. Therefore, the GDPR is highly relevant for this thesis. Regardless, a quick review of the GDPR should be on the agenda of anyone affiliated with systems not inherently preservant of informational privacy.
-% todo under ethichal considerations burde jeg skrive noe om etisk ansvar man har som utvikler og det å forstå hva gdpr er før man utvilker noe som bryter med det. ansvar for utvikling. Stille krav til etisk morals kompass, selv om ikke alltid dette blir gjort i andre yrker alltid? Jo ofte, veterinærer som velger å ikke avlive unge kjæledyr som familier bare er gått lei av å passe for eksempel.
+\subsubsection{User perceptions of smart home IoT privacy}
+\label{sec:smarthomeprivacy}
+In a 2018 study, researchers conducted semi-structured interviews of 11 smart home owners were conducted to figure out user perceptions of smart home IoT privacy (\citeauthor{zh2018userperceptionsofIoTPrivacy}). Another research question of the study (\cite{zh2018userperceptionsofIoTPrivacy}) was user perceptions of obsolescence of the IoT devices, as there are frequent upgrades and new products on the market. Responses regarding privacy and obsoleteness of IoT devices were the following:
 
-\subsubsection{The General Data Protection Regulation}
+\begin{myquote}
+    I think it's more likely that a lot of these things will become obsolete... If that's what happens then I have to buy another device. It still might be worth it for the convenience. (Participant 10)
+\end{myquote}
+
+\begin{myquote}
+    [The security concern] is always kind of in the back of my mind because of all that IoT stuff that always goes on, and everyone says how easily hackable they are. But I think my peace of mind that I get from having them outweighs my worry of what could be potentially taken advantage of. (Participant 6)
+\end{myquote}
+
+These responses indicate that the convenience and connectedness of the devices surpass the desire to preserve privacy. This is a promising finding for the development of visual systems in museums and acquariums, as it suggests that the benefits of the system may outweigh the privacy concerns of the visitors. It also illustrates the need for regulations to prevent solutions from being developed that are too privacy-invasive, as the end-users will not prioritize privacy over convenience.
+
+\subsection{The General Data Protection Regulation (GDPR)}
 \label{sec:GDPR}
-This section serves as a summarization of some aspects of the GDPR relevant to the thesis.
+The general data protection regulation (GDPR) is a single set of regulations to guarantee privacy and protecion of personal data. A quick review of the GDPR should be on the agenda of anyone affiliated with systems not inherently preservant of privacy\footnote{More specifically, \textit{informational} privacy. This term is introduced in \ref{sec:individual_privacy}}.
 
-The GDPR entered into applicability in the EU on 25th of May 2018 as a way for people to have more control over their data, and for having a level playing field for all companies. There is now one set of data protection rules for all companies operating in the European Economic Area (EEA). The EEA consists of all EU countries plus Iceland, Liechtenstein and Norway. The most relevant parts of the GDPR are the regulations regarding personal data.
+The GDPR entered into applicability in the EU on 25th of May 2018 has two major impacts. 1) It leaves individuals with more control over their data, and 2) it facilitates a level playing field for all companies; there is now a single set of data protection rules for all companies operating in the European Economic Area (EEA)\footnote{The EEA consists of all EU countries plus Iceland, Liechtenstein and Norway.}. The most relevant sections of the GDPR to this thesis are the regulations regarding personal data.
 
-\paragraph{Personal Data}
+\subsubsection{Personal Data}
 \phantomsection
 \label{sec:personal_data}
 Personal data is any form of information that can be connected to an identifiable data subject. The following definition was given by the european parliament in 2016:
 
-\begin{myquote}{Definition of personal data, as given by EUs GDPR}
-    "The term 'personal data' means any information relating to an identifed or identifable natural person ('data subject'); an identifable natural person is one who can be identifed, directly or indirectly, in particular by reference to an identifer such as a name, an identifcation number, location data, an online identifer or to one or more factors specifc to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person" (\cite{in2023gdpr_website}).
+Definition of personal data, as given by EUs GDPR:
+
+\begin{myquote}
+    The term 'personal data' means any information relating to an identifed or identifable natural person ('data subject'); an identifable natural person is one who can be identifed, directly or indirectly, in particular by reference to an identifer such as a name, an identifcation number, location data, an online identifer or to one or more factors specifc to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person. (\cite{in2023gdpr_website})
 \end{myquote}
 
-Regulations regarding personal data also applies to the events where pieces of information are aggregated to identify a person. It is possible to store information about individuals without it being personal data. This can be done in several ways, one of them being by the method of differential privacy. Differential privacy is explained in section \ref{sec:differential-privacy}.
+\paragraph{Approaches to Managing Personal Data}
+Various methodologies can be adopted to manage personal data within a system. 
 
-Another approach to the personal data is to process it the right way.
+One approach involves transforming information so that it no longer qualifies as personal data. This can be achieved through techniques such as differential privacy, which ensures that the processed data cannot be traced back to an individual. For a detailed explanation of differential privacy, refer to Section \ref{sec:differential-privacy}. 
+
+A second approach for managing personal data involves establishing lawful grounds for the processing of personal data. This necessitates adherence to legal frameworks that justify the use of personal data under specified conditions, thereby ensuring compliance with data protection regulations. Processing of personal data is permissible under the GDPR only when it satisfies at least one of the following legal bases:
 
 \paragraph{Legal Bases for Processing Personal Data}
 \label{sec:legal-bases-processing-personal-data}
-Processing of personal data is permissible under the GDPR only when it satisfies at least one of the following legal bases:
 \begin{enumerate}
     \item The data subject has given explicit consent.
     \item It is necessary for the performance of a contract to which the data subject is a party.
-    \item It is necessary for compliance with a legal obligation to which the controller is subject.
+    \item It is necessary for compliance with a legal obligation to which the controller\footnote{The controller refers to the party controlling the data} is subject.
     \item It is necessary to protect the vital interests of the data subject or of another natural person.
     \item It is necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller.
     \item It is necessary for the purposes of the legitimate interests pursued by the controller or by a third party, except where such interests are overridden by the interests or fundamental rights and freedoms of the data subject which require protection of personal data.
 \end{enumerate}
 
-Additionally, the controller is 1) responsible for compliance with the 3 requirements summarized below, and 2) should be able to demonstrate this compliance at any given time.
+Additionally, the controller is responsible for compliance with the 3 requirements summarized below and should be able to demonstrate this compliance at any given time.
 
 \begin{enumerate}
     \item{Security Documentation}
-          In the event of a breach of personal data, the controller must document that proper precautions were made to secure the data. One of these precautions is to deleted data that is no longer needed. This rule to delete no-longer-needed data is often overlooked and violated by companies (\cite{sa2022webinar_gdpr}).
+    In the event of a breach of personal data, the controller must document that proper precautions were made to secure the data. One of these precautions is to deleted data that is no longer needed. This rule to delete no-longer-needed data is often overlooked and violated by companies (\cite{sa2022webinar_gdpr}).
     \item{Data breaches}
-          Breaches of personal data must be reported within 72 hours. Companies failing to do so are economically sanctioned, but even worse, it damages the reputation of the company. In such cases it is common to uncover more failures (\cite{sa2022webinar_gdpr}). This is often that the company has failed to make, or failed to document, the efforts they have made to sufficiently protect the data (the first requirement).
+    Breaches of personal data must be reported within 72 hours. Companies failing to do so are economically sanctioned, but even worse, it damages the reputation of the company. In such cases it is common to uncover more failures (\cite{sa2022webinar_gdpr}). This is often that the company has failed to make, or failed to document, the efforts they have made to sufficiently protect the data (the first requirement).
     \item{Rights of the data subject}
-          The data subject has the right to be informed about how their personal data is handled. This is commonly achieved through the company's privacy declaration, which must be comprehensive and regularly updated. Additionally, companies are encouraged to proactively communicate this information to clients, for instance, via email. According to privacy experts (\cite{sa2022webinar_gdpr}), adopting such practices is an effective way of building and maintaining trust with customers.
+    The data subject has the right to be informed about how their personal data is handled. This is commonly achieved through the company's privacy declaration, which must be comprehensive and regularly updated. Additionally, companies are encouraged to proactively communicate this information to clients, for instance, via email. According to privacy experts (\cite{sa2022webinar_gdpr}), adopting such practices is an effective way of building and maintaining trust with customers.
 \end{enumerate}
+    
+There are multiple other approaches for managing personal data that are more specific to the management of \textit{images}. The ones discussed in this thesis are primarily concerned with removing the individual information of persons from the images. These methods are discussed in Section \ref{sec:individual_privacy}. 
 
-\paragraph{The NIS2 Directive}
+\subsubsection{The Network \& Information Security 2 (NIS2) Directive}
 \label{sec:NIS2_relevance}
-
-The NIS2 Directive (\cite{eu2022nis2}) is a more recent EU regulation that came into force in January 2023. Unlike the GDPR, which broadly addresses the protection of personal data, NIS2 is specifically targeted toward technology. As an update to the EU's cybersecurity framework, NIS2 focuses on strengthening the security of network and information systems throughout the Union. It emphasizes the critical need for robust security measures in systems that process personal data to prevent unauthorized access and data leaks.
+    
+The NIS2 Directive (\cite{eu2022nis2}) is a more recent EU regulation that came into force in January 2023. Unlike the GDPR, which broadly addresses the protection of personal data, NIS2 is specifically targeted toward technology. As an update to the EU's cybersecurity framework, NIS2 focuses on strengthening the security of network and information systems. It emphasizes the critical need for robust security measures in systems that process personal data to prevent unauthorized access and data leaks.
 
 Both NIS2 and GDPR highlight the principle of data minimization, which mandates that object detection systems process only the necessary amount of personal data for their intended function. This practice not only bolsters security but also supports privacy by minimizing potential data exposure. Adhering to these principles is vital for maintaining user trust and ensuring compliance with EU regulations, particularly when deploying object detection technologies in environments where data sensitivity is paramount.
 
-\subsubsection{Preservation of Individual Privacy}
+\subsection{Preservation of Individual Privacy in Images}
+\label{sec:individual_privacy}
+Building on the previously introduced regulations in Section \ref{sec:GDPR}, the contents of this section aims to provice a deeper insight into the methods of preserving the individual privacy of individuals \textit{in images}. It is heavily influenced by previous work of the same author. See the disclaimers in Section \ref{sec:disclaimers} for more details.
 
-Preservation of individual privacy refers to maintaining the personal space and confidentiality of individuals, ensuring that their private lives and personal integrity are not invaded or exposed without consent. This involves considerations beyond just data, including behaviors and surveillance. Protection of personal data specifically deals with the management and security of personal information—data that can identify an individual, such as names, addresses, and biometrics. This protection is primarily about the correct handling, processing, storage, and destruction of personal data to prevent unauthorized access, misuse, or breaches. While protection of personal data is important due to the regulations, preserving the individual privacy is essential in object detection of persons.
+The first definition of privacy was given by \citeauthor{br1890righttoprivacy} in \citeyear{br1890righttoprivacy} as \textit{the right to be let alone}. A more comprehensive definition of privacy that is more relevant to the modern age of digitalization and the topics of this thesis is the following:
 
-There are multiple methods, both pre- and post-processing, for preserving individual privacy. One example of a pre-processing privacy preservation method is to hide the facial regions optically during capture, which was done in a study on fall detection by \citeauthor{wa2020elderly_fall_detection_meta} (\citeauthor{wa2020elderly_fall_detection_meta}).
+Privacy as informational self-determination:
 
-Post-processing methods include various techniques to obscure identifiable information after the data has been captured. These range from simple blurring and pixelation to more sophisticated approaches such as k-anonymity (\cite{sw2002kAnonymity}) and differential privacy. Six of the simple, easy-to-implement methods are shown in figure \ref{fig:obfuscation_methods}, demonstrating practical implementations.
+\begin{myquote}
+    Privacy is the claim of individuals, groups and institutions to determine for themselves, when, how and to what extent information about them is communicated to others. (\cite{we1967privacydefinition})
+\end{myquote}
 
-K-anonymity claimed to be a mathematically proven method for anonymyzation of personal data, but has been critizised by it's successor, the l-diversity criterion, for not being robust in the events where attackers have background data (ma2007l-diversity). Differential privacy is a statistical disclosure control algorithm to process individual data from a group to produce close-to-real outcomes without disclosing the personal data of individuals (\cite{hu2023metaverse-privacy}). Differential privacy is explained and illustrated in \ref{sec:differential-privacy}.
+There are multiple dimensions to privacy. The definition of \citeauthor{we1967privacydefinition} covers informational privacy, which is most relevant to this thesis. This definition includes groups and institutions, however, in most legal systems, privacy is defined as a basic human right that only applies to natural persons\footnote{A natural person (also sometimes referred to as a physical person) is a title used to identify an individual human being. This is different from a legal person, which can be an individual or a company (\cite{te2023naturalperson}).}. The term \textit{individual privacy}\footnote{Individual privacy is sometimes referred to as personal privacy.} encapsulates the individual focus of privacy as opposed to the broader interpretations of privacy that might apply to groups, organizations, or institutions. Other dimensions of privacy include spatial privacy, territorial privacy, and bodily privacy (\cite{fi2017privacybookchapter53}). These will not be further discuss in this thesis.
+
+Preservation of individual privacy refers to maintaining the personal space and confidentiality of individuals, ensuring that their private lives and personal integrity are not invaded or exposed (without consent). 
+
+Protection of personal data is important due to the regulations, preserving the individual privacy is also essential to maintain trust with customers, and to avoid (\textit{delay}\footnote{See Section \ref{sec:discussion_ethics_localization_tech}} for brief discussion on the ethicality of person localization systems development.) the onset of a dystopian society...
+
+\subsubsection{Privacy in Images}
+\label{sec:preservation_individual_privacy_in_images}
+Protection of personal data in general is very similar to protection of personal data in images. Protection deals with the management and security of personal information—data that can identify an individual, such as names, addresses, and biometrics. This protection is primarily about the correct handling, processing, storage, and destruction of personal data to prevent unauthorized access, misuse, or breaches. 
+
+There are multiple methods, both pre- and post-processing, for preserving individual privacy in images. One example of a pre-processing privacy preservation method is to hide the facial regions optically during capture, which was done in a study on fall detection by \citeauthor{wa2020elderly_fall_detection_meta} (\citeauthor{wa2020elderly_fall_detection_meta}).
+
+Post-processing methods include various techniques to obscure identifiable information after the data has been captured. These range from simple blurring and pixelation to more sophisticated approaches such as k-anonymity (\cite{sw2002kAnonymity}) and differential privacy. Six of the simple, easy-to-implement methods are shown in Figure \ref{fig:obfuscation_methods}, demonstrating practical implementations.
+
+K-anonymity claimed to be a mathematically proven method for anonymyzation of personal data, but has been critizised by it's successor, the l-diversity criterion, for not being robust in the events where attackers have background data (\cite{ma2007l-diversity}). Differential privacy is a statistical disclosure control algorithm to process individual data from a group to produce close-to-real outcomes without disclosing the personal data of individuals (\cite{hu2023metaverse-privacy}). Differential privacy is explained and illustrated in \ref{sec:differential-privacy}.
 
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.46\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Images/Obfuscation/blurred_street.jpg}
-        \caption{Blurred entire image of Hong Kong street to protect privacy of citizens.}
+        \caption{\centering Blurred entire image of Hong Kong street to protect privacy of citizens.}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.46\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{Images/Obfuscation/face_blur.jpg}
-        \caption{Blurred face of individual by a sea town in Cinque Terre.}
+        \caption{\centering Blurred face of individual by a sea town in Cinque Terre.}
     \end{subfigure}
     \newline
 
     \begin{subfigure}{0.46\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Images/Obfuscation/tonsberg_gang_masked.jpg}
-        \caption{Masked faces.}
+        \caption{\centering Masked faces.}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.46\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Images/Obfuscation/gausta_pixelated.png}
-        \caption{Pixelated faces.}
+        \caption{\centering Pixelated faces.}
     \end{subfigure}
     \newline
 
     \begin{subfigure}{0.46\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Images/Obfuscation/me_my_friends_and_I.png}
-        \caption{Unconventional method: replace faces. May be done as effectively as the other approaches, but is likely to be seen as an unprofesional approach.}
+        \caption{\centering Unconventional method: replace faces. May be done as effectively as the other approaches, but is likely to be seen as an unprofesional approach.}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.46\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Images/Obfuscation/white.png}
-        \caption{Delete the image. This is the most effective and secure, but removes the possibility of verifying results and is unsuitable for most vision-based applications.}
+        \caption{\centering Deleted image. This is the most effective and secure, but removes the possibility of verifying results and is unsuitable for most vision-based applications.}
     \end{subfigure}
 
-    \caption{Six methods to enhance individual privacy in images.}
+    \caption{\centering Six methods to enhance individual privacy in images.}
     \label{fig:obfuscation_methods}
 \end{figure}
 
-There's also been much research with regards to preserving privacy in the context of machine learning (\cite{ra2023visual_privacy_techniques}). Common to all use cases is the principle that deleting the data is the most definitive method of ensuring privacy, provided that such an action is feasible. When only non-personal data remains stored, the application is unequivocally secure in terms of privacy.
-
-In addition to not protecting the identity of individuals, it is often important that the individuals \textit{feel} their privacy is being preserved.
-
-\subsubsection{User perceptions of smart home IoT privacy}
-\label{sec:smarthomeprivacy}
-
-In a 2018 study, researchers conducted semi-structured interviews of 11 smart home owners were conducted to figure out user perceptions of smart home IoT privacy (\citeauthor{zh2018userperceptionsofIoTPrivacy}). What the researchers found, shows promise to IoT edge computing visual devices; the convenience and connectedness of the devices surpasses the desire to preserve privacy. Another research question of the study was user perceptions of obsolescence of the IoT devices, as there are frequent upgrades and new products on the market.
-
-\begin{myquote}{Responses regarding privacy and obsoleteness of IoT devices (\cite{zh2018userperceptionsofIoTPrivacy})}
-    "I think it’s more likely that a lot of these things will become obsolete... If that’s what happens then I have to buy another device. It still might be worth it for the convenience" (Participant 10).
-
-    "[The security concern] is always kind of in the back of my mind because of all that IoT stuff that always goes on, and everyone says how easily hackable they are. But I think my peace of mind that I get from having them outweighs my worry of what could be potentially taken advantage of" (Participant 6).
-\end{myquote}
+There has been considerable research focused on preserving privacy within the realm of machine learning (\cite{ra2023visual_privacy_techniques}). A fundamental principle shared across various use cases is that deleting data serves as the most definitive means of ensuring privacy, assuming such measures are practicable. When only non-personal data is retained, the application achieves unequivocal security concerning privacy.
 
 \subsubsection{Federated learning}
 \label{sec:federated_learning}
 In many systems relying on machine learning, being able to utilize locally stored personal data may augment the system to perform better for the situation it was created for. However, sharing this personal data with a centralized model may not be possible due to the legal bases for processing personal data (see sec:legal-bases-processing-personal-data).
 
-\begin{wrapfigure}{r}{0.5\textwidth}
+% \begin{wrapfigure}{r}{0.5\textwidth}
+%     \centering
+%     \includegraphics[width=0.48\textwidth]{Images/Diagrams/FL_updated.png}
+%     \label{fig:federatedlearning}
+%     \caption{\centering The federated learning process.}
+% \end{wrapfigure}
+
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.48\textwidth]{Images/Diagrams/FL_updated.png}
-    \caption{The federated learning process}
+    \includegraphics[width=0.5\textwidth]{Images/Diagrams/FL_updated.png}
+    \caption{\centering The federated learning process.}
     \label{fig:federatedlearning}
+\end{figure}
 
-    Federated learning (FL), also known as collaborative learning, is a decentralized approach to training machine learning models. It doesn't require an exchange of data from client devices to global servers.
-\end{wrapfigure}
+The concept of FL can be seen in Figure \ref{fig:federatedlearning}. Federated learning (FL), also known as collaborative learning, is a decentralized approach to training machine learning models. It does not require exchange of data from client devices to global servers. It is described in the article of \citeauthor{an2022federatedlearninghealthcare} (\citeyear{an2022federatedlearninghealthcare}) the following way: 
 
-The concept of FL can be seen in figure \ref{fig:federatedlearning}, and is best described in the article of \citeauthor{an2022federatedlearninghealthcare} (\citeyear{an2022federatedlearninghealthcare}): "In summary, FL enables the training of ML models locally (at the location of the data) and only shares the resulting model, which is not reverse-engineerable, with the requesting party. Therefore, FL avoids the need to share the private datasets and sensitive data to others, preventing exposition to entities conducting studies and enabling data usage for broader purposes (\cite{re2021servertoclientml}). A central entity manages the learning process and distributes the training algorithm to each participating data holder. Each participant generates a local model trained with their private data and shares the resulting parameters with the central entity. Finally, the central entity employs an aggregation algorithm to combine the parameters of all local models into a single global model".
+\begin{myquote}
+    A central entity manages the learning process and distributes the training algorithm to each participating data holder. Each participant generates a local model trained with their private data and shares the resulting parameters with the central entity. Finally, the central entity employs an aggregation algorithm to combine the parameters of all local models into a single global model.
+\end{myquote}
 
+In summary, FL enables the training of ML models locally (at the location of the data) and only shares the resulting model, which is not reverse-engineerable, with the requesting party. Therefore, FL avoids the need to share the private datasets and sensitive data to others, preventing exposition to entities conducting studies and enabling data usage for broader purposes (\cite{re2021servertoclientml}). 
 
 The FL process is reliant on having ground truth data on the edge for training the models correctly, but obtaining the ground truth for edge device models operating on \textit{visual data} is difficult. The way this may be achieved, is by having a powerful edge device perform the inferences with a computationally expensive but accurate model, and using the inference results of this model as the ground truth for training a separate, possibly faster and less computationally expensive model to replace the other at a later stage. Otherwise, one could also perform the training under conditions where the ground truth is known, for example by manually inputting the number of people in an area, then having the model learn to arrive at the same count based on the camera input.
 
 Improvement of machine learning models devices in the healthcare industry present challenges due to the sensitive nature of medical data from patients. Centralized training of machine learning models may violate laws such as the GDPR, because of the way data is being collected and used unbeknownst to the data subject (\cite{an2022federatedlearninghealthcare}). To tackle these issues, \citeauthor{an2022federatedlearninghealthcare} (\citeyear{an2022federatedlearninghealthcare}) proposes the usage of FL\footnote{Specifically, the FL method described in the works of \citeauthor{ya2019federatedMLconcepts}(\citeyear{ya2019federatedMLconcepts})} to tackle these issues.
 
-Furthermore it should be noted that FL is a method to deal with the existential nature of data in edge computing devices, best described as "isolated islands", and to use the data on edge devices before it is deleted or obscured, to improve the intelligence of the devices in privacy preservant and protective way. An important measure to take in the development of FL models is to ensure that the models are not reverse-engineerable, as the models may contain personal data. This is done by adding noise to the data, which makes it impossible to backtrack the data to the individuals. This may be done by a method such as differential privacy, which is discussed in section \ref{sec:differential-privacy}.
+Furthermore it should be noted that FL is a method to deal with the existential nature of data in edge computing devices, best described as \textit{isolated islands}, and to use the data on edge devices before it is deleted or obscured, to improve the intelligence of the devices in privacy preservant and protective way. An important measure to take in the development of FL models is to ensure that the models are not reverse-engineerable, as the models may contain personal data. This is done by adding noise to the data, which makes it impossible to backtrack the data to the individuals. This may be done by a method such as differential privacy, which is discussed in Section \ref{sec:differential-privacy}.
 
 \subsubsection{Differential privacy}
 \label{sec:differential-privacy}
-The concept of differential privacy is to make data of individuals privacy-preservant through describing them as a group. Data from the group of people may be used, but without the possibility of backtracking the information to certain individuals. See figure \ref{fig:differential-privacy}.
+Regulations regarding personal data also applies to the events where pieces of information are aggregated to identify a person. The concept of differential privacy is to make data of individuals privacy-preservant through describing them as a group. Data from the group of people may be used, but without the possibility of backtracking the information to certain individuals. See Figure \ref{fig:differential-privacy}.
 
 In more technical terms: Differential privacy is a statistical disclosure control algorithm to process individual data from a group to produce close-to-real outcomes without disclosing the personal data of individuals (\cite{hu2023metaverse-privacy}). This means that the data is processed in a way that the results are close to the real results, but the data is not disclosed. This is done by adding noise to the data, which makes it impossible to backtrack the data to the individuals.
 
-Differential privacy is particularly pertinent in the context of federated learning. In this approach, client devices add controlled noise to their model updates—or weights—before sending them to a centralized server. This noise addition prevents the server from being able to infer individual-specific information from the model updates. The degree of noise is regulated by a privacy parameter, often referred to as a privacy budget. This strategy allows the central server to aggregate these noisy updates from all participating nodes to update the global model. Contrary to the original statement, the noise is not removed but rather managed in such a way that the aggregated model maintains utility while protecting individual privacy (\cite{sh2023RolwOfWeightTransmissionProtocolinML})."
+Differential privacy is particularly pertinent in the context of federated learning. In this approach, client devices add controlled noise to their model updates—or weights—before sending them to a centralized server. This noise addition prevents the server from being able to infer individual-specific information from the model updates. The degree of noise is regulated by a privacy parameter, often referred to as a privacy budget. This strategy allows the central server to aggregate these noisy updates from all participating nodes to update the global model. Contrary to the original statement, the noise is not removed but rather managed in such a way that the aggregated model maintains utility while protecting individual privacy (\cite{sh2023RolwOfWeightTransmissionProtocolinML}).
 
 Note that differential privacy is a definition, not an algorithm (\cite{dw2011DifferentialP}). In other words, we can have many different algorithms that satisfy the privacy demands for a given use case. For example, \citeauthor{dw2011DifferentialP} mentions the Laplace mechanism (outlined in the same authors works from \citeyear{dw2006noise2sensitivity-laplace}) as an optimal mechanism for answering “tally” type questions differentially privately (\citeyear{dw2011DifferentialP}). For more advanced situations, other algorithms, such as the method outlined by \citeauthor{bl2011learning-privacy} (\citeyear{bl2011learning-privacy}), are more suitable (\cite{dw2011DifferentialP}).
 
@@ -185,12 +210,12 @@ The big tech giants like Apple, Google and Microsoft employ differential privacy
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{Images/Diagrams/differential-privacy.png}
-    \caption{The differential privacy concept}
+    \caption{\centering The differential privacy concept}
     \label{fig:differential-privacy}
 \end{figure}
 
 \subsubsection{On-device processing}
-According to \citeauthor{hu2022accurateobjectdetectionatedge} (\citeyear{hu2022accurateobjectdetectionatedge}), there are four methods for running tasks on resource-constrained edge computing devices. This is relevant in applications where user's concerns for privacy increases if data is directly transmitted to a server. These methods are seen in table \ref{tab:methods_to_run_tasks}, and explained discussed in the following paragraphs.
+According to \citeauthor{hu2022accurateobjectdetectionatedge} (\citeyear{hu2022accurateobjectdetectionatedge}), there are four methods for running tasks on resource-constrained edge computing devices. This is relevant in applications where user's concerns for privacy increases if data is directly transmitted to a server. These methods are seen in Table \ref{tab:methods_to_run_tasks}, and explained discussed in the following paragraphs.
 
 \begin{table}[H]
     \centering
@@ -215,20 +240,20 @@ According to \citeauthor{hu2022accurateobjectdetectionatedge} (\citeyear{hu2022a
 \end{table}
 
 \paragraph{Data encryption}
-The first method, data encryption, would be one way of transmitting images in a more secure way. This should be done in a lossless way to maintain the image quality to preserve the accuracy of the detectors. Doing so is not trivial, and is a research field on it's own. A few methods that may function well, e.g. blurring only the faces, are discussed in section \ref{sec:obfuscation}.
+The first method, data encryption, would be one way of transmitting images in a more secure way. This should be done in a lossless way to maintain the image quality to preserve the accuracy of the detectors. Doing so is not trivial, and is a research field on it's own. A few methods that may function well, e.g. blurring only the faces, are discussed in Section \ref{sec:obfuscation}.
 
 \paragraph{Traditional machine learning}
-The second method of running traditional machine learning methods, might not the greatest solution either, as they have been less accurate than the deep learning models (see figure \ref{fig:object_detect_20_years}). They may, however, be a good option for devices with low computing power and memory resources as they are generally low-demanding. The methods need less data, are more transparent, but are most applicable to use cases with clear, deterministic logic. Traditional machine learning methods were the most prominent prior to 2014, while deep learning based detection models have been the completely dominant approach to image recognition tasks. Figure \ref{fig:road_map} illustrates a road map of what have been the most popular machine learning approaches to object detection. To achieve similar accuracies to those of the deep learning models but with the low computational demands of traditional machine learning, one might consider to investigate the field of tinyML, which was scoped out of this thesis \ref{sec:scope_tinyML}. Some considerations are, however, added in appendix \ref{app:tinyML}.
+The second method of running traditional machine learning methods, might not the greatest solution either, as they have been less accurate than the deep learning models (see Figure \ref{fig:object_detect_20_years}). They may, however, be a good option for devices with low computing power and memory resources as they are generally low-demanding. The methods need less data, are more transparent, but are most applicable to use cases with clear, deterministic logic. Traditional machine learning methods were the most prominent prior to 2014, while deep learning based detection models have been the completely dominant approach to image recognition tasks. Figure \ref{fig:road_map} illustrates a road map of what have been the most popular machine learning approaches to object detection. To achieve similar accuracies to those of the deep learning models but with the low computational demands of traditional machine learning, one might consider to investigate the field of tinyML, which was scoped out of this thesis \ref{sec:scope_tinyML}. Some considerations are, however, added in appendix \ref{app:tinyML}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{Images/Diagrams/object_detection_directions.png}
-    \caption{The evolution of object detection (\cite{zou2023object_detection_in_20_years})}
+    \caption{\centering The evolution of object detection (\cite{zou2023object_detection_in_20_years})}
     \label{fig:road_map}
 \end{figure}
 
 \paragraph{Task sharing}
-The third method, sharing the workload over multiple devices, is not an uncommon practice in technology. See for example Eufy's solution with a "home-base" device in section \ref{sec:eufycam}), where camera devices take images and send them to a more powerful computer for doing the heavy computing. This reserves privacy as the images are never sent outside of the local network, and can be achieved by simple TCP/IP\footnote{Transmission Control Protocol/Internet Protocol is a set of standardized rules that allow devices to communicate with each other on a network.} communication between the nodes. This gives low latency, fast networks, but introduces (1) the need of having a central hub, (2) extra work of setting up the transmission protocols, (3) another source of error and (4) the need to encrypt/decrypt images prior/post transmission to ensure security. However, due to scarcity in specialized hardware such as the GPU, this could be a nice solution, as one GPU per facility may be sufficient and achieve a higher throughput than processing large data on the CPUs of multiple edge devices.
+The third method, sharing the workload over multiple devices, is not an uncommon practice in technology. See for example Eufy's solution with a home-base device in Section \ref{sec:eufycam}), where camera devices take images and send them to a more powerful computer for doing the heavy computing. This reserves privacy as the images are never sent outside of the local network, and can be achieved by simple TCP/IP\footnote{Transmission Control Protocol/Internet Protocol is a set of standardized rules that allow devices to communicate with each other on a network.} communication between the nodes. This gives low latency, fast networks, but introduces (1) the need of having a central hub, (2) extra work of setting up the transmission protocols, (3) another source of error and (4) the need to encrypt/decrypt images prior/post transmission to ensure security. However, due to scarcity in specialized hardware such as the GPU, this could be a nice solution, as one GPU per facility may be sufficient and achieve a higher throughput than processing large data on the CPUs of multiple edge devices.
 
 \paragraph{Deep learning}
 As opposed to traditional machine learning,
@@ -241,7 +266,7 @@ A widely used approach within the domain of anonymous fall detection, is to use 
 \label{sec:deletion_of_images}
 In an investigation of an already existing internet of things (IoT) system for wildlife monitoring: 'Where's The Bear', relying on motion-triggered cameras, three challenges of visual systems in such applications were discussed \cite{el2017WTB}. The drawbacks were (1) the transmission of enormous numbers (sometimes millions) of images over low-bandwidth networks, which tend to happen in automatically (motion-) triggered applications, (2) motion sensors triggered by weather conditions or by animals that were not of interest, and (3) redundancy of images taken of the same individual animal. While the 2nd and 3rd drawbacks are not applicable to this project, the 1st is.
 
-\citeauthor{el2017WTB} proposed a solution to this challenge: edge computing. Edge computing, also referred to as on-device processing, encapsulates similar concepts but emphasizes slightly different aspects of the computing approach. While "on-device processing" specifically indicates that the computational tasks are carried out directly on the device itself, "edge computing" underscores that these tasks are performed close to the data sources, i.e., at the "edge" of the network.
+\citeauthor{el2017WTB} proposed a solution to this challenge: edge computing. Edge computing, also referred to as on-device processing, encapsulates similar concepts but emphasizes slightly different aspects of the computing approach. While \textit{on-device processing} specifically indicates that the computational tasks are carried out directly on the device itself, \textit{edge computing} underscores that these tasks are performed close to the data sources, i.e., at the \textit{edge} of the network.
 
 The deployment of visual systems in public spaces presents challenges related to privacy, not only because of the immediate access to private data, but also due to the recent breakthroughs in object detection allowing the extraction of sensitive information from visual data. The altogether only completely safe way to ensure complete and total privacy of data, is to not have the data at all.
 
@@ -253,52 +278,70 @@ The images would in some cases benefit in multiple ways from being obscured inst
 \label{sec:obfuscation}
 Another way to remove the privacy concern is by obscuring the images after analysis in such a way that individuals may never be identified.
 
-Obfuscation is the action of making something obscure, which means to conceal or make unclear, implying it has been done intentionally. To obscure an image is often used interchangeably with “to blur”, but they are not the same. To blur means to make something indistinct or hazy, suggesting something is unclear or out of focus. One might say an image has been obscured by blurring the image, or it may be done by other methods such as masking or pixelate the faces of individuals. These methods are illustrated in figure \ref{fig:obfuscation_methods}.
+Obfuscation is the action of making something obscure, which means to conceal or make unclear, implying it has been done intentionally. To obscure an image is often used interchangeably with “to blur”, but they are not the same. To blur means to make something indistinct or hazy, suggesting something is unclear or out of focus. One might say an image has been obscured by blurring the image, or it may be done by other methods such as masking or pixelate the faces of individuals. These methods are illustrated in Figure \ref{fig:obfuscation_methods}.
 
 \paragraph{Blurring the faces}
 In a \citeyear{ma2019fall_anonymous} study, faces were detected with a thermal-detecting camera and then photos were captured with an RGB camera, blurring the area the face was detected by the thermal camera (\citeauthor{ma2019fall_anonymous}). This approach is privacy preservant as long as all faces are blurred, but may fail if the algorithm does not detect all faces. In those cases, however, most humans would likely also struggle to identify a person based on the face. On the contrary, in many cases, blurring the entire image would compress the image, making it faster and easier to transfer, and be the faster option than having to detect all faces in an image.
 
 \paragraph{Perceptions of privacy enhancements methods}
-A questionnaire study of 328 students indicated that blurred images were not considered by the students to provide satisfactory privacy protection (\cite{ed2012privacy_review}). Participants were given 18 randomly ordered videos, and were asked to rate the privacy on a Likert\footnote{Likert scale: A scale of odd options, where the participant may answer a neutral middle-option and distribution should be equally distributed in both directions thereafter. An often used questionnaire scale in psychology research.} scale from 1-5. The obfuscation methods, or privacy enhancements as they called them, and the results are displayed in figure \ref{fig:ed_results}. The results show that blurred images were only considered privacy preservant for 23 percent of participants. Regardless, an important notion is that the images of this survey are from within a private home, posing higher demands and expectations with regards to privacy than what is typically done in a more public space.
+A questionnaire study of 328 students indicated that blurred images were not considered by the students to provide satisfactory privacy protection (\cite{ed2012privacy_review}). Participants were given 18 randomly ordered videos, and were asked to rate the privacy on a Likert\footnote{Likert scale: A scale of odd options, where the participant may answer a neutral middle-option and distribution should be equally distributed in both directions thereafter. An often used questionnaire scale in psychology research.} scale from 1-5. The obfuscation methods, or privacy enhancements as they called them, and the results are displayed in Figure \ref{fig:ed_results}. The results show that blurred images were only considered privacy preservant for 23 percent of participants. Regardless, an important notion is that the images of this survey are from within a private home, posing higher demands and expectations with regards to privacy than what is typically done in a more public space.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{Images/ed2012results.png}
-    \caption{Privacy enhancements methods in the study of  \citeauthor{ed2012privacy_review} (\citeyear{ed2012privacy_review})}
-    \RaggedRight The study indicates that the methods of blurring an image is not perceived privacy preservant. However, as we will see in section \ref{sec:obfuscation}, the results of this study might not be a reason by itself to throw the method of blurring an image out the window.
+    \caption[Privacy Enhancements Methods in the Study of \citeauthor{ed2012privacy_review} (\citeyear{ed2012privacy_review})]{\centering Privacy enhancements methods in the study of \citeauthor{ed2012privacy_review} (\citeyear{ed2012privacy_review}).}
     \label{fig:ed_results}
 \end{figure}
 
-\subsubsection{Ethical Considerations in the Development of Localization Technologies}
+\subsection{Ethical Considerations in the Development of Human Localization Technologies}
 \label{sec:ethics_localization_tech}
 
 As we advance the capabilities of technologies such as YOLOv9 for human localization, it becomes imperative to consider the ethical implications of our developments. The narrative of George Orwell's dystopian novel \textit{1984} serves as a reminder of the potential societal consequences of intelligent, extensive and automated surveillance. Orwell's portrayal of a society where history is constantly rewritten and individual privacy is obliterated highlights the dangerous path we might tread if these technologies are misused by those in control of political power.
 
-\begin{myquote} {1984 on greed of power}
-    "The Party seeks power entirely for its own sake. We are not interested in the good of others; we are interested solely in power, pure power." -George Orwell, 1984.
+"The Party seeks power entirely for its own sake. We are not interested in the good of others; we are interested solely in power, pure power." (\cite{orwell1984}). This may remind of some politicians, i.e. american presidents, who may decide to deploy human localization devices to keep population under control while tightening the grip on the population...
+
+\subsubsection{Joseph Redmon Quit Computer Vision Development}
+Joseph Redmon, the creator of the initial versions of YOLO, decided to cease his work on the project due to its military applications. This illustrates a profound ethical stance. Redmon's choice underscores the responsibility of developers in considering the broader impacts of their work. The resignation marks a critical point in the discourse on the moral responsibilities of researchers and developers in the field of artificial intelligence and machine learning. The discussion of how to responsibly regulate and develop AI applications is still ongoing, and the decisions made by individuals like Redmon are crucial in shaping the future of the field. 
+
+Joseph Redmon's Twitter Posts:
+
+\begin{myquote}
+    I stopped doing CV research because I saw the impact my work was having. I loved the work but the military applications and privacy concerns eventually became impossible to ignore. (\cite{re2020twitter_feb}).
+
+    But basically all facial recognition work would not get published if we took Broader Impacts sections seriously. There is almost no upside and enormous downside risk. (\cite{re2020twitter_feb}).
+
+    [...] I bought in to the myth that science is apolitical and research is objectively moral and good no matter what the subject is. (\cite{re2020twitter_feb}).
+
+    If you worked in a knife factory and a guy came in and thanked you for making knives because he killed many people with those knives and then he showed you a video of himself killing people with a knife you made how would you feel then about working in your knife factory?  (\cite{re2020twitter_june}).
 \end{myquote}
 
-% \begin{wrapfigure}{r}{0.5\textwidth}
-    %     \vspace{-15pt}
-    %     \centering
-    %     \includegraphics[width=0.5\textwidth]{Images/Ethical/redmon-twutter-stoppedCV.png}
-    %     \caption{Redmon Quit Computer Vision Research Due to Ethical Concerns}
-    %     \label{fig:redmon-twitter-stoppedCV}
-    % \end{wrapfigure}
-    
-\paragraph{Joseph Redmon}
-Joseph Redmon, the creator of the initial versions of YOLO, decided to cease his work on the project due to its military applications. This illustrates a profound ethical stance. Redmon's choice underscores the responsibility of developers in considering the broader impacts of their work. The resignation marks a critical point in the discourse on the moral responsibilities of researchers and developers in the field of artificial intelligence and machine learning. The discussion of how to responsibly regulate and develop AI applications is very much ongoing, and the decisions made by individuals like Redmon are crucial in shaping the future of the field.
+\subsubsection{Philosophical Perspectives}
 
-\begin{myquote} {Joseph Redmon's Twitter Posts:}
-    I stopped doing CV research because I saw the impact my work was having. I loved the work but the military applications and privacy concerns eventually became impossible to ignore.-Joseph Redmon, Twitter (\cite{re2020twitter_feb}).
+\paragraph{Immanuel Kant and Deontological Ethics}
+Immanuel Kant's deontological ethics emphasizes the importance of adhering to moral rules or duties. According to Kantian philosophy, actions are morally right if they are in accordance with a moral rule or principle, regardless of the consequences. Applying Kantian ethics to the development of localization technologies suggests that developers have a duty to uphold principles such as privacy, autonomy, and human dignity. The use of these technologies must be guided by the categorical imperative: to act only according to that maxim which can be universally applied. This means creating technologies that respect individual rights and can be ethically justified as a universal practice. 
 
-    But basically all facial recognition work would not get published if we took Broader Impacts sections seriously. There is almost no upside and enormous downside risk.-Joseph Redmon, Twitter (\cite{re2020twitter_feb}).
+\paragraph{Utilitarianism and Ethical Consequences}
+Utilitarianism, a consequentialist theory primarily developed by Jeremy Bentham and John Stuart Mill, posits that the rightness or wrongness of actions depends on their outcomes, specifically their contribution to overall happiness or utility. In the context of localization technologies, utilitarianism would require a careful assessment of the potential benefits and harms. While such technologies can enhance safety, efficiency, and convenience, they also pose significant risks to privacy and individual freedoms. Developers must strive to maximize the overall good while minimizing potential harms, ensuring that the societal benefits outweigh the risks and negative consequences.
 
-    [...] I bought in to the myth that science is apolitical and research is objectively moral and good no matter what the subject is.-Joseph Redmon, Twitter (\cite{re2020twitter_feb}).
+\paragraph{Modern philosophers}
+Modern philosophers, computer scientists and artificial intelligence researchers like (respectively) Sam Harris, Stuart Russell, and Eliezer Yudowsky also discuss the implications of AI. They are, however, discussing topics such as the long-term risks of artificial general intelligence, the control problem, and the value alignment problem. These are not so relevant for a human localization system without capabilites of decisionmaking. They are all voicing a concern, however, for the lack of regulations for the rapid-growing field of AI, where politicians oblivious to the nature of AI is making the regulations. 
 
+\subsubsection{Practical Ethical Framework for Development}
 
-    If you worked in a knife factory and a guy came in and thanked you for making knives because he killed many people with those knives and then he showed you a video of himself killing people with a knife you made how would you feel then about working in your knife factory? -Joseph Redmon, Twitter (\cite{re2020twitter_june}).
-\end{myquote}
+\paragraph{Transparency and Accountability}
+In developing technologies capable of tracking and analyzing human behaviour, transparency and accountability are paramount. Developers must ensure that the design, implementation, and deployment processes are transparent, allowing for public scrutiny and informed consent. Clear guidelines and regulations should be established to hold developers and users accountable for the ethical use of localization technologies. This includes regular audits, impact assessments, and the involvement of diverse stakeholders in decision-making processes.
+
+\paragraph{Privacy Safeguards and Data Protection}
+Privacy safeguards are critical in mitigating the ethical risks associated with localization technologies. Robust data protection measures must be implemented to secure personal information from unauthorized access and misuse. Techniques such as anonymization, encryption, and differential privacy can help protect individual privacy while allowing for the beneficial use of data. Legal frameworks like the General Data Protection Regulation (GDPR) in the European Union set important precedents for protecting personal data and ensuring privacy rights.
+
+\paragraph{Continuous Monitoring and Ethical Auditing}
+Continuous monitoring and ethical auditing are essential to ensure that localization technologies are used responsibly. Regular assessments should be conducted to evaluate the ethical implications of these technologies, identifying and addressing potential risks and unintended consequences. This involves establishing independent oversight bodies and ethical review boards to provide ongoing guidance and recommendations for ethical practices in the development and deployment of localization technologies.
+
+\paragraph{Learning from History}
+Just as Orwell warns against the dangers of forgetting or altering history, the AI community must remember the lessons from pioneers like Redmon. We must strive to develop technologies that do not compromise ethical standards for convenience or profitability. Historical examples of technological misuse and ethical failures should inform current practices, guiding the development of localization technologies in a manner that prioritizes ethical considerations and societal well-being.
+
+\paragraph{Conclusion}
+The development of localization technologies presents complex ethical challenges that require us to be vigilant and proactive. By embedding ethical considerations into the fabric of our technological innovations, we can avoid the dystopian futures forewarned by Orwell and ensure that these tools serve to support and enhance human society, rather than diminish it. The integration of philosophical insights, practical ethical frameworks, and lessons from history will help guide the responsible and ethical development of localization technologies, fostering a future where technological advancements align with the values and principles of a just and equitable society.
 
 
 % \begin{myquote}{Greed's Grief}
@@ -306,7 +349,7 @@ Joseph Redmon, the creator of the initial versions of YOLO, decided to cease his
 % \end{myquote}
 
 \paragraph{Ethical Framework for Development}
-In developing technologies capable of tracking and analyzing human behavior, we must establish robust ethical frameworks that prevent misuse and ensure that advancements enhance societal welfare without infringing on individual rights and freedoms. This involves transparent development processes, clear privacy safeguards, and continuous monitoring of technology deployment.
+In developing technologies capable of tracking and analyzing human behaviour, we must establish robust ethical frameworks that prevent misuse and ensure that advancements enhance societal welfare without infringing on individual rights and freedoms. This involves transparent development processes, clear privacy safeguards, and continuous monitoring of technology deployment.
 
 \paragraph{Learning from History}
 Just as Orwell warns against the dangers of forgetting or altering history, the AI community must remember the lessons from pioneers like Redmon. We must strive to develop technologies that do not compromise ethical standards for convenience or profitability.
@@ -314,27 +357,9 @@ Just as Orwell warns against the dangers of forgetting or altering history, the 
 \paragraph{Conclusion}
 The development of localization technologies presents complex ethical challenges that require us to be vigilant and proactive. By embedding ethical considerations into the fabric of our technological innovations, we can avoid the dystopian futures forewarned by Orwell and ensure that these tools serve to support and enhance human society, rather than diminish it.
 
-\subsection{Object Detection}
-\label{sec:object_detection}
-This subsection includes a brief summarization of the evolution of object detection, including the transition from traditional methods to morw modern methods such as the YOLO series and vision transformers.
-
-The evolution of object detection can be divided into two major historical phases: before and after 2014, as illustrated in Figure \ref{fig:object_detect_20_years}. Prior to 2014, traditional object detection methods, such as the Viola-Jones detectors (\cite{vi2001viola-jones-orig}), Histogram of Oriented Gradients (HOG), and Deformable Part-Based Models (DPMs) were prevalent\footnote{These are just some honorable mentiones of some of the most sucessful and widely adopted models of the time (\cite{li2012violajonessuccessful})}. During this era, "mixture models" were developed to improve detection granularity by recognizing the different parts of the same object, such as the doors and windows of a car.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\linewidth]{Images/Diagrams/object_detection_20years.png}
-    \caption{The evolution of object detection (\cite{zou2023object_detection_in_20_years})}
-    \label{fig:object_detect_20_years}
-\end{figure}
-
-Despite these advancements, it was not until the introduction of Region-based Convolutional Neural Networks (R-CNN) in 2014 that the accuracy of object detection systems began to improve significantly. This paradigm shift marked a substantial advancement in the field, leveraging deep learning techniques to enhance detection performance dramatically (\cite{zou2023object_detection_in_20_years}). The period following 2014 has seen rapid progress, introducing sophisticated object detectors like You Only Look Once (YOLO) and Detection Transformers (DETR). These are explored in greater detail in section \ref{sec:rtdetr} and \ref{sec:yolov9}.
-
-Machine learning can be seen as a gamified\footnote{Gamification is the practice of applying typical elements of game play (e.g. point scoring, competition with others, rules of play) to an activity, typically as an online marketing technique, to encourage engagement with a product or service (\cite{ox2023gamification}).} version of statistics and software engineering. Object detection is a subset of machine learning. Modifications and new advances in object detection methods may be instantly evaluated by running inference on benchmark datasets and compare them to the other state of the art (SOTA) models.
-
-\subsubsection{Performance benchmark}
+\subsubsection{Object Detection Performance Benchmark Datasets}
 \label{sec:performance_benchmark}
 
-\paragraph{Dataset}
 There are multiple benchmark datasets for machine learning applications. The area of facial emotion recognition alone has at least five benchmark datasets (\cite{sa2022facialemotions}). For the task of object detection, the Common Objects in Context (COCO) dataset (\cite{li2014cocodataset}) has been widely used since it's introduction in 2014, with it's 330 000 annotated images.
 
 Another well-known, widely adopted dataset for classification, object detection and segmentation is the PASCAL Visual Object Classes (VOC) (\cite{ev2010pascaldataset}). The PASCAL VOC websites include several challenges, i.e. VOC2005 through VOC2012, for researchers to benchmark their detectors. Even though the challenges have completed, one can still evaluate new methods on their datasets.
@@ -345,21 +370,23 @@ For any use case implementation however, it is vital to have a dataset that is r
 
 In real-world applications there are licenses for using datasets for training a model. Testing and benchmarking a solution against a certain dataset is typically free to do, but the datasets are often under a license which forbids commercial use.
 
-\paragraph{Accuracy of Model Inferences}
+\subsubsection{Object Detection Performance Benchmark Metrics}
 \phantomsection
 \label{sec:accuracy_of_model_inferences}
-Partly due to the aforementioned gamified nature of machine learning models, which metrics are deemed important may have a significant impact on the development of the models. There are competitions on the data science platform "\href{Kaggle}{kaggle.com}" where data and machine learning specialists may compete for the best scores on competitions. The winners of the competitions are, for many competitions, awarded prize money. This is a great way to gain experience in the machine learning field. What the target variables are for the competitions are what drives the development. According to \citeauthor{zou2023object_detection_in_20_years}, these developments primarily pursue two main goals: enhancing prediction accuracy and increasing computational efficiency (\citeyear{zou2023object_detection_in_20_years}. Additionally, the evaluation of object detectors extends to more, harder-to-measure, abilities. This can be their ability to transfer their capabilities to new domains, such as learning to detect a new category it has not previously been trained for. There's not yet been a focus on energy efficiency, which needs to happen soon, should development continue for "AI" in the current pace (\cite{lu2023AIenergyefficieny}).
+Machine learning can be seen as a gamified\footnote{Gamification is the practice of applying typical elements of game play (e.g. point scoring, competition with others, rules of play) to an activity, typically as an online marketing technique, to encourage engagement with a product or service (\cite{ox2023gamification}).} version of statistics and software engineering. Object detection is a subset of machine learning. Modifications and new advances in object detection methods may be instantly evaluated by running inference on benchmark datasets and compare them to the other state of the art (SOTA) models.
 
-The most used measurement of performance for an object detector model is the \textit{mean Average Precision} (mAP) for varying values of \textit{IoU thresholds} (\cite{zou2023object_detection_in_20_years}). 
+Partly due to the aforementioned gamified nature of machine learning models, which metrics are deemed important may have a significant impact on the development of the models. There are competitions on the data science platform \href{https://kaggle.com}{Kaggle}, where data and machine learning specialists may compete for the best scores. The developers of the best-performing models are awarded prize money in many of the competitions. The target variables for the competitions are what drives development. According to \citeauthor{zou2023object_detection_in_20_years}, the developments primarily pursue two main goals: enhancing prediction accuracy and increasing computational efficiency (\citeyear{zou2023object_detection_in_20_years}. Additionally, the evaluation of object detectors extends to more, harder-to-measure, abilities. This can be their ability to transfer their capabilities to new domains, such as learning to detect a new category it has not previously been trained for. There's not yet been a focus on energy efficiency, which needs to happen soon, should development continue for AI in the current pace (\cite{lu2023AIenergyefficieny}).
 
-The average precision is the average when taking the average of precision values under various recalls. The mean is when this is averaged for all the object classes in the dataset. The IoU brings bounding box positioning into the equation, representing how well the predicted box fits to the ground truth. A detailed explanation of what this means is given in the following paragraphs.
+The most used measurement of performance for an object detector model is the \textit{mean Average Precision} (mAP) for varying values of \textit{IoU thresholds} (\cite{zou2023object_detection_in_20_years}).
 
-First we need to understand the concepts of true positives, false positives, false negatives, the confusion matrix, precision and recall. These are easiest to explain if the task is image classification and not object detection. For \ref{sec:understandingtp} and \ref{sec:understandingprecision}, we will use the example of image classification, but the concepts are the same for object detection, with the difference that the bounding box positioning is also taken into account.
+The average precision is the average when taking the average of precision values under various recalls. The mean is when this is averaged for all the object classes in the dataset. The IoU represents how well the predicted box fits to the ground truth. The average precision may be calculated fixing the IoU threshold, fixing the confidence threshold, or varying them both. More on this later.
+
+First the thesis provides an overview to understand the concepts of true positives, false positives, false negatives, the confusion matrix, precision and recall. These are easiest to explain if the task is image classification and not object detection. For \ref{sec:understandingtp} and \ref{sec:understandingprecision}, we will use the example of image classification, but the concepts are the same for object detection, with the difference that the bounding box positioning is also taken into account.
 
 \paragraph{Understanding TP, FN, and FP, and the Confusion Matrix}
 \phantomsection
 \label{sec:understandingtp}
-For a machine learning model dealing with a regression problem\footnote{Object detection is also a regression problem, as the model is simply relating the independent variable input image pixels to a dependent variable output of the bounding boxes and classes.}, the metrics usually used to evaluate it's performance is the number of true positives, false negatives and false positives. 
+For a machine learning model dealing with a regression problem\footnote{Object detection is also a regression problem, as the model is simply relating the independent variable input image pixels to a dependent variable output of the bounding boxes and classes.}, the metrics usually used to evaluate it's performance is the number of true positives, false negatives and false positives.
 
 These may be defined as follows:
 \begin{enumerate}
@@ -368,12 +395,12 @@ These may be defined as follows:
     \item False Positive (FP): The number of instances where the model incorrectly identifies a negative instance as positive. This could occur if the model identifies a person in an image where there is no person.
 \end{enumerate}
 
-The confusion matrix is a table used to illustrate these numbers. An example of a confusion matrix is shown in figure \ref{fig:confusion_matrix}. 
+The confusion matrix is a table used to illustrate these numbers. An example of a confusion matrix is shown in Figure \ref{fig:confusion_matrix}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{Images/Diagrams/confusion_matrix.png}
-    \caption{Example Confusion Matrix.}
+    \caption{\centering Example Confusion Matrix.}
     \label{fig:confusion_matrix}
 \end{figure}
 
@@ -388,12 +415,12 @@ For a balanced metric of precision and recall we also have the F1 Score, combini
 
 Precision: Measures the accuracy of positive predictions. It is the ratio of correctly predicted positive observations to the total predicted positives. High precision relates to a low rate of false positives. For object detecion of persons, precision would be how accurate the model is when it claims to detect a person.
 \begin{equation}
-    \text{Precision} = \frac{TP}{TP + FP}	
+    \text{Precision} = \frac{TP}{TP + FP}
 \end{equation}
 
 Recall (Sensitivity or True Positive Rate): Measures the ability of the model to find all the relevant cases within a dataset. It is the ratio of correctly predicted positive observations to the all observations in actual class. High recall relates to a low rate of false negatives. For object detection of persons, recall would tell us how many of the actual persons in the image the model was able to detect.
 \begin{equation}
-    \text{Recall} = \frac{TP}{TP + FN}	
+    \text{Recall} = \frac{TP}{TP + FN}
 \end{equation}
 
 F1 Score: The weighted average of Precision and Recall. This score takes both false positives and false negatives into account. It is particularly useful when the class distribution is uneven. F1 Score is best if there is some sort of balance between Precision and Recall in the system.
@@ -401,12 +428,12 @@ F1 Score: The weighted average of Precision and Recall. This score takes both fa
     \text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
 \end{equation}
 
-To assess a regular machine learning model's performance, the precision-recall curve is common practice (see figure \ref{fig:precisionrecallcurveexample} for an example). The precision-recall curve is a graph that shows the trade-off between precision and recall for different thresholds for confidence in the object class. As you allow your model to be more uncertain in it's inferences on the image, the number of hallucinations will also increase and thus the precision drops. The area under this curve is the average precision (AP) of the model. 
+To assess a regular machine learning model's performance, the precision-recall curve is common practice (see Figure \ref{fig:precisionrecallcurveexample} for an example). The precision-recall curve is a graph that shows the trade-off between precision and recall for different thresholds for confidence in the object class. As you allow your model to be more uncertain in it's inferences\footnote{For object detection, there are at least three ways of allowing the model to be more uncertain. Fixing the confidence threshold and vary the IoU, or fixing the IoU and vary the confidence threshold, or by averaging over both thresholds.}, the number of hallucinations will also increase and thus the precision drops. The area under this curve is the average precision (AP) of the model.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{Images/Results/PR-curve standard e 640.png}
-    \caption{Example Precision-Recall Curve.}
+    \caption{\centering Example Precision-Recall Curve.}
     \label{fig:precisionrecallcurveexample}
 \end{figure}
 
@@ -420,70 +447,172 @@ Alternatively, AP can be represented as an integral:
 \begin{equation}
     \text{AP} = \int_{0}^{1} P(R) dR
 \end{equation}
-where $P(R)$ is the precision as a function of recall $R$. 
+where $P(R)$ is the precision as a function of recall $R$.
 
 
 \paragraph{Understanding the IoU metric}
 
-Accuracy in object detection refers to both detecting the object \textit{and} it's location accurately. Combining both in one metric would simplify benchmarking. The precision, recall and f1-score all neglect the positioning precision of bounding boxes. 
+Accuracy in object detection refers to both detecting the object \textit{and} it's location accurately. Combining both in one metric would simplify benchmarking. The precision, recall and f1-score all neglect the positioning precision of bounding boxes.
 
-For assessing localization accuracy, the Intersection over Union (IoU) is calculated. This compares the predicted bounding box and the ground truth bounding box in a way so boxes need to fit as closely to the ground truth bounding box as possible to get the best score (which is 1.0). See figure \ref{fig:IoU} for an illustration. In this figure we can see that high IoU values equates to having a good fit with the ground truth bounding box. If the IoU value is over a threshold (image to the left), we define the detection to be a true positive. If we make a bounding box somewhere else (image in the middle), we get a false positive (a hallucination). If we don't have detections for a ground truth bounding box (image to the right), we have a false negative.
+For assessing localization accuracy, the Intersection over Union (IoU) is calculated. This compares the predicted bounding box and the ground truth bounding box in a way so boxes need to fit as closely to the ground truth bounding box as possible to get the best score (which is 1.0). See Figure \ref{fig:IoU}. 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{Images/Diagrams/IoU_better.jpg}
-    \caption{Intersection over Union (IoU).}
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/iou_left.png}
+        \caption{\centering True positive.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/iou_middle.png}
+        \caption{\centering False Positive}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/iou_right.png}
+        \caption{\centering False Negative.}
+    \end{subfigure}
+    \centering
+    \caption[Intersection over Union (IoU) (\cite{learnopencv_iou}).]{\centering Intersection over Union (IoU) (\cite{learnopencv_iou}). The red boxes are the ground truth, and the blue are the model predictions.}
     \label{fig:IoU}
 \end{figure}
 
-The equation is simple:
+A high IoU values equates to having a good fit with the ground truth bounding box. If the IoU value is over a certain threshold, we define the detection to be a true positive (see \ref{fig:IoU}a). If the predicted bounding box has little overlap, we identify this as a false positive (see \ref{fig:IoU}b). This may also be called a hallucination. If we don't have detections for a ground truth bounding box (see \ref{fig:IoU}c), we have a false negative. A fourth case is where the predicted bounding box fully overlaps with the ground truth, but covers a larger area. In this case, we have a low IoU due to the high area of union, and thus a false positive. 
+
+The equation for calculating the IoU of a predicted bounding box and a ground truth bounding box is as follows:
+
 \begin{equation}
     \text{Intersect over Union} = \frac{\text{Area of Overlap}}{\text{Area of Union}}
 \end{equation}
 
-The single-most important metric for object detection in the COCO dataset challenge was the mean Average Precision (mAP) over 10 IoU thresholds of .50:.05:.95. This rewards the detectors with more accurate localization (\cite{li2014cocodataset}).
-
-Following the introduction of MS-COCO datasets in 2014, researchers started to pay more attention to the accuracy of object localization instead of using a fixed IoU threshold\footnote{A fixed IoU threshold is typically set at 0.5 or higher. Which value is best dependends on the accuracy demands of the sceneario, and is why having the value the ability to adjust the threshold is a good idea when implementing an object detector} (\cite{zou2023object_detection_in_20_years}).
-
-
-% evne til å forbedre mørke scener i mobiltelefonteknologi vil kanskje også over noen år bli overført til mer lavnivåsystemer.
-% Primary objective demonstrate feasability and effectiveness of on-device human detection and tracking in a practical and realistic setting.
-% Burde være en sekundary goal her kanskje å lage en heatmap.
-% Avveie om lysstyrke, bevegelse, bilder, sett fra menneske og maskin er det samme.
-
-\subsubsection{Real-Time Detection Transformer}
-\label{sec:rtdetr}
-The Real Time Detection Transformer (RT-DETR) is a real-time object detection model developed by the Facebook (Meta) Research team. The model uses a transformer encoder-decoder architecture similar to a large language model. See figure \ref{fig:detrarchitecture} for an illustration of the architecture.
+\paragraph{Conclusion of Performance Metrics}
+The Pascal Visual Object Challenge (VOC) was a standard way of measuring performance. Here, the IoU value was fixed (typically at 0.5), while the confidence in detections was averaged over multiple confidence thresholds. Today, this metric is seldom used (see \ref{fig:coco_voc_usage}).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\linewidth]{Images/Diagrams/DETR2.png}
-    \caption{The architecture of the DETR model (\cite{carion2020endtoend}).}
-    \label{fig:detrarchitecture}
+    \begin{subfigure}{0.40\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Dataset Usages/PASCAL.png}
+        \caption{\centering Pascal VOC Approximate Usage in 2023: 32.}
+    \end{subfigure}
+    \begin{subfigure}{0.40\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Dataset Usages/COCO.png}
+        \caption{\centering COCO Approximate Usage in 2023: 2401.}
+    \end{subfigure}
+    \caption[Datasets PASCAL VOC and COCO Approximate Usages]{\centering PASCAL VOC and COCO Approximate Usages the Previous Five Years.}
+    \label{fig:coco_voc_usage}
 \end{figure}
 
-In the paper first introducing the model, \citeauthor{carion2020endtoend} claim it outperforms competitive baselines on panoptic segmentation\footnote{This is a challenging pixel-level segmentation task. In segmentation tasks, an image is divided into meaningful regions. Altough different from object detection.} with a simple segmentation head trained on top of a pre-trained DETR. 
+The single-most important metric for object detection in the COCO dataset challenge was the mean Average Precision (mAP) over 10 IoU thresholds of .50:.05:.95. This rewards the detectors with more accurate localization (\cite{li2014cocodataset}).
 
-The conclusions of the paper are as follows: "We presented DETR, a new design for object detection systems based on transformers and bipartite matching loss for direct set prediction. The approach achieves comparable results to an optimized Faster R-CNN baseline on the challenging COCO dataset. DETR is straightforward to implement and has a flexible architecture that is easily extensible to panoptic segmentation, with competitive results. In addition, it achieves significantly better performance on large objects than Faster R-CNN, likely thanks to the processing of global information performed by the self-attention. This new design for detectors also comes with new challenges, in particular regarding training,  optimization and performances on small objects. Current detectors required several years of improvements to cope with similar issues, and we expect future work to successfully address them for DETR." (\cite{carion2020endtoend}).
+Following the introduction of MS-COCO datasets in 2014, researchers started to pay more attention to the accuracy of object localization instead of using a fixed IoU threshold\footnote{A fixed IoU threshold is typically set at 0.5 or higher. Which value is best dependends on the accuracy demands of the sceneario, and is why retaining the ability to adjust the threshold is a good idea when implementing an object detector.} (\cite{zou2023object_detection_in_20_years}).
 
-\subsubsection{YOLOv9}
-\label{sec:yolov9}
-The YOLO (You Only Look Once) object detection algorithm is a popular choice for real-time object detection. YOLO processes images in a single pass, making it faster than traditional object detection algorithms that require multiple passes. YOLO divides the image into a grid and predicts bounding boxes and class probabilities for each grid cell. The YOLOv9 is an improved version of the original YOLO algorithm, incorporating various enhancements to improve detection accuracy and speed. The YOLOv9 model is pre-trained on the COCO dataset. This is previously introduced dataset contains 80 different classes which the model is able to detect. 
+The third method of measuring AP would be to vary both the confidence threshold and the IoU threshold. This would consider both the classification \textit{and} localization accuracy.
 
-\begin{myquote}{YOLOv9 author's comment on the DETR series}
-    "However, since it is extremely difficult for DETR series object detector to be applied to new domains without a corresponding domain pre-trained model, the most widely used real-time object detector at present is still YOLO series." (\cite{wa2024yolov9}).
+\subsection{Object Detection Algorithms}
+\label{sec:object_detection}
+This subsection includes a brief summarization of the evolution of object detection, including the transition from traditional methods to morw modern methods such as the YOLO series and vision transformers.
+
+The evolution of object detection can be divided into two major historical phases: before and after 2014, as illustrated in Figure \ref{fig:object_detect_20_years}. Prior to 2014, traditional object detection methods, such as the Viola-Jones detectors (\cite{vi2001viola-jones-orig}), Histogram of Oriented Gradients (HOG), and Deformable Part-Based Models (DPMs) were prevalent\footnote{These are just some honorable mentiones of some of the most sucessful and widely adopted models of the time (\cite{li2012violajonessuccessful})}. During this era, \textit{mixture models} were developed to improve detection granularity by recognizing the different parts of the same object, such as the doors and windows of a car.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Images/Diagrams/object_detection_20years.png}
+    \caption{\centering The evolution of object detection (\cite{zou2023object_detection_in_20_years})}
+    \label{fig:object_detect_20_years}
+\end{figure}
+
+Despite these advancements, it was not until the introduction of Region-based Convolutional Neural Networks (R-CNN) in 2014 that the accuracy of object detection systems began to improve significantly. This paradigm shift marked a substantial advancement in the field, leveraging deep learning techniques to enhance detection performance dramatically (\cite{zou2023object_detection_in_20_years}). The period following 2014 has seen rapid progress, introducing sophisticated object detectors like You Only Look Once (YOLO) and Detection Transformers (DETR). 
+
+\subsubsection{You Only Look Once (YOLO)}
+\label{sec:yolo}
+The YOLO (You Only Look Once) object detection algorithm is renowned for its efficiency in real-time object detection. YOLO divides the image into a grid and predicts bounding boxes and class probabilities for each grid cell. Unlike traditional object detection algorithms that require multiple passes through a network, YOLO processes images in a single pass. This approach significantly enhances detection speed. The YOLO algorithm was the first one-stage (single pass) detector, and led the way for the development of other various popular networks such as the RetinaNet and DETR.
+
+\paragraph{YOLOv3}
+YOLOv3 marked a significant advancement in the YOLO series by integrating multi-scale predictions and a deeper feature extractor. A deeper feature extractor refers to the use of more layers in the convolutional neural network (CNN), which allows the model to capture more complex features from the images. These improvements improved speed and accuracy from the first versions of YOLO.  
+
+\paragraph{YOLOv9}
+YOLOv9 represents what was the latest and most advanced version in the YOLO series at the beginning of this thesis project. It features numerous optimizations for faster training and increased accuracy, especially in challenging conditions such as low light and occlusions. YOLOv9's architecture is streamlined to reduce computational overhead, enabling it to perform well even on less powerful devices. This version also benefits from enhanced post-processing techniques that refine the accuracy of its predictions.
+
+\paragraph{YOLOv10}
+YOLOv10, built with ultralytics and RT-DETR, is the current latest addition to the series. The commit message "add yolov10" was made on 23rd of May, signalling the first date of the release.
+
+\subsubsection{Detection Transformers (DETR)}
+\label{sec:detr}
+The Detection Transformer (DETR) is an innovative machine learning method introduced by the Facebook (Meta) Research team. DETR leverages a transformer encoder-decoder architecture, similar to those used in natural language processing models. This architecture enables the model to handle complex object detection tasks by processing global information within images, rather than relying solely on local features. See Figure \ref{fig:detrarchitecture} for an illustration of the architecture.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Images/Diagrams/DETR2.png}
+\caption{\centering The architecture of the DETR model (\cite{carion2020endtoend}).}
+\label{fig:detrarchitecture}
+\end{figure}
+
+In the paper where DETR was first introduced, \citeauthor{carion2020endtoend} demonstrated that DETR outperforms several competitive baselines on tasks such as panoptic segmentation\footnote{This is a challenging pixel-level segmentation task where an image is divided into meaningful regions.}. They achieved these results by integrating a simple segmentation head trained on top of a pre-trained DETR.
+
+The conclusions of their study highlight the potential of DETR:
+
+\begin{myquote}
+    We presented DETR, a new design for object detection systems based on transformers and bipartite matching loss for direct set prediction. The approach achieves comparable results to an optimized Faster R-CNN baseline on the challenging COCO dataset. DETR is straightforward to implement and has a flexible architecture that is easily extensible to panoptic segmentation, with competitive results. In addition, it achieves significantly better performance on large objects than Faster R-CNN, likely thanks to the processing of global information performed by the self-attention. This new design for detectors also comes with new challenges, particularly regarding training, optimization, and performances on small objects. Current detectors required several years of improvements to cope with similar issues, and we expect future work to successfully address them for DETR. (\cite{carion2020endtoend})
 \end{myquote}
+
+The conclusions encapsulates the core innovations and findings of the DETR model. However, the authors also acknowledge the challenges that come with this new approach. Training and optimizing DETR is complex, especially when dealing with small objects. The initial performance issues on training and optimalization present challenges in terms of being able to fine-tune the models to a specialized dataset. Despite these challenges, the authors express optimism that DETR can overcome these initial hurdles, much like how earlier detectors evolved over time. 
+
+\subsubsection{Comparison of YOLO and DETR}
+
+While DETR offers a groundbreaking approach by utilizing transformers for object detection, its complexity and the need for domain-specific training models can limit its adaptability and scalability. In contrast, the YOLO series, particularly YOLOv9, provides a more robust solution for real-time applications. YOLO's ability to quickly process images, coupled with continual improvements in both speed and accuracy, makes it a more practical choice for diverse and dynamic environments.
+
+The introduction of YOLOv9 highlights a notable weakness in the DETR series. \citeauthor{wa2024yolov9} pointed out:
+
+\textit{However, since it is extremely difficult for DETR series object detector to be applied to new domains without a corresponding domain pre-trained model, the most widely used real-time object detector at present is still YOLO series.} (\citeyear{wa2024yolov9})
+
+This assessment underscores the flexibility and widespread adoption of the YOLO architecture in various operational contexts. In contrast, DETR's specialized and computationally intensive requirements make it less versatile for broader applications without significant adjustments and domain-specific training. Thus, while DETR presents a novel and highly effective approach, YOLO remains the preferred choice for real-time, adaptable object detection tasks.
 
 
 \subsubsection{Dark-Lit Environments}
 Being able to detect and locate people in dark-lit environments have been previously attempted, usually for security concerns in public spaces. \citeauthor{pa2020PersonDetectionNightTimeFLIR} developed a system for detecting people in dark-lit environments using a convolutional neural network (\citeyear{pa2020PersonDetectionNightTimeFLIR}). They modified the three input channels which usually take RGB to take as input instead (i) the original infrared image, (ii) a difference image from the previous frame, and (iii) a background subtraction mask. Their dataset is vastly different from the setting for this thesis, as the individuals in their photos were far away from the cameras. However, they found that their system was able to detect people in dark-lit environments with an accuracy of 90\%. This is a promising result, as it shows that it is possible to detect people in dark-lit environments using infrared imaging and CNNs. They used FLIR cameras, which make images from heat. Doing inferences on pure infrared images may be harder because the infrared radiation may be less prevalent than the heat a FLIR camera may capture. The FLIR cameras are expensive, and thus not considered viable for this project.
 
+The article "YOLO in the Dark - Domain Adaptation Method for Merging Multiple Models" by \citeauthor{Sasagawa2020YOLO} presents a novel approach for improving object detection in low-light conditions (\citeyear{Sasagawa2020YOLO}). 
 
-todo les YOLO in the Dark - Domain Adaptation Method for Merging Multiple Models
+The key findings are: 
+\begin{itemize}
+    \item Domain Adaptation Method: The proposed method merges pre-trained models from different domains using glue layers and a generative model, enabling adaptation to new tasks without additional datasets. 
+    \item Model Components: The YOLO-in-the-Dark model combines the "Learning-to-See-in-the-Dark" model with the YOLO model, enhancing object detection capabilities in low-light images. 
+    \item Generative Model: By creating latent features from existing datasets, the generative model trains glue layers efficiently, reducing the need for new data and computational resources. 
+    \item Performance: The YOLO-in-the-Dark model effectively detects objects in raw short-exposure low-light images with fewer computing resources than traditional methods.
+\end{itemize}
+
+These findings highlight the model's potential for efficient, high-performance object detection in challenging lighting conditions, making it a valuable tool for human detection applications in real-world low-lit environments.
 
 \subsubsection{Transfer Learning and the Effectiveness of Fine-tuning}
-\label{sec:dataset_specialization}
-Transfer learning is the process of transferring knowledge from a source domain to a different but related target domain. In practice, this means having a pre-trained model fine-tune on a dataset that is specialized for the task at hand. Extending a model's capabilities to learn to correctly identify a new object class or improving the detection accuracy are typical examples of transfer learning use cases. 
+\label{sec:transfer_learning_fine_tuning}
+Transfer learning is the process of transferring knowledge from a source domain to a different but related target domain. In practice, this means having a pre-trained model fine-tune on a dataset that is specialized for the task at hand. Extending a model's capabilities to learn to correctly identify a new object class or improving the detection accuracy are typical examples of transfer learning use cases. Recent research on transfer learning for object detection models demonstrates significant accuracy gains when fine-tuning pre-trained models compared to training from scratch. 
+
+\citeauthor{Wei2024FeatureCorrective} introduced Feature Corrective Transfer Learning (FCTL) in their study (\citeyear{Wei2024FeatureCorrective}). 
+This approach enhances object detection in non-ideal visual conditions by incorporating a feature similarity loss during training. The Non-Ideal 
+Image Transfer Faster R-CNN (NITF-RCNN) model, developed using this method, showed improved detection accuracy in challenging environments by 
+aligning feature maps between ideal and non-ideal images.
+
+Another approach used a generative model to create synthetic training data, which was then used to pre-train an object detector (\cite{TransferLearningGenerative2023}). This pre-trained detector was subsequently fine-tuned on a limited real dataset. This method, applied to detect cars in urban environments and fish in underwater settings, resulted in improved detection accuracy compared to using real data alone. The key advantage was leveraging the large synthetic dataset to enhance the detector's initial training phase before fine-tuning it on the actual data, yielding better performance in both domains. An illustration of the process is depicted in figure \ref{fig:training_data_generated}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Images/Diagrams/generated_training_images.png}
+    \caption[Transfer learning for object detection with generative models (\cite{TransferLearningGenerative2023})]{Transfer learning for object detection with generative models (\cite{TransferLearningGenerative2023})}
+    \label{fig:training_data_generated}
+\end{figure}
+
+Description for Figure \ref{fig:training_data_generated} as given by the authors:
+
+\begin{myquote}
+    We employ a L2I pretrained model to generate images for transfer learning to an object detector. We can filter out suboptimal generated images based on benchmark metrics. For instance, the image along the red arrow is discarded because the generative model has depicted many cars outside the bounding boxes designated in the grounding instruction. With the remaining generated images, we pretrain the object detector, followed by a fine-tuning on the real dataset. Dashed lines indicate the data used for training the models. (\cite{TransferLearningGenerative2023})
+\end{myquote}
+
+These findings highlight the effectiveness of transfer learning in improving the accuracy of object detection models, particularly when fine-tuning pre-trained models to adapt to new or challenging environments.
 
 \subsection{Third-Party Services}
 \label{sec:thirdparty}
@@ -506,80 +635,102 @@ Roboflow excels in scenarios requiring the detection of specific objects within 
 
 One application would be using Roboflow to train models on the CrowdHuman dataset todo denne beskrevet tidligere?. Users can train custom models using this dataset, fine-tuned for scenarios such as monitoring museum traffic. On Roboflows website, there are multiple guides for how such applications may be implemented.
 
-\subsubsection{GPT-4 with Vision on Object Detection}
-The well known large language models (LLM) have been generalized to perform more tasks, and are thus applicable to than just text. The ChatGPT-4 with Vision is one such large \textit{multimodal} model (LMM). Numerous solutions already incorporate OpenAI's chatGPT as a fundamental component of their product. Expanding the role of GPT to include visual processing could potentially yield additional benefits. LLMs with vision may enable applications capable of semantically understanding scenes. This could mean the application may for example understand when a riot is about to break out in a bar street in England, or when a fish tank feeding is taking place in the acquarium, and what the crowds general reactions are to the show \footnote{Detecting the mood of people is also much researched and could be implemented for images with high enough resolution and quality. One model would then detect people or faces, and another would get cut-outs of those faces to detect the mood of each individual.}. This may allow automated applications to provide insights to their users so they don't need to analyze the data. The resulting solution may be faster, less error prone and more scalable than the "surveillance-system with human interference"-paradigm we have today for public surveillance and intelligence.
+\subsubsection{OpenAIs Generative Pretrained Transformer 4 (GPT-4) with Vision}
+The well known large language models (LLM) have been generalized to perform more tasks, and are thus applicable to than just text. The GPT-4 with Vision is one such large \textit{multimodal} model (LMM). Numerous solutions already incorporate OpenAI's chatGPT as a fundamental component of their product. Expanding the role of GPT to include visual processing could potentially yield additional benefits. LLMs with vision may enable applications capable of semantically understanding scenes. This could mean the application may for example understand when a riot is about to break out in a bar street in England, or when a fish tank feeding is taking place in the acquarium, and what the crowds general reactions are to the show \footnote{There has been considerable research focused on detecting the mood of people. This requires high resolution images of good quality. One model would then detect people or faces, and another would get cut-outs of those faces to detect the mood of each individual.}. This may allow automated applications to provide insights to their users so they don't need to analyze the data. The resulting solution may be faster, less error prone and more scalable than the \textit{surveillance-system with human interference}-paradigm we have today for public surveillance and intelligence.
 
 One issue arises from the generative nature of the GPTs. It is not given that a model performing well one day will be as good the next. Many experiments are performed to measure the performance of the LMM, and some show promising results. However, most experiments are frozen in time and will not reflect how well the model may perform from one day to the next. This may result in models performing well when tested, but no longer doing their jobs post-deployment.
 
-To tackle this issue, a \href{https://www.gptcheckup.com/}{website} has been dedicated to measure how the GPT-4 with Vision \footnote{Previously called GPT-4V \href{https://platform.openai.com/docs/guides/vision}{https://platform.openai.com/docs/guides/vision}.} performs across a range of experiments. The website is made by the team at Roboflow, but let's other users submit their experiments for daily checkups through git pull requests. Out of 13 of the experiments currently posted, 5 have failed every day the last 7 days, and 2 have failed at least once in the last 7 days. One of the experiments, counting fruits in a bowl, is alternating every day between success and failure. This proves the point that generative models may still be considered too unreliable for many applications.
+To tackle this issue, a \href{https://www.gptcheckup.com/}{website} has been dedicated to measure how the GPT-4 with Vision\footnote{Previously called GPT-4V \href{https://platform.openai.com/docs/guides/vision}{https://platform.openai.com/docs/guides/vision}.} performs across a range of experiments. The website is made by the team at Roboflow, but let's other users submit their experiments for daily checkups through git pull requests. Out of 13 of the experiments currently posted, 5 have failed every day the last 7 days, and 2 have failed at least once in the last 7 days. One of the experiments, counting fruits in a bowl, is alternating every day between success and failure. This proves the point that generative models may still be considered too unreliable for many applications.
 
-The two preceding sections highlights the strengths and capabilities of third-party services such as Roboflow and GPT4-V, but there are some more downsides not yet mentioned that need to be evaluated before moving forward with a third-party option. Further discussion of third-party services are found in section \ref{sec:discuss_thirdparty}. 
+Further, in May 2024, OpenAI introduced it's newest edition of the renounced ChatGPT series; the ChatGPT-4o. \textit{o} is for omnimodal, and refers to it's ability to perform in a multitude of modalities, including vision. This model was tested for the task of object detection, but rendered unsatisfactory performances\footnote{The other GPT models \textit{Gemini}, \textit{GPT-4 with Vision}, and \textit{Claude 3 Opus} were previously tested for the identical task, and failed.}. A review of ChatGPT-4o, including a more in-depth description of the experiment on object detection, is found \href{https://blog.roboflow.com/gpt-4o-vision-use-cases/}{here}. The experiment is displayed in Figure \ref{fig:gpt4o_experiment}. ChatGPT-4o, misplaced two bounding boxes when prompted to detect the dog in the image.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Images/gpt4o_object_detection_just_dog.jpg}
+    \caption[ChatGPT-4o Object Detection Experiment]{\centering ChatGPT-4o Object Detection Experiment (\cite{ue2024chatgpt4o})}
+    \label{fig:gpt4o_experiment}
+\end{figure}
+
+The two preceding sections highlights the strengths and capabilities of third-party services such as Roboflow and GPT4-V, but there are some more downsides not yet mentioned that need to be evaluated before moving forward with a third-party option. Further discussion of third-party services are found in Section \ref{sec:discuss_thirdparty}.
 
 \subsection{Third-Party Products}
 \label{sec:thirdparty_products}
 Intelligent visual edge image/video devices seem to have an endless number of applications. In the following section we will take a look at some actors and their products to get an overview of the market of edge AI cameras.
 
-The target of products such as the 'EufyCam 3' and the 'Aqara FP2 mmWave' is the private smart home sector. The i-PRO's WV-S71300-F3 has many of the same functionalities but targets enterprises instead. These products can be seen in figure \ref{fig:solutions_on_the_market} and are presented in the following paragraphs.
+The target of products such as the 'EufyCam 3' and the 'Aqara FP2 mmWave' is the private smart home sector. The i-PRO's WV-S71300-F3 has many of the same functionalities but targets enterprises instead. These products can be seen in Figure \ref{fig:solutions_on_the_market} and are presented in the following paragraphs.
 
-\subsubsection{Eufy}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.2\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Products/eufycam3.jpg}
+        \caption{\centering EufyCam 3}
+        \label{fig:eufycam_3}
+    \end{subfigure}
+    \hspace{30pt}%
+    \begin{subfigure}{0.2\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Products/aquara_fp2.jpg}
+        \caption{\centering Aquara FP2}
+        \label{fig:aquara_fp2}
+    \end{subfigure}
+    \hspace{30pt}%
+    \begin{subfigure}{0.2\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Products/iPRO_wv-s71300-f3.png}
+        \caption{\centering i-PRO WV-S71300-F3}
+        \label{fig:i-PRO_camera}
+    \end{subfigure}
+    \caption{\centering Smart cameras from Aquara, Eufy and i-PRO}
+    \label{fig:solutions_on_the_market}
+\end{figure}
+
+\subsubsection{EufyCam 3}
 \label{sec:eufycam}
-The EufyCam 3 is a battery driven camera with solar a panel, only requiring two hours of sunlight to become fully charged. The EufyCam has functionality for face recognition. This is a self-learning AI which improves with time, up to an accuracy of 99.9\% \cite{eufycam}. To do this, the cameras communicate to an edge computing 'home base' to perform the machine learning tasks, and to save images to a hard drive. You may see an image of the EufyCam product in figure \ref{fig:eufycam_3}.
+The EufyCam 3 is a battery driven camera with solar a panel, only requiring two hours of sunlight to become fully charged. The EufyCam has functionality for face recognition. This is a self-learning AI which improves with time, up to an accuracy of 99.9\% \cite{eufycam}. To do this, the cameras communicate to an edge computing 'home base' to perform the machine learning tasks, and to save images to a hard drive. You may see an image of the EufyCam product in Figure \ref{fig:eufycam_3}.
 
-The EufyCam deals with low light situations in two different ways: a motion activated spotlight, turning on to film in the dark with a self-provided source of light, and a black and white night vision using six infrared LEDs to capture the video. There's also functionality to set activity areas, and to detect animals or cars. 
+The EufyCam deals with low light situations in two different ways: a motion activated spotlight, turning on to film in the dark with a self-provided source of light, and a black and white night vision using six infrared LEDs to capture the video. There's also functionality to set activity areas, and to detect animals or cars.
 
-Eufy's product does not assure privacy by deleting or obscuring images, but rather keeps them on the local area network (LAN). The user's privacy is preserved through storing the videos and images on a private in-house 1TB device, communicated from the camera devices via 2.4GHz WiFi.  
+Eufy's product does not assure privacy by deleting or obscuring images, but rather keeps them on the local area network (LAN). The user's privacy is preserved through storing the videos and images on a private in-house 1TB device, communicated from the camera devices via 2.4GHz WiFi.
 
 The EufyCam 3 product is an edge computing device, and the Prasidh Chhadbria, director of Harvard Undergraduate AI, highlight three main advantages of the edge computing approach (\citeyear{ch2022youtube_edge_computing_eufycam}). (1) Time saved, as the edge devices do not have to constantly send a lot of data to the cloud; (2) Save on cost in terms of cheaper local storage, rather than more expensive cloud storage; (3) Privacy. The data is not sent to another server, but exists on the device itself so you have more control over where your data is going.
 
 
-\subsubsection{Aqara}
-The Aqara FP2 utilizes multiple passive infrared (PIR) sensors rather than a RGB camera to make detections. The FP2 may detect falls, and can localize up to 5 persons in an area, but a device may only do one of the functionalities at a time. This is due to the fact that fall detection requires the device to be mounted in the ceiling, while presence detections are only accurate when the device is mounted on the wall. 
+\subsubsection{Aqara Presence Sensor FP2}
+The Aqara FP2 utilizes multiple passive infrared (PIR) sensors rather than a RGB camera to make detections. The FP2 may detect falls, and can localize up to 5 persons in an area, but a device may only do one of the functionalities at a time. This is due to the fact that fall detection requires the device to be mounted in the ceiling, while presence detections are only accurate when the device is mounted on the wall.
 
-However, the devices has more functionalities. With the ability to set rules for separate zones in the area, one may toggle lights only where a person is located, for example over a workbench. Making this application part of a visual system would possibly facilitate for more applications such as being able to automatically label specific items in the area. One could combine the use of zones with a visual computing module where it would only compute and analyze data, not only when something in the frame is moving (which is typical for wildlife detection cameras (\ref{sec:deletion_of_images})), but when certain rules are triggered, such that a person has been located in a certain zone for a specified amount of time.   
+However, the devices has more functionalities. With the ability to set rules for separate zones in the area, one may toggle lights only where a person is located, for example over a workbench. Making this application part of a visual system would possibly facilitate for more applications such as being able to automatically label specific items in the area. One could combine the use of zones with a visual computing module where it would only compute and analyze data, not only when something in the frame is moving (which is typical for wildlife detection cameras (\ref{sec:deletion_of_images})), but when certain rules are triggered, such that a person has been located in a certain zone for a specified amount of time.
 
 \subsubsection{i-PRO}
-Another big actor is i-PRO, providing AI network cameras to the market with edge computed people counting, face detection, and people attribute search 
+Another big actor is i-PRO, providing AI network cameras to the market with edge computed people counting, face detection, and people attribute search
 (See their product: \href{https://i-pro.com/products_and_solutions/en/surveillance/products/wv-s71300-f3}{product wv-s71300-f3}). The applications of the cameras they offer are often video monitoring and security features. i-PRO has informational web pages about surveillance policies and security. Most, if not all, of their cameras are NDAA compliant as well, which is a requirement to use them on american federal ground with regards to who produces the hardware of the system. Trusted manufacturers is a requirement for products capable of breaching privacy. See \href{https://i-pro.com/}{i-PRO's website} for more information.
 
-i-PRO had a big project where over a 100 cameras were installed in a arts museum in Monaco, where their cameras AI VMD that will give intrusion alerts when movement is detected in areas that should not be accessed, and virtual line crossing, giving alerts when people have crossed a digitally set line of an image. They also had AI scene change detection, detecting any changes in the image in a fixed part of the scenery. Also, AI people detection was used so to generate details about the visitors, so that guards that were interested in specific individuals had to opportunity to track specific individuals. These applications also generated statistics so the costumer had an overview of knowing in real time how many visitors were in the museum and even in the separate rooms or in front of each gallery. The cameras used in this solution were all fish-eye models, illustrating how fish-eye lenses may be the way to go for inside-application areas. 
-
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}{0.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Images/Products/eufycam3.jpg}
-        \caption{EufyCam 3}
-        \label{fig:eufycam_3}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Images/Products/aquara_fp2.jpg}
-        \caption{Aquara FP2}
-        \label{fig:aquara_fp2}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Images/Products/iPRO_wv-s71300-f3.png}
-        \caption{i-PRO WV-S71300-F3}
-        \label{fig:i-PRO_camera}
-    \end{subfigure}
-    \caption{Smart cameras from Aquara, Eufy and i-PRO}
-    \label{fig:solutions_on_the_market}
-\end{figure}
+i-PRO had a big project where over a 100 cameras were installed in a arts museum in Monaco, where their cameras AI VMD that will give intrusion alerts when movement is detected in areas that should not be accessed, and virtual line crossing, giving alerts when people have crossed a digitally set line of an image. They also had AI scene change detection, detecting any changes in the image in a fixed part of the scenery. Also, AI people detection was used so to generate details about the visitors, so that guards that were interested in specific individuals had to opportunity to track specific individuals. These applications also generated statistics so the costumer had an overview of knowing in real time how many visitors were in the museum and even in the separate rooms or in front of each gallery. The cameras used in this solution were all fish-eye models, illustrating how fish-eye lenses may be the way to go for inside-application areas.
 
 \subsubsection{Viso}
 \label{sec:viso}
-Viso.ai has applications for nearly every use case from abandoned luggage at airports, real time video stream weapon detections, detection of stopped vehicles, to parking space information. Their no-code platform (Viso Suite) enables a fast pipeline for developing new applications out of existing software. Viso.ai also has a lot of great articles on their web page regarding visual computing topics (see for example \cite{bo2023yolov7_guide}). The Viso Suite is marketed as a way to "Automate manual work, reduce development costs, solve scaleability, privacy and security end-to-end, accelerating every step of the enterprise computer vision development life cycle". (This thesis is not sponsored).
+Viso.ai offers products for nearly every use case from abandoned luggage at airports, real time video stream weapon detections, detection of stopped vehicles, to parking space information. Their no-code platform (Viso Suite) enables a fast pipeline for developing new applications out of existing software. Viso.ai also has a lot of great articles on their web page regarding visual computing topics (see for example \cite{bo2023yolov7_guide}). The Viso Suite is marketed as a way to \textit{Automate manual work, reduce development costs, solve scaleability, privacy and security end-to-end, accelerating every step of the enterprise computer vision development life cycle}. (This thesis is not sponsored).
 
-\subsubsection{VMukti} 
-Not only does VMukti have some of the longest and most confusing product names on the market ("Real-time Edge AI based Smart Cloud Camera"), but also some of the biggest fishes in their pond of costumers. This pond includes Google, Amazon Web Services, Azure \textit{and} Microsoft. Azure, owned by Microsoft, \textit{and} Microsoft.. Anyways, one of their products, the "Real-time Edge AI based Smart Cloud Camera", provides the user with a live stream of video from the camera. This may create privacy issues should the wrong user get access to the video stream, and it is likely demanding more power and network bandwidth than what it would take to only communicate the results of an analysis. VMukti's other product, the "Edge AI Based 5MP PTZ ANPR Bullet Camera VM-72BPTZ5AIVE" has some cutting edge technologies, including "local data processing, filtered data transfer to the cloud and faster decision-making". However, it's hard to figure out from their website what data is processed locally, and what their decision-making is faster than.
+\subsubsection{VMukti}
+Not only does VMukti have some of the longest and most confusing product names on the market (\textit{Real-time Edge AI based Smart Cloud Camera}), but also some of the biggest fishes in their pond of costumers. This pond includes Google, Amazon Web Services, and Microsoft\footnote{Also Azure, which is owned by Microsoft}. One of their products, the Real-time Edge AI based Smart Cloud Camera, provides the user with a live stream of video from the camera. This may create privacy issues should the wrong user get access to the video stream, and it is likely demanding more power and network bandwidth than what it would take to only communicate the results of an analysis. VMukti's other product, the \textit{Edge AI Based 5MP PTZ ANPR Bullet Camera VM-72BPTZ5AIVE} is listed with cutting edge technologies, including \textit{local data processing, filtered data transfer to the cloud, and faster decision-making}. However, it's hard to figure out from their website what data is processed locally, and what their decision-making is faster than.
 
-For outside monitoring, VMukti offer cameras that may connect through the mobile network, for monitoring outside remote locations. 
+VMukti delivers solutions for surveillance of vehicles, school buses, healthcare, shopping malls, smart cities, warehouses, campuses, examinations, premises, elections and banking. For outside monitoring, VMukti offer cameras that may connect through the mobile network, for monitoring outside remote locations.
 
-VMukti delivers solutions for surveillance of vehicles, school buses, healthcare, shopping malls, smart cities, warehouses, campuses, examinations, premises, elections and banking.
-
-
+\newpage
 \subsection{Summary of Literature Review}
-A summarization of the current state of research, and where my thesis aims to contribute.
+The literature review covers a wide range of topics crucial to the development and implementation of on-device processing systems for human detection and tracking in sensitive environments like museums and aquariums. The following paragraphs provide a summarized overview of the key areas discussed:
+
+\paragraph{Visitor behaviour Analysis:}
+The review explores alternative, cost-effective methods such as mobile apps and RFID tracking for visitor behaviour analysis. These technologies provide scalable solutions without the privacy concerns associated with video-based systems. Different perceptions among museum stakeholders (curators vs. administrators) highlight the diverse needs and expectations regarding visitor analytics technologies.
+
+\paragraph{Privacy Concerns and Data Regulation:}
+Insights into user perceptions of privacy in smart home environments reveal a trade-off between convenience and privacy concerns, indicating similar challenges could arise in public visitor contexts. The section on GDPR highlights the requirements for personal data protection and the legal bases for processing such data, which are directly applicable to any human localization system developed. Together with the NIS2 directive, the GDPR promotes the principle of data minimization, pushing for a solution that deletes unnecessary data as soon as the data is redundant.
+
+\paragraph{Technical Aspects of Human Detection:}
+The review delineates the privacy advantages of on-device processing over cloud-based systems, emphasizing the importance of local data processing to mitigate privacy risks. Exploration of technologies like federated learning and differential privacy illustrates advanced methods for protecting individual privacy while utilizing data for machine learning.
+
+\paragraph{Impact of Dataset Specificity:}
+The effectiveness of model performance when fine-tuned on specialized versus general datasets is discussed, which ties directly to the thesis objective of evaluating model performance in specific deployment environments.
+
+\paragraph{Third-Party Services and Technologies:}
+Roboflow and GPT-4 with Vision are evaluated for their utility in building and deploying object detection models, with considerations on their implications for privacy and data security in real-world applications.

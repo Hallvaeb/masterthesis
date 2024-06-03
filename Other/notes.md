@@ -20,3 +20,10 @@ Ga to mellomrom i referanselisten:
 % "{Cynthia Dwork and McSherry, Frank and Nissim, Kobbi and Smith, Adam}",
 Funket fint når endret til:
 author={Cynthia Dwork and Frank McSherry and Kobbi Nissim and Adam D. Smith},
+
+
+spm: skal man ha med vurderinger sånn som time to label? JEg har noen tall.. .men usikker på om det er relevant å nevne hva jeg har brukt av tid på de ulike stegene. KAnskje oppsummere på slutten hva jeg tenker tiden har gått til?
+context: Time to label varied greatly. For instance, the 466 images of the 3rd iteration image-capturing session had detections in all but 10 images, making it much faster to verify the images. This was done in 3 hours, from raw images to having deleted unwanted images, set bounding boxes for the false negatives, and deleted the false positives. The 1st iteration images, however, took a great deal longer. 
+
+
+

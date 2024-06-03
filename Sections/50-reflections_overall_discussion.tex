@@ -1,0 +1,83 @@
+\section{Reflections \& Overall Discussions}
+This chapter will discuss the broader implications of the results, summarizing the results and their significance for the development of similar systems, and whether or not the approach in this thesis is a viable solution for the presented problem. To maintain flow, the research questions from the introduction of this thesis are restated and addressed in the end of this discussion.
+
+
+\subsection{Visitor Behaviour Analysis}
+
+
+\subsection{Privacy in Images}
+In the edge computing paradigm, the developer has the option to choose what should happen to the image post-analysis. Having the device delete the image and only send the anonymous analysis results is what makes the device the most privacy preservant, but obfuscation may be a preferable approach in some cases. While the former is advantageous when the technology is verified or a certain degree of analysis error is acceptable, the latter makes it easier to develop and verify the technology as one may to some degree verify the analysis results.  Obscuring the images also has the advantages of transparency regarding the origin of analysis results, which in some cases proves beneficial as the end-users may want to verify and understand the data. Some approaches to obfuscating an image were displayed, where blurring the whole image certainly is the easiest option to avoid having to detect faces. 
+
+\citeauthor{ed2012privacy_review} reported blurred images to not be privacy preservant (\citeauthor{ed2012privacy_review}). However, one could argue the results of this study are invalid due to multiple reasons. 
+\begin{itemize}
+    \item The age of the paper. Opinions may have changed since the publication in 2012, i.e. people may be either more or less sceptical.  
+    \item Due to the way the questionnaire had multiple methods of preserving privacy where some were clearly more privacy preservant than the others, participants may have felt urged to select blurred videos to be privacy violating due to the fact they were much less privacy preservant than some others, albeit they were not really in fact privacy violating had they been evaluated by themselves.
+    \item One could also argue about the demographic of participants, and that the results of the study would possibly not apply to Scandinavian countries where the general trust to public institutions is significantly higher than in the United States. This builds on a hypothesis that people in Scandinavian countries may be more inclined to trust obfuscation methods to protect privacy, which is yet to be explored. 
+\end{itemize}
+
+This discourse will prove relevant in addressing the research question of how a system may mitigate privacy concerns, and in the primary objective of developing a privacy preservant system.
+
+\subsection{Third-party Services}
+\label{sec:discuss_thirdparty}
+As we've seen in Section \ref{sec:thirdparty}, third-party services offer convenient solutions that may align perfectly with specific requirements for object detection systems, providing a quick and efficient path to implementation. There are potential drawbacks, however. These are listed below.
+
+\subsubsection{Drawbacks of Utilizing Third-Party Services}
+\begin{enumerate}
+    \item \textbf{Complete Control Over the System:} Developing your own application allows for full customization in terms of software architecture, data processing, and system integration. This total control facilitates the optimization of the system to meet specific performance and operational requirements. In addition, a system built separately would have the benefit of being independent from the performance and existence of Roboflow.
+    \item \textbf{Data Privacy and Security:} On-device processing ensures that all data processing is kept on-device, enhancing data security and privacy. Roboflow offers local deployment, but this comes as part of their more expensive business-level subsxription plan.
+    \item \textbf{Cost Efficiency:} Managing your own system can be more cost-effective in the long run, particularly if the application demands extensive processing power or high throughput, as it eliminates recurring costs associated with third-party platforms. Roboflow's plans include costs related to "inference credits", making the system great for small applications but less likely to be a good fit for bigger enterprise solutions looking to leverage the margins. GPT4-V may be accessed via Azure's OpenAI service, which is also priced by how much the service is used and how
+    \item \textbf{Performance Optimization:} Owning the inference system allows for hardware and software optimizations that are not possible when using third-party services. This can lead to better performance, especially in terms of processing speed and latency.
+    \item \textbf{Scalability and Integration Flexibility:} Implementing your own solution allows for easier scaling and integration with existing IT infrastructure, which is beneficial for maintaining seamless data workflows and supporting business growth without being limited by external platform constraints.
+\end{enumerate}
+
+While leveraging third-party services can expedite development, it is imperative for researchers and practitioners in the field of object detection, particularly in contexts such as person detection where privacy may be of cencern, to carefully weigh these considerations. Exploring alternative methods of implementation, including developing systems from scratch, can offer greater flexibility, control, and potential for innovation.
+
+\subsection{On the Ethicality of Person Localization Systems Development}
+\label{sec:discussion_ethics_localization_tech}
+History has shown Kant's categorical imperative to function as a guiding principle in smaller groups, but these principles fail once the size of societies passes a certain threshold where internal in- and out groups are forming. This is apparent, as wars and failure of governments to provide basic humanitary aid to those in need is still an issue. Enabling further mass public control through automated human localization devices may be a bad idea. This is also the case in areas where conflicts are not the current issue, but ways of tipping an election through improved intelligence or influence on the mass public may be the threat. 
+
+People may use Kant's deontological ethics to argue why they don't want systems to gather intelligence on them, without being able to accurately reflect about the consequences; posing arguments such as "it is just wrong" or similar. As seen in Section \ref{sec:smarthomeprivacy}, this principle will work until the convenience of devices surpass the desire to preserve privacy. This constitutes a need for a stronger motivation to uphold the individual privacy, once technology capabilities surpass these desires. We already agree to surveillance in many public spaces for surveillance reasons. We have also accepted having devices in our homes and pockets listening for a "Hi Siri", "Okay Google", or "Alexa". The future may also include devices that will locate you in your room, detect if you fall, or turn the TV on once you move into the living room area. Not to speak about the attention-encapsulating experience these intelligent automations may entail, they would also pose a threat to privacy in the cases where the companies have legal bases for processing of personal data where "it is necessary for the performance of a contract to which the data subject is a party" (see Section \ref{sec:legal-bases-processing-personal-data}).
+
+Redmon's quote "[...] I bought in to the myth that science is apolitical and research is objectively moral and good no matter what the subject is." reflects a deontological approach to ethics, which may fail to consider the impacts of actions. 
+
+As proven by the third-party services and products, however, there are also many positive impacts of computer vision applications, e.g. self-driving cars, automated fall detection, and automated waste filtering for recycling. Democracy is designed so it is up to the people themselves to decide whether the benefits outweigh the risks. To put it in utilitarian terms: will the overall happiness or utility be improved or worsened by the development of said systems and applications?
+
+Drawing from the literature on utilitarianism and ethical consequences, it is evident that the deployment of these technologies necessitates a balanced and comprehensive approach. Utilitarianism suggests that we must weigh the potential benefits of increased safety, efficiency, and convenience against the risks to privacy and individual freedoms. The key challenge for developers and policymakers is to maximize the net positive impact—enhancing societal well-being while minimizing adverse outcomes. This perspective underscores the importance of rigorous impact assessments and ethical considerations in the development and implementation phases of these technologies.
+
+Modern philosophical discourse, as highlighted by thinkers like Harris, Russell, and Yudkowsky, also offers critical insights, particularly regarding the broader ethical and regulatory challenges posed by AI. Although their primary concerns revolve around the long-term implications and governance of artificial general intelligence, their emphasis on the need for informed and effective regulation is highly pertinent. While ethical considerations are crucial, it's important not to stifle innovation. 
+
+In conclusion, the ethical deployment of computer vision technologies requires a multi-faceted approach. Utilitarian principles call for maximizing societal benefits while minimizing harms, and modern philosophical discourse on AI regulation highlight the necessity for informed policymaking. By integrating these diverse ethical frameworks, society can better navigate the complexities of technological advancement, fostering developments that are both beneficial and just.
+
+\subsubsection{Broader Impacts}
+The practical demonstation of basic-level computer vision technology in the project of this thesis, plays a tiny role in advancing technology, while the thesis addresses critical ethical and privacy concerns in a much more comprehensive and possibly impactful way. The increased efficiency and convenience\footnote{Hopefully also safety in the future. Also not mentioned is the personal desire to complete the master thesis degree.} outweights potential privacy infringements in the live aquarium experiment of the project. This ethical consideration aims to convey the message of the need for a thoughtful and comprehensive approach in developing and implementing technology. Developers bear a significant responsibility to ensure ethical performance, as the public often fails to recognize these issues and regulations lag behind.
+
+The rapid pace of AI development necessitates that regulators possess a nuanced understanding of the technologies they seek to govern, ensuring that laws and policies are both protective and conducive to innovation. Developers should be encouraged to pursue creative solutions while adhering to ethical guidelines. A balance between innovation and ethics must be achieved through collaborative efforts between technologists, ethicists, policymakers, and the public, and this thesis may serve as a collaborative and communicative medium for this.
+
+By upholding the aforementioned ethical standards and evaluating the potential outcomes of the project, we can justify the development of the system in this thesis project. Recognizing that the benefits to societal advancement and the contributions to ethical discourse make such progress acceptable and valuable.
+
+
+\subsection{Methodology}
+
+
+Despite it's Apache-2.0 license, the DETR showed too bad performance in object detection to be part of a satisfactory system.
+
+
+\subsection{Results}
+
+\subsection{The Broader Context Results}
+
+\subsection{Research Questions}
+\begin{enumerate}
+    \item What are some privacy risks associated with traditional human localization systems in public spaces, and how may a system mitigate these privacy concerns?
+
+    Privacy risks include unauthorized data collection, misuse of personal data, and lack of transparency in data handling. On-device processing mitigates these concerns by keeping data localized, enhancing security and privacy, and allowing users greater control over their data.
+
+    \item How does the validity of object detection model evaluations change when using data specifically from the intended deployment environment compared to using generic datasets?
+
+    The validity of object detection model evaluations improves when using data from the intended deployment environment because the model can better learn the specific features and variations present in that context. Generic datasets may not capture these nuances, leading to less accurate evaluations and performance.
+
+    \item What are some machine learning architectures suitable for object detection in a real-world deployment scenario?
+    \item How many images are needed for testing before the average precision of a machine learning model converges in a single-environment setting?
+\end{enumerate}
+
+

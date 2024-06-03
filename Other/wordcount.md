@@ -1,0 +1,1 @@
+The Party seeks power entirely for its own sake. We are not interested in the good of others; we are interested solely in power, pure power. 
