@@ -1,4 +1,4 @@
-## "main.pdf" in the the top level directory is the thesis document. Code may be find in the Code folder.
+## "main.pdf" in the the top level directory is the thesis document. Code may be found under Others/Code/.
 
 This master thesis project is considered finished. Feel free to read, but it's not meant for other than myself (version control) and my supervisor Amund Skavhaug. Let me know if you're interested or have comments at hallvard.bjorgen@gmail.com.
 
