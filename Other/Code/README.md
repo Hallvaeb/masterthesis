@@ -1,4 +1,4 @@
-# Description for the thesis code in this folder
+# Description for Thesis Code
 If further explanations are needed, feel free to contact hallvard.bjorgen@gmail.com.
 
 ## Device
