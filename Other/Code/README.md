@@ -6,6 +6,7 @@ capture_store was used to collect the images for the dataset. It simply captures
 
 Utils:
 In Utils/ is the scripts used for creating a daily log file (which the detections was stored within) and sending this daily log. The code is to perform the inference, to setup the camera, to instantiate the logger class, and to upload the log. 
+renamelogs is likely not relevant for anyone, but is kept in case I need to rename my logs. It was used to convert the logs file names to correct date format.
 
 
 UTILS FOLDER:
@@ -13,7 +14,7 @@ Some of the code in utils/ is mentioned in the thesis, and was mainly used to co
 
 
 ANALYTICS:
-Here are the heatmap generation code. Note that the code is not optimized. The best template for creating heatmaps would be the simple heatmap.py file.
+Here are the heatmap and peak hours generation code. Note that the code is not optimized. The best template for creating heatmaps would be the simple heatmap.py file.
 logs_to_df.py reveals the basic dumb way that was used to read data from log files to a dataframe.
 
 The daily txt log file looks like this:
@@ -30,8 +31,7 @@ Detection 3: Confidence: 0.36. Box coords: [575, 90, 631, 186].
 09:20:52: 46.66s File 'hallvard-210224-092037-3.jpg' uploaded.
 09:20:55: 49.15s -------------FINISH-------------
 
-
-
-
+To create an environment for the analytics code:
+'''conda env create -f environment.yaml'''
 
 If further explanations are needed, contact hallvard.bjorgen@gmail.com
