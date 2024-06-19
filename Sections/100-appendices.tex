@@ -4,20 +4,13 @@
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Images/Code Screenshots/camerahandler.png}
-	\caption{CameraHandler class initialization.}
+	\caption{CameraHandler Class Initialization}
 	\label{fig:code_camerahandler}
 \end{figure}
 
-\section{Technical Challenges}
-\paragraph{Pi out of memory on image capture}
-Context: tweaking camera settings, leading to larger size images
-Error: mal port enable failed to enable connected port... Out of resources.
-Solution: allocating more memory to the GPU by going through raspi-config Performance Options -> GPU Memory
+An attempt was made to set the AWB (Automatic White Balance) gains on the Pi camera, but the setting had no effect.
 
-\paragraph{AWB Gains}
-Context: setting picamera.awg gains has no effect
-Error: no change
-Solution: set awb gains after awb mode has been set to off, and capture an image. The control seems to not set before after capturing an image. Thus, setting these values and then checking the values, it might seem the modification has not been made altough it will show on the images.
+The solution was that AWB gains adjustments only take effect after the AWB mode is set to 'off'. Additionally, the new settings are not applied until after an image is captured. Therefore, to ensure that the AWB gains were effectively set, it was necessary to first disable the AWB mode, capture an image, and then adjust the gains. This sequence ensured that changes were accurately reflected in subsequent images. Figure \ref{fig:code_camerahandler} displays the ordering of settings for consistent image capture. 
 
 \section{Camera Settings Explanation}
 \label{app:camera_settings_explanation}

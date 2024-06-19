@@ -1,39 +1,37 @@
 \begin{abstract}
-Placeholders:
+	This thesis investigates the development and ethical implications of on-device processing person localization systems in public spaces, with a focus on maintaining high standards of privacy. As modern surveillance technologies become increasingly pervasive, there is a pressing need to balance technological advancements with privacy concerns. This thesis demonstrates the feasibility of using on-device processing for object detection on images to significantly enhance data privacy and security while providing actionable insights into visitor behavior in public venues.
 
-% hva er gjort
-\textit{What}
+	The results of this study found that the accuracy of the investigated object detection models were significantly improved when evaluated with deployment-specific images instead of images in generic datasets. The object detection model \textit{YOLOv9} achieved an average precision score of 91.3\% on a deployment-specific dataset collected for this thesis project, substantially higher than the 55.6\% average precision the same model achieves on the COCO validation set (\cite{wang2024yolov9}). This highlights the importance of contextually relevant images in the evaluation of model precisions in practice. Furthermore, the research delves into various ethical considerations, discussing the potential risks associated with mass surveillance and the importance of maintaining a balanced approach that respects individual privacy rights while harnessing the benefits of technological innovations.
 
+	The principal contributions of this thesis include:
+	\begin{enumerate}
+		\item The \textit{FIMUS} dataset was gathered, labeled, and released.
+		\item A person localization system was developed and deployed at the Fisheries and Maritime Museums (FIMUS) aquarium in Esbjerg, Denmark. The resulting data was visualized through heatmaps and bar charts, and its relevance to museum curators and administrators was discussed.
+		\item Images of varying degrees of quality and relevance to the deployment scenario were utilized to fine-tune object detection models, assessing the impact of data quality and relevance on accuracy of the fine-tuned models.
+		\item A comprehensive review and discussion of literature regarding privacy, ethics, and the technology.
+	\end{enumerate}
 
-% Hvorfor er arbeidet gjort
-\textit{Why}
+	The practical implementation of the system at the \textit{Fisheries and Maritime Museums} aquarium provides a real-world application of the discussed concepts, showcasing the potential of implementing on-device processing for person localization systems to improve operational efficiencies and visitor experiences without compromising privacy. The thesis also explores future research directions, including enhancing dataset diversity, exploring advanced privacy-preserving techniques, and expanding the technology's application beyond person detection to include features such as fall detection and visitor interaction tracking.
 
-
-% Hvordan er det gjort
-\textit{How}
-
-
-% Hva ble prinsipielt / hoved resultat(er)
-\textit{Principal contributions}
-
-
-% prinsipiell konklusjon
-\textit{Principal conclusion}
-
+	In conclusion, this thesis demonstrates that on-device processing effectively preserves individual privacy, aligning with data protection regulations. It contributes insights into the development and implementation of privacy-preserving person localization systems, addressing both their technical and social dimensions. This work provides a comprehensive understanding of the challenges and opportunities associated with these systems. To further enhance the relevance and applicability of the locational data, collaboration with museum administrators is essential to align the system's capabilities with their specific needs. This approach ensures that technological advancements not only uphold societal well-being but also protect individual privacy, advocating for ongoing innovation guided by rigorous ethical standards and practical engagements.
 \end{abstract}
 
+\newpage
 \renewcommand{\abstractname}{Sammendrag}
 \begin{abstract}
-Plassholdere:
-	% hva er gjort
-	\textit{Hva}
-	% Hvorfor er arbeidet gjort
-	\textit{Hvorfor}
-	% Hvordan er det gjort
-	\textit{Hvordan}
-	% Hva ble prinsipielt / hoved resultat(er)
-	\textit{Prinsipielle bidrag/resultater}
-	% prinsipiell konklusjon
-	\textit{Prinsipiell konklusjon}
+	Denne avhandlingen undersøker utviklingen og de etiske implikasjonene av \textit{on-device} prosesserende personlokaliseringssystemer i offentlige rom, med fokus på opprettholdelse av personvern. Ettersom moderne overvåkningsteknologier stadig blir mer utbredt, er det et presserende behov for å balansere teknologiske fremskritt med personvernhensyn. Denne avhandlingen viser at det er mulig å benytte \textit{on-device} prosessering i objektdetektesjon på bilder til å øke datasikkerhet og personvern, samtidig som den gir nyttig innsikt i besøkendes adferd i kulturelle institusjoner.
 
+	Resultatene av studien fant at presisjonen til de undersøkte objektdeteksjonsmodellene forbedres betydelig når de ble evaluert med bilder spesifikt for utplasseringen i stedet for bilder fra generiske datasett. Objektdetekteringsmodellen \textit{YOLOv9} oppnådde en gjennomsnitlig presisjon på 91.3\% på datasettet fra prosjektet i denne avhandlingen, hvilket er mye enn 55.6\% som er det den samme modellen oppnår på \textit{COCO} valideringssettet (\cite{wang2024yolov9}).	Dette understreker viktigheten av kontekstuelt relevante bilder i vurderingen av modellenes nøyaktighet i praksis. Videre går forskningen inn på ulike etiske betraktninger, og diskuterer potensielle risikoer knyttet til massesurveillance og viktigheten av å opprettholde en balansert tilnærming som respekterer individuelle rettigheter til privatliv samtidig som man utnytter fordelene ved teknologiske innovasjoner.
+
+	De viktigste bidragene fra denne avhandlingen inkluderer:
+	\begin{enumerate}
+		\item Datasettet \textit{FIMUS} ble samlet, merket og utgitt.
+		\item Et personlokaliseringssystem ble utviklet og implementert i Fiskeri og Søfartsmuseets akvarium i Esbjerg, Danmark. Resulterende data ble visualisert, og dataens relevans for museumsforvaltere og administratorer diskutert.
+		\item Bilder av ulik kvalitet og relevanse for implementeringsscenarioet ble brukt til å finjustere objektdeteksjonsmodeller, for å vurdere påvirkningsgraden av kvalitet og relevanse av bilder på nøyaktigheten av de finjusterte modellene.
+		\item En omfattende gjennomgang og diskusjon av litteratur om personvern, etikk og teknologi.
+	\end{enumerate}
+
+	Den praktiske implementeringen av systemet i \textit{Fiskeri- og Søfartsmuseet} gir en virkelig anvendelse av de diskuterte konseptene, og viser potensialet av å implementere \textit{on-device} prosessering i personlokaliseringssystemer til å forbedre operasjonell effektivitet og brukeropplevelser uten å gå på kompromiss med personvern. Avhandlingen utforsker også fremtidige forskningsretninger, inkludert å forbedre mangfoldet i datasett, å utforske avanserte teknikker for personvernbevarelse, og å utvide teknologiens anvendelse utover persondeteksjon til å inkludere funksjoner som deteksjon av fall og sporing av besøkendes interaksjoner.
+
+	Den prinsipielle konklusjonen som denne avhandlingen viser, er at \textit{on-device} prosessering effektivt bevarer individets personvern, i tråd med regelverk for databeskyttelse. Den bidrar med innsikter i utviklingen og implementeringen av personlokaliseringssystemer som bevarer personvernet, og tar for seg både tekniske og etiske aspekter ved disse systemene. Avhandlingen gir en omfattende forståelse av utfordringene og mulighetene som er forbundet med disse systemene. For å ytterligere forbedre relevansen og anvendeligheten av lokaliseringsdataen, er samarbeid med museumsadministratorer essensielt for å tilpasse systemets kapabiliteter til deres spesifikke behov. This thesis supports the notion that technological advancements should not only enhance societal well-being but also protect individual privacy, and argues that continuous innovation must be guided by strict ethical standards and guidelines.
 \end{abstract}

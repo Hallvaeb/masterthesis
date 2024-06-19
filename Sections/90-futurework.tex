@@ -1,16 +1,29 @@
 \section{Future Work}
+\label{sec:future_work}
+This section outlines a comprehensive research agenda based on the findings of the thesis, addressing outstanding questions and challenges to advance the field of on-device processing person localization systems.
 
-Recommendations for future work include the following.
+\paragraph{Evaluation of Fine-Tuned Models on Generic Datasets}
+While this thesis has demonstrated the importance of using deployment-specific data for model evaluations, future research should include a comprehensive assessment of fine-tuned models on generic datasets. This will help establish a more complete understanding of the models' generalizability and their performance across diverse environments, thereby validating their robustness and applicability in varied scenarios.
 
+\paragraph{Enhancing Dataset Diversity and Quality}
+Expanding the FIMUS dataset to encompass a variety of environments and conditions would enrich the robustness of future models and facilitate more research. Collaboratively building a dataset consisting of many various real-world scenarios for surveillance-type positions of cameras could facilitate the development of pre-trained weights more specifically developed for person localization in public spaces. This includes gathering data from various public spaces with different lighting, architectural layouts, and population densities. Such diversification will help improve the accuracy and reliability of object detection models, ensuring their effectiveness in a broader spectrum of deployment contexts. Obtaining informed consent for participation in such datasets must be taken seriously to avoid inadvertently using photos of individuals. 
 
+% \paragraph{Exploring Advanced Privacy-Preserving Techniques}
+% Building on the privacy-preserving measures explored in this thesis, further research should investigate more advanced techniques, such as differential privacy and homomorphic encryption, to enhance data security. Evaluating the practical implementation and performance impact of these techniques will be crucial in developing more secure and privacy-conscious person localization systems.
 
-\subsection{Data Visualization Tools}
+% \paragraph{Longitudinal Studies on General Public Opinions}
+% Given the ethical considerations highlighted in this thesis, longitudinal studies are necessary to understand the long-term societal impacts of deploying person localization systems. These studies should focus on user acceptance, privacy concerns, and the social dynamics influenced by these technologies. Engaging with ethicists, policymakers, and the public in these studies will provide a comprehensive view of the ethical landscape.
 
-\subsubsection{Heat Map Generation with more Variables}
-Other variables could have been integrated in the solution to create more insights. This could be temperature, weather or light data, measuring if the visitation patterns change based on any of these variables. Once the initial technology of being able to localize humans in a space in a privacy preservant way, experimenting with more data variables to improve insights could prove beneficial. 
+\paragraph{Development of Regulatory Frameworks}
+Future work should contribute to the development of regulatory frameworks that balance innovation with ethical guidelines. Research should explore the creation of standardized policies and best practices for the deployment of AI technologies in public spaces. Collaboration with legal experts, policymakers, and technologists will be essential to formulate regulations that protect privacy while fostering technological advancement.
 
-\subsubsection{Zones}
+\paragraph{Expanding Practical Applications} Another avenue for future work and research is to ease the implementation cost of on-device processing in systems that may benefit from increased privacy. Potential areas include smart home automation, healthcare monitoring, and personalized user experiences in public venues. Evaluating the feasibility and impact of these applications will help expand the utility of person localization systems in various sectors.
+
+\paragraph{Heat Map Generation with More Variables}
+Future work could enhance the solution by integrating additional variables to provide deeper insights. For instance, incorporating data on temperature, weather, and light conditions could help determine how these factors influence visitation patterns. Once the initial technology for privacy-preserving person localization is established, experimenting with these additional data variables could significantly improve the accuracy and utility of the generated insights.
+
+\paragraph{Zones}
 \label{sec:zones}
-Another great visualization would be to visualize the number of detections in front of each exhibition. This would allow for an easy-to-grasp and useful visualization of where visitors most frequently stand, giving indications to what exhibition is most popular (or time-consuming). 
+Understanding visitor distribution and engagement across different exhibition zones and in front of different exhibitions can significantly enhance operational management and visitor experience. This approach would provide an easy-to-understand and practical visualization of where visitors most frequently stand, offering insights into which exhibitions are the most popular (or time-consuming). Additionally, identifying the zones where queues form can help optimize space and improve visitor flow. 
 
-\subsubsection{Queue Formation Areas}
+The data gathered could be most useful in the event where certain zones are subject to wear and tear or cleaning based on amount of usage, e.g. pools. If a person localization system could see how many and possibly what age groups are in different pools or swimming facilities at different times, one could possibly allocate certain time periods for usage which would better overlap with the actual usage of facilities. 
