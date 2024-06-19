@@ -243,9 +243,9 @@ The results of this section are put into a broader context in the Discussion sec
 \label{sec:data_visualization}
 The obtained localization data of visitors may be visualized a multiple of ways. The explored methods in this thesis are by creating heat maps and bar charts to visualize the data. 
 
-\subsubsection{Visitor Localization Heatmaps}
-\label{sec:results_heatmaps}
-As mentioned in Section \ref{sec:heatmaps}, heatmaps are a powerful visualization tool that can provide insights into visitor behavior patterns and engagement levels within a museum or aquarium setting. Heatmaps for the month of may are illustrated in \ref{fig:heatmap_final}. These heatmap generation code for the two heatmaps are identical, apart from one variable: the position where detections are mapped to. In \ref{fig:heatmap_final}a and b, the detections are mapped to the respectively the middle and the bottom center of the detection bounding box. This single modification has the largest difference on the edges of occlusions, such as (for the images in Figure \ref{fig:heatmap_final}) the railing of the fish tank in the center.
+\subsubsection{Visitor Localization Heat maps}
+\label{sec:results_heat maps}
+As mentioned in Section \ref{sec:heat_maps}, heat maps are a powerful visualization tool that can provide insights into visitor behavior patterns and engagement levels within a museum or aquarium setting. Heat maps for the month of may are illustrated in \ref{fig:heat_map_final}. These heat map generation code for the two heat maps are identical, apart from one variable: the position where detections are mapped to. In \ref{fig:heat_map_final}a and b, the detections are mapped to the respectively the middle and the bottom center of the detection bounding box. This single modification has the largest difference on the edges of occlusions, such as (for the images in Figure \ref{fig:heat_map_final}) the railing of the fish tank in the center.
 
 \begin{figure}[H]
     \centering
@@ -260,13 +260,13 @@ As mentioned in Section \ref{sec:heatmaps}, heatmaps are a powerful visualizatio
         \includegraphics[width=1\textwidth]{Images/Analytics/heatmap_bottom_center.jpg}
         \caption{Sampled From the \textit{Bottom} of Detections}
     \end{subfigure}
-    \caption{Weekly Heatmaps: Positions Sampled From Center vs Bottom of Each Detection}
-    \label{fig:heatmap_final}
+    \caption{Weekly Heat maps: Positions Sampled From Center vs Bottom of Each Detection}
+    \label{fig:heat_map_final}
 \end{figure}
 
-There's another, more important takeaway from the small modification. While seemingly similar, the heatmap sampling detections from the middle of the bounding boxes (\ref{fig:heatmap_final}a) reveal a weakness in our detector which is invisible in the other heatmap: the lamp is sometimes classified as a person. On the other hand, the other heatmap (\ref{fig:heatmap_final}b) reveal another weakness. The seaweed in the second fish tank from the right is sometimes also classified as a person.   
+There's another, more important takeaway from the small modification. While seemingly similar, the heat map sampling detections from the middle of the bounding boxes (\ref{fig:heat_map_final}a) reveal a weakness in our detector which is invisible in the other heat map: the lamp is sometimes classified as a person. On the other hand, the other heat map (\ref{fig:heat_map_final}b) reveal another weakness. The seaweed in the second fish tank from the right is sometimes also classified as a person.   
 
-Apart from revealing weaknesses from the detector models\footnote{These weaknesses in our detector models could be revealed by looking at the annotated images. However, looking at the annotated images is not possible for a on-device processing image-deleting device. In this case, one would need to display/plot the detections onto a base-layer image (heat map), or make use of obfuscation discussed in Section \ref{sec:obfuscation} to illustrate and reveal model weaknesses.}, these heatmaps may provide valuable insights with regards to which areas of the facility are being used the most. There may be difficulties, however, in correctly inferring what are the reasons for the variations. For periods less than a day, these variations are likely due to randomness. The more interesting numbers in this context would be to see the total number of visitors throughout the day, which is better visualized in the bar charts in Section \ref{sec:peak_hours}. Two heatmaps for separate days are illustrated in Figure \ref{fig:heatmap_daily}.
+Apart from revealing weaknesses from the detector models\footnote{These weaknesses in our detector models could be revealed by looking at the annotated images. However, looking at the annotated images is not possible for a on-device processing image-deleting device. In this case, one would need to display/plot the detections onto a base-layer image (heat map), or make use of obfuscation discussed in Section \ref{sec:obfuscation} to illustrate and reveal model weaknesses.}, these heat maps may provide valuable insights with regards to which areas of the facility are being used the most. There may be difficulties, however, in correctly inferring what are the reasons for the variations. For periods less than a day, these variations are likely due to randomness. The more interesting numbers in this context would be to see the total number of visitors throughout the day, which is better visualized in the bar charts in Section \ref{sec:peak_hours}. Two heat maps for separate days are illustrated in Figure \ref{fig:heat_map_daily}.
 
 \begin{figure}[H]
     \centering
@@ -281,11 +281,11 @@ Apart from revealing weaknesses from the detector models\footnote{These weakness
         \includegraphics[width=1\textwidth]{Images/Analytics/heatmap_day_11052024.jpg}
         \caption{Saturday 11th of May, 2024}
     \end{subfigure}
-    \caption{Daily Heatmaps}
-    \label{fig:heatmap_daily}
+    \caption{Daily Heat maps}
+    \label{fig:heat_map_daily}
 \end{figure}
 
-Heat maps may also visualize the hours throughout a day, accumulating all data for a specific time period each day to see if the visitor engagement changes based on the time. This is one example of introducing a variable, namely the time of day, to filter the detections. For an area where other variables such as the temperature, the noise level or the weather is also known, this could be used instead to filter the detections and illustrate how visitor engagement changes based on these factors. This usage would naturally, require some months-worth of data to be valid. For this project, only a months-worth of positional data has been stored to make the analysis. An illustration of heatmaps where the time of day has been used to determine which detections are presented in the heatmaps are displayed in Figure \ref{fig:heatmap_time}.
+Heat maps may also visualize the hours throughout a day, accumulating all data for a specific time period each day to see if the visitor engagement changes based on the time. This is one example of introducing a variable, namely the time of day, to filter the detections. For an area where other variables such as the temperature, the noise level or the weather is also known, this could be used instead to filter the detections and illustrate how visitor engagement changes based on these factors. This usage would naturally, require some months-worth of data to be valid. For this project, only a months-worth of positional data has been stored to make the analysis. An illustration of heat maps where the time of day has been used to determine which detections are presented in the heat maps are displayed in Figure \ref{fig:heat_map_time}.
 
 \begin{figure}[H]
     \centering
@@ -300,13 +300,13 @@ Heat maps may also visualize the hours throughout a day, accumulating all data f
         \includegraphics[width=\textwidth]{Images/Analytics/heatmap_time_1600_1700.jpg}
         \caption{16:00-17:00}
     \end{subfigure}
-    \caption{Hourly Heatmap}
-    \label{fig:heatmap_time}
+    \caption{Hourly Heat map}
+    \label{fig:heat_map_time}
 \end{figure}
 
-The heatmaps in Figure \ref{fig:heatmap_time} reveal another use case for heatmaps. The relative difference between the two heatmaps is likely due to randomness, but with a larger number of detections one might be able to look for patterns. This could be that the heatmap for 13:00-14:00 could show a higher number of detections in front of the fish tanks, while the heatmap for 16:00-17:00 could show a higher number of detections on the benches. This could have easily been overlooked, had a manager of the museum only passed through the museum in the day and never in the evenings, resulting in him not thinking so many benches were neccessary. 
+The heat maps in Figure \ref{fig:heat_map_time} reveal another use case for heat maps. The relative difference between the two heat maps is likely due to randomness, but with a larger number of detections one might be able to look for patterns. This could be that the heat map for 13:00-14:00 could show a higher number of detections in front of the fish tanks, while the heat map for 16:00-17:00 could show a higher number of detections on the benches. This could have easily been overlooked, had a manager of the museum only passed through the museum in the day and never in the evenings, resulting in him not thinking so many benches were neccessary. 
 
-The project experiment with the devices in the aquarium lasted for the entire month of May, and heatsmaps from all of the gathered data are displayed in Figure \ref{fig:heatmap_month}. 
+The project experiment with the devices in the aquarium lasted for the entire month of May, and heatsmaps from all of the gathered data are displayed in Figure \ref{fig:heat_map_month}. 
 
 \begin{figure}[H]
     \centering
@@ -321,11 +321,11 @@ The project experiment with the devices in the aquarium lasted for the entire mo
         \includegraphics[width=\textwidth]{Images/Analytics/heatmap_right_all.jpg}
         \caption{Right, n=12087}
     \end{subfigure}
-    \caption{Monthly Heatmap}
-    \label{fig:heatmap_month}
+    \caption{Monthly Heat map}
+    \label{fig:heat_map_month}
 \end{figure}
 
-From the heatmaps in Figure \ref{fig:heatmap_month}, we can clearly understand the need to filter the data in one of the proposed ways to gather more insightful information. 
+From the heat maps in Figure \ref{fig:heat_map_month}, we can clearly understand the need to filter the data in one of the proposed ways to gather more insightful information. 
 
 \subsubsection{Visitation Count Bar Charts}
 \label{sec:peak_hours}
@@ -344,7 +344,7 @@ Further, comparing visitor detections of summer vs winter months, normalized for
 
 Understanding these dynamics can guide decisions on environmental controls, such as adjusting heating levels to enhance visitor comfort and potentially increase engagement in specific areas of the facility. Such adjustments could directly influence the overall visitation experience, making the whole facility more favorable for a visit regardless of seasonal factors.
 
-A hypothesis was formed during the image capture process by observing the few visitors during the final opening hours of the aquarium. Most late visitors would sit more on the bench, rather than walk and run around the room like many of the earlier visitors would. This is a find that the heat map could have revealed, had it been the case. However, the data-driven visualization (the heatmaps), tell us a different story. 
+A hypothesis was formed during the image capture process by observing the few visitors during the final opening hours of the aquarium. Most late visitors would sit more on the bench, rather than walk and run around the room like many of the earlier visitors would. This is a find that the heat map could have revealed, had it been the case. However, the data-driven visualization (the heat maps), tell us a different story. 
 
 \subsubsection{Data Visualization Future Directions}
 Through the development of more sophisticated models, possible future use cases for the technology could be to develop a model to segment the users based on their age group. This could provide graphs to infer e.g. that children are most represented early in the day, and this data could thus be used to have children activities when most of the user group are present to hit the biggest audience. One could also use the data to have children-activities in the afternoon to draw more young visitors to the unpopular visitation hours. The age groups would most succintly expressed as different colored bars in a barchart.  

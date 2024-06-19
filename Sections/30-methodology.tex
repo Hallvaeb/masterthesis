@@ -442,11 +442,11 @@ Furthermore, the project will adhere to an ongoing ethical review process, ensur
 In summary, by prioritizing privacy through the use of image obscuration techniques and adopting a comprehensive ethical framework, this research aims to advance the understanding of visitor engagement in a manner that is both innovative and respectful of individual privacy rights. This approach sets a precedent for the ethical application of machine learning technologies in cultural institutions, balancing the benefits of visitor behavior analysis with the imperative of protecting privacy.
 
 \subsection{Heatmaps}
-\label{sec:heatmaps}
-Heatmaps are a powerful visualization tool that can provide insights into visitor behavior patterns and engagement levels within a museum or aquarium setting. By aggregating anonymized data from the tracking system, heatmaps can reveal areas of high visitor activity, peak visitation times, and popular exhibit locations. These visual representations offer valuable information for museum staff and curators, enabling them to optimize exhibit layouts, plan interactive experiences, and enhance visitor engagement. For this project, heatmaps were attempted to be created using 3 different python packages.
+\label{sec:heat maps}
+Heatmaps are a powerful visualization tool that can provide insights into visitor behavior patterns and engagement levels within a museum or aquarium setting. By aggregating anonymized data from the tracking system, heat maps can reveal areas of high visitor activity, peak visitation times, and popular exhibit locations. These visual representations offer valuable information for museum staff and curators, enabling them to optimize exhibit layouts, plan interactive experiences, and enhance visitor engagement. For this project, heat maps were attempted to be created using 3 different python packages.
 
 \paragraph{On the Heatmap Creation Attempts}
-The first attempt was made asking chatGPT 4 to provide the code. The AI chose to draw circles using the python package "OpenCV", which without modifications did not render satisfactory results due to the lack of depth visualization (see Figure \ref{fig:heatmap_drafts}a). In this heatmap, red circles were drawn at every detection. This renders a heatmap where it is impossible to see the scale of detections, apart from simply where the detection was made. An idea was formulated to apply a Gaussian filter to the detections to spread the detections out on a grid-like surface of the floor of the room.. But instead of tweaking a suboptimal solution, the attempt was then made to use the modules from Ultralytics to create the heatmap. 
+The first attempt was made asking chatGPT 4 to provide the code. The AI chose to draw circles using the python package "OpenCV", which without modifications did not render satisfactory results due to the lack of depth visualization (see Figure \ref{fig:heat_map_drafts}a). In this heat map, red circles were drawn at every detection. This renders a heat map where it is impossible to see the scale of detections, apart from simply where the detection was made. An idea was formulated to apply a Gaussian filter to the detections to spread the detections out on a grid-like surface of the floor of the room.. But instead of tweaking a suboptimal solution, the attempt was then made to use the modules from Ultralytics to create the heat map. 
 
 \begin{figure}[H]
     \centering
@@ -462,19 +462,19 @@ The first attempt was made asking chatGPT 4 to provide the code. The AI chose to
         \caption{Unsatisfactory Ultralytics Heatmap}
     \end{subfigure}
     \caption{Heatmap Development Drafts}
-    \label{fig:heatmap_drafts}
+    \label{fig:heat_map_drafts}
 \end{figure}
 
-Ultralytics is a company from Los Angeles and the same company that developed YOLOv5 on which the YOLOv9 is built upon. Amongst their many ML application are the modules specifically for creating heatmaps. However, the solution neccessitates a detector model to make inferences live, and optional arguments to pass pre-made inferences was not found. An attempt was made to modify the code and pass the detection in the format the modules were expected, but the result was unsatisfactory. This may only be a misunderstanding in how to use the module, but getting a visualization of more than the few spots shown in \ref{fig:heatmap_drafts}b was difficult. Again, instead of struggling further with a third-party module, an attemt with another module was made.
+Ultralytics is a company from Los Angeles and the same company that developed YOLOv5 on which the YOLOv9 is built upon. Amongst their many ML application are the modules specifically for creating heat maps. However, the solution neccessitates a detector model to make inferences live, and optional arguments to pass pre-made inferences was not found. An attempt was made to modify the code and pass the detection in the format the modules were expected, but the result was unsatisfactory. This may only be a misunderstanding in how to use the module, but getting a visualization of more than the few spots shown in \ref{fig:heat_map_drafts}b was difficult. Again, instead of struggling further with a third-party module, an attemt with another module was made.
 
 \subsubsection{Supervision Heatmaps}
 Supervision is a module created by Roboflow, to make reusable and user friendly computer vision tools. It is designed to be model agnostic. The github repo is found \href{https://github.com/roboflow/supervision}{here}.
 
-The solution incorporating Supervision rendered satisfactory results. An example image is provided in Figure \ref{fig:heatmap_final_example} where a heatmap has been created for a single day in May. This solution supports generating heatmaps from data in a pandas dataframe, allowing for filtering the dataframe to generate the preferred heatmaps based on any variable. This could be the interesting times of the day aggregated over a month, (e.g. every weekday from 10-11), or for a given time interval (e.g. week 39, 2024).
+The solution incorporating Supervision rendered satisfactory results. An example image is provided in Figure \ref{fig:heat_map_final_example} where a heat map has been created for a single day in May. This solution supports generating heat maps from data in a pandas dataframe, allowing for filtering the dataframe to generate the preferred heat maps based on any variable. This could be the interesting times of the day aggregated over a month, (e.g. every weekday from 10-11), or for a given time interval (e.g. week 39, 2024).
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.49\textwidth]{Images/Analytics/heatmap_day_10052024.jpg}
     \caption{Final Heatmap Example}
-    \label{fig:heatmap_final_example}
+    \label{fig:heat_map_final_example}
 \end{figure}
