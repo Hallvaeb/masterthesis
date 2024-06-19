@@ -1,22 +1,6 @@
 # Description for Thesis Code
 If further explanations are needed, feel free to contact hallvard.bjorgen@gmail.com.
 
-## Device
-
-capture_detect was previously named main.py, and was used to capture an image, detect (localize) persons in the image using yolov3 (weights must be downloaded), store the locations in a txt file (see Utils below), and send a blurred image to another google bucket.
-
-capture_store was used to collect the images for the dataset. It simply captures images and stores them in a folder. 
-
-### Device/Utils
-
-In Utils/ is the scripts used for creating a daily log file (which the detections was stored within) and sending this daily log. The code is to perform the inference, to setup the camera, to instantiate the logger class, and to upload the log. 
-renamelogs is likely not relevant for anyone, but is kept in case I need to rename my logs. It was used to convert the logs file names to correct date format.
-
-
-## Utils
-
-Some of the code in utils/ is mentioned in the thesis, and was mainly used to convert data between different formats.
-
 
 ## Analytics
 
@@ -41,9 +25,35 @@ To create an environment for the analytics code:
 '''conda env create -f environment.yaml'''
 
 
+## Device
+
+capture_detect was previously named main.py, and was used to capture an image, detect (localize) persons in the image using yolov3 (weights must be downloaded), store the locations in a txt file (see Utils below), and send a blurred image to another google bucket.
+
+capture_store was used to collect the images for the dataset. It simply captures images and stores them in a folder. 
+
+
 ## Evaluate
 
 The code used to generate evaluations for inferences. These are designed to run evaluations of multiple model inferences sequentially.
+
+
+## Train
+
+This notebook was one of several similar notebooks used to train the models. This notebook and pdf is added for transparency regarding the training process. 
+
+
+## Utils
+
+Some of the code in utils/ is mentioned in the thesis, and was mainly used to convert data between different formats.
+
+### Device/Utils
+
+In Utils/ is the scripts used for creating a daily log file (which the detections was stored within) and sending this daily log. The code is to perform the inference, to setup the camera, to instantiate the logger class, and to upload the log. 
+renamelogs is likely not relevant for anyone, but is kept in case I need to rename my logs. It was used to convert the logs file names to correct date format.
+
+
+
+
 
 
 
