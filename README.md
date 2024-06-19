@@ -1,4 +1,6 @@
-# Master Thesis "Privacy-Preservant Person Localization Systems", 2024 at NTNU by Hallvard Enger Bjørgen
+# Privacy-Preservant Person Localization Systems
+
+Master Thesis of 2024 at NTNU by Hallvard Enger Bjørgen.
 
 The thesis document is "main.pdf" in the top level directory. Code is found under Others/Code/.
 
