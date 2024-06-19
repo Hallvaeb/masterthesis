@@ -1,5 +1,7 @@
-## "main.pdf" in the the top level directory is the thesis document. Code may be found under Others/Code/.
+# Master Thesis "Privacy-Preservant Person Localization Systems", 2024 at NTNU by Hallvard Enger Bjørgen
 
-This master thesis project is considered finished. Feel free to read, but it's not meant for other than myself (version control) and my supervisor Amund Skavhaug. Let me know if you're interested or have comments at hallvard.bjorgen@gmail.com.
+The thesis document is "main.pdf" in the top level directory. Code is found under Others/Code/.
 
-I've written in VSCode using the LaTeX Workshop extension and compiled with "Latexmk, John Collins, 24 Dec. 2023. Version 4.82".
+Feel free to read. Let me know if you have comments or questions at hallvard.bjorgen@gmail.com.
+
+Written in VSCode using the LaTeX Workshop extension and compiled with "Latexmk, John Collins, 24 Dec. 2023. Version 4.82".
