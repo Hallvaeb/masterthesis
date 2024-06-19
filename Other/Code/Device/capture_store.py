@@ -10,7 +10,7 @@ import os
 import cv2
 from PIL import Image
 import time
-from camera_handler import CameraHandler
+from utils.camera_handler import CameraHandler
 from fractions import Fraction
 from google_storage import upload_blob
 from io import BytesIO
