@@ -34,4 +34,9 @@ Detection 3: Confidence: 0.36. Box coords: [575, 90, 631, 186].
 To create an environment for the analytics code:
 '''conda env create -f environment.yaml'''
 
+
+EVALUATE:
+The code used to generate evaluations for inferences. These are designed to run evaluations of multiple model inferences sequentially.
+
+
 If further explanations are needed, contact hallvard.bjorgen@gmail.com
